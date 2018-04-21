@@ -18,45 +18,59 @@
  */
 #include <SDL.h>
 
-#include "logging/Loggers.hpp"
-#include "RgRogue.hpp"
+#include "../logging/Loggers.hpp"
+#include "MainLoop.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-RgRogue::RgRogue()
+MainLoop::MainLoop():
+  m_isRunning(false)
 {
 }
 
 //------------------------------------------------------------------------------
-RgRogue::~RgRogue()
+MainLoop::~MainLoop()
 {
-  SDL_Quit();
 }
 
 //------------------------------------------------------------------------------
-int RgRogue::init()
+int MainLoop::run()
 {
-  LOG_DB() << "Initializing";
+  Uint32 lastTick = SDL_GetTicks();
+  SDL_Event event;
 
-  if(SDL_Init(SDL_INIT_EVERYTHING))
+  LOG_DB() << "Starting main loop";
+
+  m_isRunning = true;
+  while(m_isRunning)
   {
-    LOG_ER() << "SDL initialization failed:" << SDL_GetError();
-    return -1;
+    Uint32 loopDuration;
+
+    while(SDL_PollEvent(&event) != 0 )
+    {
+      if(event.type == SDL_QUIT)
+      {
+        m_isRunning = false;
+        return 0;
+      }
+
+      // TODO: Dispatch event
+    }
+
+    // TODO: Tick world
+    // TODO: Redraw
+
+    loopDuration = SDL_GetTicks() - lastTick;
+    if(loopDuration < 16) // ~60 fps
+      SDL_Delay(16 - loopDuration);
+    else
+      LOG_WA() << "No time to sleep in event loop!";
+
+    lastTick = SDL_GetTicks();
   }
-
-  if(m_mainWindow.init())
-    return -1;
-
-  LOG_IN() << "Initialization done";
 
   return 0;
 }
 
-//------------------------------------------------------------------------------
-int RgRogue::runGame()
-{
-  return m_mainLoop.run();
-}
-
-}
+}       // namespace
