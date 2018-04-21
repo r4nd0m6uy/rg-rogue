@@ -39,7 +39,6 @@ MainWindow::~MainWindow()
 int MainWindow::init()
 {
   Uint32 sdlCreateWindowFlag = SDL_WINDOW_OPENGL;
-  SDL_Surface* surface;
 
   if(SDL_Init(SDL_INIT_EVERYTHING))
   {
@@ -59,6 +58,14 @@ int MainWindow::init()
     LOG_ER() << "Error creating SDL window: " << SDL_GetError();
     return -1;
   }
+
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int MainWindow::redraw()
+{
+  SDL_Surface* surface;
 
   surface = SDL_GetWindowSurface(m_window);
   if(SDL_FillRect(

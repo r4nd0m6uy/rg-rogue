@@ -20,19 +20,21 @@
 #define _RG_ROGUE_MAIN_LOOP_HPP_
 
 #include "../options/Options.hpp"
+#include "../ui/MainWindow.hpp"
 
 namespace rgrogue {
 
 class MainLoop
 {
 public:
-  MainLoop(Options& options);
+  MainLoop(Options& options, MainWindow& mainWindow);
   ~MainLoop();
 
   int run();
 
 private:
   Options& m_options;
+  MainWindow& m_mainWindow;
   bool m_isRunning;
 };
 

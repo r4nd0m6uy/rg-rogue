@@ -32,6 +32,7 @@ public:
   ~MainWindow();
 
   int init();
+  int redraw();
 
 private:
   Options& m_options;

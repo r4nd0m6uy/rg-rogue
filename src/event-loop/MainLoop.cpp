@@ -24,8 +24,9 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainLoop::MainLoop(Options& options):
+MainLoop::MainLoop(Options& options, MainWindow& mainWindow):
   m_options(options),
+  m_mainWindow(mainWindow),
   m_isRunning(false)
 {
 }
@@ -61,7 +62,9 @@ int MainLoop::run()
     }
 
     // TODO: Tick world
-    // TODO: Redraw
+
+    if(m_mainWindow.redraw())
+      return -1;
 
     loopDuration = SDL_GetTicks() - lastTick;
     if(loopDuration < fpsDuration)
