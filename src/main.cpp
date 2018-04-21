@@ -20,6 +20,8 @@
 
 #include <iostream>
 
+#include "logging/Loggers.hpp"
+#include "RgRogue.hpp"
 #include "version.hpp"
 
 //------------------------------------------------------------------------------
@@ -75,10 +77,18 @@ int parseArgse(int argc, char* argv[], int& retCode)
 //------------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {
-  int rc = 0;
+  rgrogue::RgRogue rgRogue;
+  int rc;
 
   if(parseArgse(argc, argv, rc))
     return rc;
+
+  if(rgRogue.init())
+    return -1;
+
+  rc = rgRogue.runGame();
+
+  LOG_IN() << "Exiting with code " << rc;
 
   return rc;
 }
