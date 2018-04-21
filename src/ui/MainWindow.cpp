@@ -22,7 +22,8 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainWindow::MainWindow():
+MainWindow::MainWindow(Options& options):
+  m_options(options),
   m_window(nullptr)
 {
 }
@@ -37,6 +38,7 @@ MainWindow::~MainWindow()
 //------------------------------------------------------------------------------
 int MainWindow::init()
 {
+  Uint32 sdlCreateWindowFlag = SDL_WINDOW_OPENGL;
   SDL_Surface* surface;
 
   if(SDL_Init(SDL_INIT_EVERYTHING))
@@ -45,10 +47,13 @@ int MainWindow::init()
     return -1;
   }
 
+  if(m_options.isFullScreen())
+    sdlCreateWindowFlag |= SDL_WINDOW_FULLSCREEN;
+
   m_window = SDL_CreateWindow("rg-rogue",
       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-      640, 480,
-      SDL_WINDOW_OPENGL);
+      m_options.getXResolution(), m_options.getYResolution(),
+      sdlCreateWindowFlag);
   if(!m_window)
   {
     LOG_ER() << "Error creating SDL window: " << SDL_GetError();

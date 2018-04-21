@@ -24,7 +24,8 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-RgRogue::RgRogue()
+RgRogue::RgRogue():
+  m_mainWindow(m_options)
 {
 }
 
@@ -38,6 +39,9 @@ RgRogue::~RgRogue()
 int RgRogue::init()
 {
   LOG_DB() << "Initializing";
+
+  if(m_options.init())
+    return -1;
 
   if(SDL_Init(SDL_INIT_EVERYTHING))
   {

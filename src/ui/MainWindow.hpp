@@ -21,17 +21,20 @@
 
 #include <SDL.h>
 
+#include "../options/Options.hpp"
+
 namespace rgrogue {
 
 class MainWindow
 {
 public:
-  MainWindow();
+  MainWindow(Options& options);
   ~MainWindow();
 
   int init();
 
 private:
+  Options& m_options;
   SDL_Window* m_window;
 };
 
