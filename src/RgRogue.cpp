@@ -25,7 +25,8 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 RgRogue::RgRogue():
-  m_mainWindow(m_options)
+  m_mainWindow(m_options),
+  m_mainLoop(m_options)
 {
 }
 

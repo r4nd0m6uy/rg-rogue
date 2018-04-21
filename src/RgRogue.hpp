@@ -34,9 +34,9 @@ public:
   int runGame();
 
 private:
+  Options m_options;
   MainWindow m_mainWindow;
   MainLoop m_mainLoop;
-  Options m_options;
 };
 
 }       // namespace

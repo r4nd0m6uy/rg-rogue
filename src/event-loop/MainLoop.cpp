@@ -24,7 +24,8 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainLoop::MainLoop():
+MainLoop::MainLoop(Options& options):
+  m_options(options),
   m_isRunning(false)
 {
 }
@@ -46,6 +47,7 @@ int MainLoop::run()
   while(m_isRunning)
   {
     Uint32 loopDuration;
+    Uint32 fpsDuration = 1000 / m_options.getFps();
 
     while(SDL_PollEvent(&event) != 0 )
     {
@@ -62,8 +64,8 @@ int MainLoop::run()
     // TODO: Redraw
 
     loopDuration = SDL_GetTicks() - lastTick;
-    if(loopDuration < 16) // ~60 fps
-      SDL_Delay(16 - loopDuration);
+    if(loopDuration < fpsDuration)
+      SDL_Delay(fpsDuration - loopDuration);
     else
       LOG_WA() << "No time to sleep in event loop!";
 
