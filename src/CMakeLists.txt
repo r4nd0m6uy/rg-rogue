@@ -6,6 +6,7 @@ set(APP_SOURCES
   logging/Logger.cpp
   logging/LoggerConsole.cpp
   logging/Loggers.cpp
+  ui/MainWindow.cpp
   RgRogue.cpp
   main.cpp
 )

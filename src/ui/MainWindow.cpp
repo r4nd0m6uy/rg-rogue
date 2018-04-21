@@ -16,29 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL.h>
-
-#include "logging/Loggers.hpp"
-#include "RgRogue.hpp"
+#include "../logging/Loggers.hpp"
+#include "MainWindow.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-RgRogue::RgRogue():
-  m_isRunning(false)
+MainWindow::MainWindow():
+  m_window(nullptr)
 {
 }
 
 //------------------------------------------------------------------------------
-RgRogue::~RgRogue()
+MainWindow::~MainWindow()
 {
-  SDL_Quit();
+  if(m_window)
+    SDL_DestroyWindow(m_window);
 }
 
 //------------------------------------------------------------------------------
-int RgRogue::init()
+int MainWindow::init()
 {
-  LOG_DB() << "Initializing";
+  SDL_Surface* surface;
 
   if(SDL_Init(SDL_INIT_EVERYTHING))
   {
@@ -46,46 +45,31 @@ int RgRogue::init()
     return -1;
   }
 
-  if(m_mainWindow.init())
-    return -1;
-
-  LOG_IN() << "Initialization done";
-
-  return 0;
-}
-
-//------------------------------------------------------------------------------
-int RgRogue::runGame()
-{
-  Uint32 lastTick = SDL_GetTicks();
-  SDL_Event event;
-
-  LOG_DB() << "Starting main loop";
-
-  m_isRunning = true;
-  while(m_isRunning)
+  m_window = SDL_CreateWindow("rg-rogue",
+      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+      640, 480,
+      SDL_WINDOW_OPENGL);
+  if(!m_window)
   {
-    Uint32 loopDuration;
+    LOG_ER() << "Error creating SDL window: " << SDL_GetError();
+    return -1;
+  }
 
-    while(SDL_PollEvent(&event) != 0 )
-    {
-      if(event.type == SDL_QUIT)
-        m_isRunning = false;
-    }
+  surface = SDL_GetWindowSurface(m_window);
+  if(SDL_FillRect(
+      surface, NULL, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF)))
+  {
+    LOG_ER() << "Error painting SDL window: " << SDL_GetError();
+    return -1;
+  }
 
-    // TODO: Tick world
-    // TODO: Redraw
-
-    loopDuration = SDL_GetTicks() - lastTick;
-    if(loopDuration < 16) // ~60 fps
-      SDL_Delay(16 - loopDuration);
-    else
-      LOG_WA() << "No time to sleep in event loop!";
-
-    lastTick = SDL_GetTicks();
+  if(SDL_UpdateWindowSurface(m_window))
+  {
+    LOG_ER() << "Error Updating SDL window: " << SDL_GetError();
+    return -1;
   }
 
   return 0;
 }
 
-}
+}       // namespace

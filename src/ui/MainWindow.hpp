@@ -16,26 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
+#ifndef _RG_ROGUE_MAIN_WINDOW_HPP_
+#define _RG_ROGUE_MAIN_WINDOW_HPP_
 
-#include "ui/MainWindow.hpp"
+#include <SDL.h>
 
 namespace rgrogue {
 
-class RgRogue
+class MainWindow
 {
 public:
-  RgRogue();
-  ~RgRogue();
+  MainWindow();
+  ~MainWindow();
 
   int init();
-  int runGame();
 
 private:
-  MainWindow m_mainWindow;
-  bool m_isRunning;
+  SDL_Window* m_window;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_
+#endif  // _RG_ROGUE_MAIN_WINDOW_HPP_
