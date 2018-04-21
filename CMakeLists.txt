@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.11)
 project(RgRogue)
 
+add_compile_options(-std=c++11 -Wall -Werror)
+
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 0)
 set(VERSION_BUGFIX 0)

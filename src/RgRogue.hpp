@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_RG_ROGUE_HPP_
 #define _RG_ROGUE_RG_ROGUE_HPP_
 
+#include <SDL.h>
+
 namespace rgrogue {
 
 class RgRogue
@@ -29,6 +31,9 @@ public:
 
   int init();
   int runGame();
+
+private:
+  SDL_Window* m_window;
 };
 
 }       // namespace

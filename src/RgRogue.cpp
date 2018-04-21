@@ -22,19 +22,58 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-RgRogue::RgRogue()
+RgRogue::RgRogue():
+  m_window(nullptr)
 {
 }
 
 //------------------------------------------------------------------------------
 RgRogue::~RgRogue()
 {
+  if(m_window)
+    SDL_DestroyWindow(m_window);
+
+  SDL_Quit();
 }
 
 //------------------------------------------------------------------------------
 int RgRogue::init()
 {
-  LOG_DB() << "Initializing";
+  SDL_Surface* surface;
+
+  LOG_DB() << "Initializing ...";
+
+  if(SDL_Init(SDL_INIT_EVERYTHING))
+  {
+    LOG_ER() << "SDL initialization failed:" << SDL_GetError();
+    return -1;
+  }
+
+  m_window = SDL_CreateWindow("rg-rogue",
+      SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+      640, 480,
+      SDL_WINDOW_OPENGL);
+  if(!m_window)
+  {
+    LOG_ER() << "Error creating SDL window: " << SDL_GetError();
+    return -1;
+  }
+
+  surface = SDL_GetWindowSurface(m_window);
+  if(SDL_FillRect(
+      surface, NULL, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF)))
+  {
+    LOG_ER() << "Error painting SDL window: " << SDL_GetError();
+    return -1;
+  }
+
+  if(SDL_UpdateWindowSurface(m_window))
+  {
+    LOG_ER() << "Error Updating SDL window: " << SDL_GetError();
+    return -1;
+  }
+
+  LOG_IN() << "Initialization done";
 
   return 0;
 }
@@ -43,6 +82,8 @@ int RgRogue::init()
 int RgRogue::runGame()
 {
   LOG_DB() << "Starting main loop";
+
+  SDL_Delay(2000);
 
   return 0;
 }
