@@ -23,7 +23,8 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 RgRogue::RgRogue():
-  m_window(nullptr)
+  m_window(nullptr),
+  m_isRunning(false)
 {
 }
 
@@ -81,9 +82,33 @@ int RgRogue::init()
 //------------------------------------------------------------------------------
 int RgRogue::runGame()
 {
+  Uint32 lastTick = SDL_GetTicks();
+  SDL_Event event;
+
   LOG_DB() << "Starting main loop";
 
-  SDL_Delay(2000);
+  m_isRunning = true;
+  while(m_isRunning)
+  {
+    Uint32 loopDuration;
+
+    while(SDL_PollEvent(&event) != 0 )
+    {
+      if(event.type == SDL_QUIT)
+        m_isRunning = false;
+    }
+
+    // TODO: Tick world
+    // TODO: Redraw
+
+    loopDuration = SDL_GetTicks() - lastTick;
+    if(loopDuration < 16) // ~60 fps
+      SDL_Delay(16 - loopDuration);
+    else
+      LOG_WA() << "No time to sleep in event loop!";
+
+    lastTick = SDL_GetTicks();
+  }
 
   return 0;
 }

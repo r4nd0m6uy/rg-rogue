@@ -34,6 +34,7 @@ public:
 
 private:
   SDL_Window* m_window;
+  bool m_isRunning;
 };
 
 }       // namespace
