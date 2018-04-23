@@ -39,6 +39,7 @@ public:
 
   // IMainLoop
   virtual int registerKeyObserver(IKeyObserver& observer) override;
+  virtual void breakLoop() override;
 
 private:
   Options& m_options;

@@ -123,4 +123,9 @@ int MainLoop::registerKeyObserver(IKeyObserver& observer)
   return 0;
 }
 
+//------------------------------------------------------------------------------
+void MainLoop::breakLoop()
+{
+  m_isRunning = false;
+}
 }       // namespace

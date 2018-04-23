@@ -112,7 +112,8 @@ int MainMenu::draw()
     textSize = ImGui::CalcTextSize(currentText.c_str());
     if(ImGui::Button(
         currentText.c_str(), ImVec2(WINDOW_WIDTH, textSize.y + 10)))
-     LOG_DB() << "Exit!";
+      // TODO: Are you sure?
+      m_mainLoop.breakLoop();
   }
 
   ImGui::End();

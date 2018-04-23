@@ -30,6 +30,7 @@ public:
   ~IMainLoop();
 
   virtual int registerKeyObserver(IKeyObserver& observer) = 0;
+  virtual void breakLoop() = 0;
 };
 
 }       // namespace
