@@ -68,10 +68,7 @@ int MainLoop::run()
           !ImGui::GetIO().WantCaptureMouse)
       {
         // TODO: Dispatch event
-        LOG_DB() << "Dispatch event " << event.type;
       }
-      else
-        LOG_DB() << "IMGUI EVENT";
     }
 
     // TODO: Tick world
