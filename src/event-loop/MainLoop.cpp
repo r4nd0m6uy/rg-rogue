@@ -53,7 +53,6 @@ int MainLoop::run()
   while(m_isRunning)
   {
     Uint32 loopDuration;
-    Uint32 fpsDuration = 1000 / m_options.getFps();
 
     while(SDL_PollEvent(&event) != 0 )
     {
@@ -96,11 +95,16 @@ int MainLoop::run()
       return -1;
 
     // Limit FPS
-    loopDuration = SDL_GetTicks() - lastTick;
-    if(loopDuration < fpsDuration)
-      SDL_Delay(fpsDuration - loopDuration);
-    else
-      LOG_WA() << "No time to sleep in event loop!";
+    if(m_options.getFps() > 0)
+    {
+      Uint32 fpsDuration = 1000 / m_options.getFps();
+
+      loopDuration = SDL_GetTicks() - lastTick;
+      if(loopDuration < fpsDuration)
+        SDL_Delay(fpsDuration - loopDuration);
+      else
+        LOG_WA() << "No time to sleep in event loop!";
+    }
 
     if(SDL_GetTicks() - lastFrame >= 1000)
     {

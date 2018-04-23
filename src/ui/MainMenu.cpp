@@ -36,6 +36,7 @@ static const std::string STR_OPTIONS    = "Options";
 static const std::string STR_VIDEO      = "Video";
 static const std::string STR_CLOSE      = "Close";
 static const std::string STR_FULLSCREEN = "Fullscreen";
+static const std::string STR_FPS        = "Max FPS";
 static const std::string STR_APPLY      = "Apply";
 static const std::string STR_EXIT       = "Exit";
 
@@ -116,6 +117,7 @@ int MainMenu::draw()
     if(ImGui::BeginPopupModal(STR_OPTIONS.c_str()))
     {
       static bool isFullScreen = m_options.isFullScreen();
+      static int newFps = m_options.getFps();
 
       ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), 0);
 
@@ -123,6 +125,7 @@ int MainMenu::draw()
       if (ImGui::CollapsingHeader(STR_VIDEO.c_str()))
       {
         ImGui::Checkbox(STR_FULLSCREEN.c_str(), &isFullScreen);
+        ImGui::InputInt(STR_FPS.c_str(), &newFps);
         ImGui::Text("TODO: Resolution");
       }
 
@@ -131,6 +134,7 @@ int MainMenu::draw()
         Options newConfig = m_options;
 
         newConfig.setFullScreen(isFullScreen);
+        newConfig.setFps(newFps);
 
         if(!m_mainWindow.applyVideoConfig(newConfig))
         {
@@ -144,6 +148,7 @@ int MainMenu::draw()
       if(ImGui::Button(STR_CLOSE.c_str()))
       {
         isFullScreen = m_options.isFullScreen();
+        newFps = m_options.getFps();
         ImGui::CloseCurrentPopup();
       }
       ImGui::EndPopup();
