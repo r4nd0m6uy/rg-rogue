@@ -24,10 +24,12 @@
 
 #include "../options/Options.hpp"
 #include "MainMenu.hpp"
+#include "IMainWindow.hpp"
 
 namespace rgrogue {
 
-class MainWindow
+class MainWindow:
+    public IMainWindow
 {
 public:
   MainWindow(Options& options, IMainLoop& mainLoop);
@@ -35,6 +37,9 @@ public:
 
   int init();
   int draw();
+
+  // IMainWindow
+  int applyVideoConfig(Options& options) override;
 
 private:
   Options& m_options;

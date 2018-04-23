@@ -9,6 +9,7 @@ set(APP_SOURCES
   logging/Logger.cpp
   logging/LoggerConsole.cpp
   logging/Loggers.cpp
+  ui/IMainWindow.cpp
   ui/MainWindow.cpp
   ui/MainMenu.cpp
   event-loop/IKeyObserver.cpp

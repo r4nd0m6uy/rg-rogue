@@ -27,7 +27,7 @@ namespace rgrogue {
 //------------------------------------------------------------------------------
 MainWindow::MainWindow(Options& options, IMainLoop& mainLoop):
   m_options(options),
-  m_mainMenu(options, mainLoop),
+  m_mainMenu(options, mainLoop, *this),
   m_sdlWindow(nullptr),
   m_sdlGlContext(nullptr)
 {
@@ -104,6 +104,26 @@ int MainWindow::draw()
   ImGui::Render();
   ImGui_ImplSdlGL2_RenderDrawData(ImGui::GetDrawData());
   SDL_GL_SwapWindow(m_sdlWindow);
+
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int MainWindow::applyVideoConfig(Options& options)
+{
+  if(options.isFullScreen() != m_options.isFullScreen())
+  {
+    Uint32 flags = 0;
+
+    if(options.isFullScreen())
+      flags = SDL_WINDOW_FULLSCREEN;
+
+    if(SDL_SetWindowFullscreen(m_sdlWindow, flags))
+    {
+      LOG_ER() << "Cannot change full screen configuration: " << SDL_GetError();
+      return -1;
+    }
+  }
 
   return 0;
 }

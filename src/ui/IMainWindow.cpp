@@ -16,40 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_MAIN_MENU_HPP_
-#define _RG_ROGUE_MAIN_MENU_HPP_
-
-#include "../options/Options.hpp"
-#include "../event-loop/IMainLoop.hpp"
 #include "IMainWindow.hpp"
 
 namespace rgrogue {
 
-class MainMenu:
-    public IKeyObserver
+//------------------------------------------------------------------------------
+IMainWindow::IMainWindow()
 {
-public:
-  MainMenu(Options& options, IMainLoop& mainLoop, IMainWindow& mainWindow);
-  ~MainMenu();
+}
 
-  int init();
-  void setVisible(bool isVisible);
-  int draw();
-
-  // IKeyObserver
-  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode) override;
-  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode) override;
-
-private:
-  Options& m_options;
-  IMainLoop& m_mainLoop;
-  IMainWindow& m_mainWindow;
-  bool m_isVisible;
-
-  std::string getHeaderText();
-};
+//------------------------------------------------------------------------------
+IMainWindow::~IMainWindow()
+{
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_MAIN_MENU_HPP_

@@ -33,12 +33,18 @@ static const float WINDOW_HEIGHT        = 150;
 // FIXME: Translation
 static const std::string STR_NEW_GAME   = "New game";
 static const std::string STR_OPTIONS    = "Options";
+static const std::string STR_VIDEO      = "Video";
+static const std::string STR_CLOSE      = "Close";
+static const std::string STR_FULLSCREEN = "Fullscreen";
+static const std::string STR_APPLY      = "Apply";
 static const std::string STR_EXIT       = "Exit";
 
 //------------------------------------------------------------------------------
-MainMenu::MainMenu(Options& options, IMainLoop& mainLoop):
+MainMenu::MainMenu(Options& options, IMainLoop& mainLoop,
+    IMainWindow& mainWindow):
   m_options(options),
   m_mainLoop(mainLoop),
+  m_mainWindow(mainWindow),
   m_isVisible(true)
 {
 }
@@ -105,7 +111,42 @@ int MainMenu::draw()
     textSize = ImGui::CalcTextSize(currentText.c_str());
     if(ImGui::Button(
         currentText.c_str(), ImVec2(WINDOW_WIDTH, textSize.y + 10)))
-     LOG_DB() << "Options!";
+      ImGui::OpenPopup(STR_OPTIONS.c_str());
+
+    if(ImGui::BeginPopupModal(STR_OPTIONS.c_str()))
+    {
+      static bool isFullScreen = m_options.isFullScreen();
+
+      ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), 0);
+
+      // Video
+      if (ImGui::CollapsingHeader(STR_VIDEO.c_str()))
+      {
+        ImGui::Checkbox(STR_FULLSCREEN.c_str(), &isFullScreen);
+        ImGui::Text("TODO: Resolution");
+      }
+
+      if(ImGui::Button(STR_APPLY.c_str()))
+      {
+        Options newConfig = m_options;
+
+        newConfig.setFullScreen(isFullScreen);
+
+        if(!m_mainWindow.applyVideoConfig(newConfig))
+        {
+          m_options = newConfig;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+
+      ImGui::SameLine();
+      if(ImGui::Button(STR_CLOSE.c_str()))
+      {
+        isFullScreen = m_options.isFullScreen();
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndPopup();
+    }
 
     // Exit
     currentText = STR_EXIT;
