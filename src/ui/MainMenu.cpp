@@ -119,7 +119,7 @@ int MainMenu::draw()
       static bool isFullScreen = m_options.isFullScreen();
       static int newFps = m_options.getFps();
 
-      ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), 0);
+      ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), ImGuiCond_Once);
 
       // Video
       if (ImGui::CollapsingHeader(STR_VIDEO.c_str()))
@@ -151,6 +151,7 @@ int MainMenu::draw()
         newFps = m_options.getFps();
         ImGui::CloseCurrentPopup();
       }
+
       ImGui::EndPopup();
     }
 
