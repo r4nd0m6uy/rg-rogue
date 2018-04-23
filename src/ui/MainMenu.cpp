@@ -124,14 +124,15 @@ int MainMenu::draw()
 void MainMenu::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
-  LOG_DB() << "Main menu key " << (char)keyCode << " pressed";
+  if(keyCode == SDLK_ESCAPE)
+    m_isVisible = true;
 }
 
 //------------------------------------------------------------------------------
 void MainMenu::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
-  LOG_DB() << "Main menu key " << (char)keyCode << " release";
+  // Nothing to do
 }
 
 //------------------------------------------------------------------------------
