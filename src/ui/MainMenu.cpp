@@ -26,7 +26,7 @@
 
 namespace rgrogue {
 
-static const std::string STR_GAME_NAME  = "Random Rogue";
+static const std::string STR_GAME_NAME  = "RGRogue";
 static const float WINDOW_WIDTH         = 300;
 static const float WINDOW_HEIGHT        = 150;
 
@@ -95,8 +95,7 @@ int MainMenu::draw()
     ImVec2 textSize = ImGui::CalcTextSize(currentText.c_str());
     ImGui::SetCursorPos(
         ImVec2((WINDOW_WIDTH / 2) - (textSize.x / 2), ImGui::GetCursorPosY()));
-    ImGui::Text("Random Rogue (%i.%i.%i - %s)",
-        VERSION_MAJOR, VERSION_MINOR, VERSION_BUGFIX, VERSION_GIT.c_str());
+    ImGui::Text(currentText.c_str());
 
     // New game
     currentText = STR_NEW_GAME;
