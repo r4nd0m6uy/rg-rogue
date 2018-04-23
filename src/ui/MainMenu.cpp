@@ -135,6 +135,7 @@ int MainMenu::draw()
         if(!m_mainWindow.applyVideoConfig(newConfig))
         {
           m_options = newConfig;
+          m_options.writeConfig();
           ImGui::CloseCurrentPopup();
         }
       }

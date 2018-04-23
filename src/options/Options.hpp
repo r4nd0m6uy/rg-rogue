@@ -36,6 +36,7 @@ public:
   void setYResolution(int yResolution);
   unsigned int getFps();
   void setFps(unsigned int fps);
+  int writeConfig();
 
 private:
   bool m_isFullScreen;
@@ -44,7 +45,6 @@ private:
   unsigned int m_fps;
 
   int readConfig();
-  int writeConfig();
 };
 
 }       // namespace

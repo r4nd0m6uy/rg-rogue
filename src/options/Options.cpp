@@ -56,8 +56,6 @@ bool Options::isFullScreen()
 void Options::setFullScreen(bool isFullScreen)
 {
   m_isFullScreen = isFullScreen;
-
-  writeConfig();
 }
 
 //------------------------------------------------------------------------------
@@ -70,8 +68,6 @@ int Options::getXResolution()
 void Options::setXResolution(int xResolution)
 {
   m_xResolution = xResolution;
-
-  writeConfig();
 }
 
 //------------------------------------------------------------------------------
@@ -84,8 +80,6 @@ int Options::getYResolution()
 void Options::setYResolution(int yResolution)
 {
   m_yResolution = yResolution;
-
-  writeConfig();
 }
 
 //------------------------------------------------------------------------------
@@ -98,17 +92,6 @@ unsigned int Options::getFps()
 void Options::setFps(unsigned int fps)
 {
   m_fps = fps;
-
-  writeConfig();
-}
-
-//------------------------------------------------------------------------------
-int Options::readConfig()
-{
-  // TODO
-  LOG_WA() << "Reading configuration not implemented yet";
-
-  return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -116,6 +99,15 @@ int Options::writeConfig()
 {
   // TODO
   LOG_WA() << "Writing configuration not implemented yet";
+
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int Options::readConfig()
+{
+  // TODO
+  LOG_WA() << "Reading configuration not implemented yet";
 
   return 0;
 }
