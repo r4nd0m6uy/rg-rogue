@@ -36,8 +36,9 @@ static const std::string STR_OPTIONS    = "Options";
 static const std::string STR_EXIT       = "Exit";
 
 //------------------------------------------------------------------------------
-MainMenu::MainMenu(Options& options):
+MainMenu::MainMenu(Options& options, IMainLoop& mainLoop):
   m_options(options),
+  m_mainLoop(mainLoop),
   m_isVisible(true)
 {
 }
@@ -51,6 +52,14 @@ MainMenu::~MainMenu()
 void MainMenu::setVisible(bool isVisible)
 {
   m_isVisible = isVisible;
+}
+
+//------------------------------------------------------------------------------
+int MainMenu::init()
+{
+  m_mainLoop.registerKeyObserver(*this);
+
+  return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -109,6 +118,20 @@ int MainMenu::draw()
   ImGui::End();
 
   return 0;
+}
+
+//------------------------------------------------------------------------------
+void MainMenu::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+    Uint16 mode)
+{
+  LOG_DB() << "Main menu key " << (char)keyCode << " pressed";
+}
+
+//------------------------------------------------------------------------------
+void MainMenu::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+    Uint16 mode)
+{
+  LOG_DB() << "Main menu key " << (char)keyCode << " release";
 }
 
 //------------------------------------------------------------------------------

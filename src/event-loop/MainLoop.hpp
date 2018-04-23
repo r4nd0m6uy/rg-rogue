@@ -19,12 +19,17 @@
 #ifndef _RG_ROGUE_MAIN_LOOP_HPP_
 #define _RG_ROGUE_MAIN_LOOP_HPP_
 
+#include <list>
+#include <functional>
+
 #include "../options/Options.hpp"
 #include "../ui/MainWindow.hpp"
+#include "IMainLoop.hpp"
 
 namespace rgrogue {
 
-class MainLoop
+class MainLoop:
+    public IMainLoop
 {
 public:
   MainLoop(Options& options, MainWindow& mainWindow);
@@ -32,10 +37,14 @@ public:
 
   int run();
 
+  // IMainLoop
+  virtual int registerKeyObserver(IKeyObserver& observer) override;
+
 private:
   Options& m_options;
   MainWindow& m_mainWindow;
   bool m_isRunning;
+  std::list<std::reference_wrapper<IKeyObserver>> m_keyObservers;
 };
 
 }       // namespace

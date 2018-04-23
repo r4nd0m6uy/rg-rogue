@@ -20,19 +20,30 @@
 #define _RG_ROGUE_MAIN_MENU_HPP_
 
 #include "../options/Options.hpp"
+#include "../event-loop/IMainLoop.hpp"
+
 namespace rgrogue {
 
-class MainMenu
+class MainMenu:
+    public IKeyObserver
 {
 public:
-  MainMenu(Options& options);
+  MainMenu(Options& options, IMainLoop& mainLoop);
   ~MainMenu();
 
+  int init();
   void setVisible(bool isVisible);
   int draw();
 
+  // IKeyObserver
+  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) override;
+  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) override;
+
 private:
   Options& m_options;
+  IMainLoop& m_mainLoop;
   bool m_isVisible;
 
   std::string getHeaderText();

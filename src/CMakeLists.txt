@@ -11,6 +11,8 @@ set(APP_SOURCES
   logging/Loggers.cpp
   ui/MainWindow.cpp
   ui/MainMenu.cpp
+  event-loop/IKeyObserver.cpp
+  event-loop/IMainLoop.cpp
   event-loop/MainLoop.cpp
   options/Options.cpp
   RgRogue.cpp

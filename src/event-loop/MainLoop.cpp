@@ -67,7 +67,25 @@ int MainLoop::run()
       if(!ImGui::GetIO().WantCaptureMouse &&
           !ImGui::GetIO().WantCaptureMouse)
       {
-        // TODO: Dispatch event
+        switch(event.type)
+        {
+        case SDL_KEYDOWN:
+          for(auto& keyObserver : m_keyObservers)
+            keyObserver.get().onKeyPressed(
+                event.key.keysym.scancode,
+                event.key.keysym.sym,
+                event.key.keysym.mod);
+          break;
+        case SDL_KEYUP:
+          for(auto& keyObserver : m_keyObservers)
+            keyObserver.get().onKeyReleased(
+                event.key.keysym.scancode,
+                event.key.keysym.sym,
+                event.key.keysym.mod);
+          break;
+//          default:
+//            LOG_DB() << "Unhandled SDL event " << event.type;
+        }
       }
     }
 
@@ -93,6 +111,14 @@ int MainLoop::run()
     else
       framesCount++;
   }
+
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int MainLoop::registerKeyObserver(IKeyObserver& observer)
+{
+  m_keyObservers.push_back(observer);
 
   return 0;
 }

@@ -25,9 +25,9 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainWindow::MainWindow(Options& options):
+MainWindow::MainWindow(Options& options, IMainLoop& mainLoop):
   m_options(options),
-  m_mainMenu(options),
+  m_mainMenu(options, mainLoop),
   m_sdlWindow(nullptr),
   m_sdlGlContext(nullptr)
 {
@@ -84,7 +84,7 @@ int MainWindow::init()
   ImGui_ImplSdlGL2_Init(m_sdlWindow);
   ImGui::StyleColorsDark();
 
-  return 0;
+  return m_mainMenu.init();
 }
 
 //------------------------------------------------------------------------------

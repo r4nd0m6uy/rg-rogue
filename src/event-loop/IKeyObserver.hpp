@@ -16,28 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
+#ifndef _RG_ROGUE_I_KEY_OBSERVER_HPP_
+#define _RG_ROGUE_I_KEY_OBSERVER_HPP_
 
-#include "ui/MainWindow.hpp"
-#include "event-loop/MainLoop.hpp"
+#include <SDL.h>
 
 namespace rgrogue {
 
-class RgRogue
+class IKeyObserver
 {
 public:
-  RgRogue();
-  ~RgRogue();
+  IKeyObserver();
+  virtual ~IKeyObserver();
 
-  int init();
-  int runGame();
-
-private:
-  Options m_options;
-  MainLoop m_mainLoop;
-  MainWindow m_mainWindow;
+  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) = 0;
+  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) = 0;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_
+#endif  // _RG_ROGUE_MAIN_LOOP_HPP_

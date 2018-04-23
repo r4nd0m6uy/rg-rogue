@@ -30,7 +30,7 @@ namespace rgrogue {
 class MainWindow
 {
 public:
-  MainWindow(Options& options);
+  MainWindow(Options& options, IMainLoop& mainLoop);
   ~MainWindow();
 
   int init();

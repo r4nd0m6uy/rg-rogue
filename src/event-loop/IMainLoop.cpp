@@ -16,28 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
-
-#include "ui/MainWindow.hpp"
-#include "event-loop/MainLoop.hpp"
+#include "IMainLoop.hpp"
 
 namespace rgrogue {
 
-class RgRogue
+//------------------------------------------------------------------------------
+IMainLoop::IMainLoop()
 {
-public:
-  RgRogue();
-  ~RgRogue();
+}
 
-  int init();
-  int runGame();
-
-private:
-  Options m_options;
-  MainLoop m_mainLoop;
-  MainWindow m_mainWindow;
-};
+//------------------------------------------------------------------------------
+IMainLoop::~IMainLoop()
+{
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_
