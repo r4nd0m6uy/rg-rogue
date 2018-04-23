@@ -43,12 +43,18 @@ MainLoop::~MainLoop()
 int MainLoop::run()
 {
   SDL_Event event;
+  int framesCount = 0;
+  Uint32 lastTick = SDL_GetTicks();
+  Uint32 lastFrame = SDL_GetTicks();
 
   LOG_DB() << "Starting main loop";
 
   m_isRunning = true;
   while(m_isRunning)
   {
+    Uint32 loopDuration;
+    Uint32 fpsDuration = 1000 / m_options.getFps();
+
     while(SDL_PollEvent(&event) != 0 )
     {
       ImGui_ImplSdlGL2_ProcessEvent(&event);
@@ -69,9 +75,26 @@ int MainLoop::run()
     }
 
     // TODO: Tick world
+    lastTick = SDL_GetTicks();
 
     if(m_mainWindow.draw())
       return -1;
+
+    // Limit FPS
+    loopDuration = SDL_GetTicks() - lastTick;
+    if(loopDuration < fpsDuration)
+      SDL_Delay(fpsDuration - loopDuration);
+    else
+      LOG_WA() << "No time to sleep in event loop!";
+
+    if(SDL_GetTicks() - lastFrame >= 1000)
+    {
+      LOG_DB() << framesCount << " FPS";
+      framesCount = 0;
+      lastFrame = SDL_GetTicks();
+    }
+    else
+      framesCount++;
   }
 
   return 0;

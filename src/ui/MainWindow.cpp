@@ -50,8 +50,6 @@ int MainWindow::init()
 {
   Uint32 sdlCreateWindowFlag = SDL_WINDOW_OPENGL;
 
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
   if(SDL_Init(SDL_INIT_EVERYTHING))
   {
     LOG_ER() << "SDL initialization failed:" << SDL_GetError();
@@ -77,6 +75,9 @@ int MainWindow::init()
     LOG_ER() << "Error creating OpenGl context: " << SDL_GetError();
     return -1;
   }
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+  SDL_GL_SetSwapInterval(0);
 
   ImGui::CreateContext();
   ImGui_ImplSdlGL2_Init(m_sdlWindow);
