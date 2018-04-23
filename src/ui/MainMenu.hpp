@@ -19,19 +19,23 @@
 #ifndef _RG_ROGUE_MAIN_MENU_HPP_
 #define _RG_ROGUE_MAIN_MENU_HPP_
 
+#include "../options/Options.hpp"
 namespace rgrogue {
 
 class MainMenu
 {
 public:
-  MainMenu();
+  MainMenu(Options& options);
   ~MainMenu();
 
   void setVisible(bool isVisible);
   int draw();
 
 private:
+  Options& m_options;
   bool m_isVisible;
+
+  std::string getHeaderText();
 };
 
 }       // namespace

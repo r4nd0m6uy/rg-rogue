@@ -26,9 +26,10 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 MainWindow::MainWindow(Options& options):
-      m_options(options),
-      m_sdlWindow(nullptr),
-      m_sdlGlContext(nullptr)
+  m_options(options),
+  m_mainMenu(options),
+  m_sdlWindow(nullptr),
+  m_sdlGlContext(nullptr)
 {
 }
 
