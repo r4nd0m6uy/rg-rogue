@@ -16,63 +16,51 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL.h>
-
 #include <imgui.h>
-#include <imgui_impl_sdl_gl2.h>
 
 #include "../logging/Loggers.hpp"
-#include "MainLoop.hpp"
+#include "MainMenu.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainLoop::MainLoop(Options& options, MainWindow& mainWindow):
-  m_options(options),
-  m_mainWindow(mainWindow),
-  m_isRunning(false)
+MainMenu::MainMenu():
+  m_isVisible(true)
 {
 }
 
 //------------------------------------------------------------------------------
-MainLoop::~MainLoop()
+MainMenu::~MainMenu()
 {
 }
 
 //------------------------------------------------------------------------------
-int MainLoop::run()
+void MainMenu::setVisible(bool isVisible)
 {
-  SDL_Event event;
+  m_isVisible = isVisible;
+}
 
-  LOG_DB() << "Starting main loop";
+//------------------------------------------------------------------------------
+int MainMenu::draw()
+{
+  ImGui::Begin("Hello Window", nullptr,
+      ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 
-  m_isRunning = true;
-  while(m_isRunning)
+  if(ImGui::BeginMenuBar())
   {
-    while(SDL_PollEvent(&event) != 0 )
+    if (ImGui::BeginMenu("File"))
     {
-      ImGui_ImplSdlGL2_ProcessEvent(&event);
-      if(event.type == SDL_QUIT)
-      {
-        m_isRunning = false;
-        return 0;
-      }
+      if(ImGui::MenuItem("Open..", "Ctrl+O"))
+        LOG_DB() << "Open do stuff";
+      if(ImGui::MenuItem("Save", "Ctrl+S"))
+        LOG_DB() << "Save do stuff";
 
-      if(!ImGui::GetIO().WantCaptureMouse &&
-          !ImGui::GetIO().WantCaptureMouse)
-      {
-        // TODO: Dispatch event
-        LOG_DB() << "Dispatch event " << event.type;
-      }
-      else
-        LOG_DB() << "IMGUI EVENT";
+      ImGui::EndMenu();
     }
-
-    // TODO: Tick world
-
-    if(m_mainWindow.draw())
-      return -1;
+    ImGui::EndMenuBar();
   }
+
+  ImGui::End();
 
   return 0;
 }

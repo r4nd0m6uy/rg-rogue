@@ -16,6 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <imgui.h>
+#include <imgui_impl_sdl_gl2.h>
+
 #include "../logging/Loggers.hpp"
 #include "MainWindow.hpp"
 
@@ -23,16 +26,23 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 MainWindow::MainWindow(Options& options):
-  m_options(options),
-  m_window(nullptr)
+      m_options(options),
+      m_sdlWindow(nullptr),
+      m_sdlGlContext(nullptr)
 {
 }
 
 //------------------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
-  if(m_window)
-    SDL_DestroyWindow(m_window);
+  ImGui_ImplSdlGL2_Shutdown();
+  ImGui::DestroyContext();
+
+  if(m_sdlWindow)
+    SDL_DestroyWindow(m_sdlWindow);
+
+  if(m_sdlGlContext)
+    SDL_GL_DeleteContext(m_sdlGlContext);
 }
 
 //------------------------------------------------------------------------------
@@ -40,6 +50,8 @@ int MainWindow::init()
 {
   Uint32 sdlCreateWindowFlag = SDL_WINDOW_OPENGL;
 
+  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
   if(SDL_Init(SDL_INIT_EVERYTHING))
   {
     LOG_ER() << "SDL initialization failed:" << SDL_GetError();
@@ -49,37 +61,47 @@ int MainWindow::init()
   if(m_options.isFullScreen())
     sdlCreateWindowFlag |= SDL_WINDOW_FULLSCREEN;
 
-  m_window = SDL_CreateWindow("rg-rogue",
+  m_sdlWindow = SDL_CreateWindow("rg-rogue",
       SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
       m_options.getXResolution(), m_options.getYResolution(),
       sdlCreateWindowFlag);
-  if(!m_window)
+  if(!m_sdlWindow)
   {
     LOG_ER() << "Error creating SDL window: " << SDL_GetError();
     return -1;
   }
 
+  m_sdlGlContext = SDL_GL_CreateContext(m_sdlWindow);
+  if(!m_sdlGlContext)
+  {
+    LOG_ER() << "Error creating OpenGl context: " << SDL_GetError();
+    return -1;
+  }
+
+  ImGui::CreateContext();
+  ImGui_ImplSdlGL2_Init(m_sdlWindow);
+  ImGui::StyleColorsDark();
+
   return 0;
 }
 
 //------------------------------------------------------------------------------
-int MainWindow::redraw()
+int MainWindow::draw()
 {
-  SDL_Surface* surface;
-
-  surface = SDL_GetWindowSurface(m_window);
-  if(SDL_FillRect(
-      surface, NULL, SDL_MapRGB(surface->format, 0xFF, 0xFF, 0xFF)))
-  {
-    LOG_ER() << "Error painting SDL window: " << SDL_GetError();
+  // Render imgui
+  ImGui_ImplSdlGL2_NewFrame(m_sdlWindow);
+  if(m_mainMenu.draw())
     return -1;
-  }
 
-  if(SDL_UpdateWindowSurface(m_window))
-  {
-    LOG_ER() << "Error Updating SDL window: " << SDL_GetError();
-    return -1;
-  }
+  // TODO render world
+  glViewport(0, 0,
+      (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
+  glClearColor(0, 0, 0, 1);
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  ImGui::Render();
+  ImGui_ImplSdlGL2_RenderDrawData(ImGui::GetDrawData());
+  SDL_GL_SwapWindow(m_sdlWindow);
 
   return 0;
 }

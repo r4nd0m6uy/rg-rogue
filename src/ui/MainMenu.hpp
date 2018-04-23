@@ -16,32 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_MAIN_WINDOW_HPP_
-#define _RG_ROGUE_MAIN_WINDOW_HPP_
-
-#include <SDL.h>
-#include <SDL_opengl.h>
-
-#include "../options/Options.hpp"
-#include "MainMenu.hpp"
+#ifndef _RG_ROGUE_MAIN_MENU_HPP_
+#define _RG_ROGUE_MAIN_MENU_HPP_
 
 namespace rgrogue {
 
-class MainWindow
+class MainMenu
 {
 public:
-  MainWindow(Options& options);
-  ~MainWindow();
+  MainMenu();
+  ~MainMenu();
 
-  int init();
+  void setVisible(bool isVisible);
   int draw();
 
 private:
-  Options& m_options;
-  MainMenu m_mainMenu;
-  SDL_Window* m_sdlWindow;
-  SDL_GLContext m_sdlGlContext;
+  bool m_isVisible;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_MAIN_WINDOW_HPP_
+#endif  // _RG_ROGUE_MAIN_MENU_HPP_
