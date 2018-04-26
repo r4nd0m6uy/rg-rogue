@@ -16,31 +16,45 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
+#include <SDL_opengl.h>
 
-#include "ui/MainWindow.hpp"
-#include "ui/scenes/SceneTitle.hpp"
-#include "event-loop/MainLoop.hpp"
+#include "SceneTitle.hpp"
 
 namespace rgrogue {
 
-class RgRogue
+//------------------------------------------------------------------------------
+SceneTitle::SceneTitle()
 {
-public:
-  RgRogue();
-  ~RgRogue();
+}
 
-  int init();
-  int runGame();
+//------------------------------------------------------------------------------
+SceneTitle::~SceneTitle()
+{
+}
 
-private:
-  Options m_options;
-  ImGuiAdapter m_imgui;
-  SceneTitle m_scene;
-  MainLoop m_mainLoop;
-  MainWindow m_mainWindow;
-};
+//------------------------------------------------------------------------------
+int SceneTitle::reset()
+{
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int SceneTitle::tick()
+{
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int SceneTitle::draw(SDL_Window* window)
+{
+  glBegin(GL_QUADS);
+  glVertex2f(-1, 0);
+  glVertex2f(1, -0.5f);
+  glVertex2f(0.5f, 0.5f);
+  glVertex2f(-0.5f, 0.5f);
+  glEnd();
+
+  return 0;
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_

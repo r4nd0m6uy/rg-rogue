@@ -191,6 +191,9 @@ int ImGuiAdapter::draw()
 
   ImGui::Render();
 
+  glViewport(0, 0,
+      (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
+
   ImGuiIO& io = ImGui::GetIO();
   fb_width = (int)(io.DisplaySize.x * io.DisplayFramebufferScale.x);
   fb_height = (int)(io.DisplaySize.y * io.DisplayFramebufferScale.y);

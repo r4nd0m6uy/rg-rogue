@@ -23,10 +23,11 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 MainWindow::MainWindow(Options& options, IMainLoop& mainLoop,
-    ImGuiAdapter& imgui):
+    ImGuiAdapter& imgui, IScene& scene):
   m_options(options),
   m_mainMenu(options, mainLoop, *this),
   m_imgui(imgui),
+  m_scene(scene),
   m_sdlWindow(nullptr),
   m_sdlGlContext(nullptr)
 {
@@ -93,6 +94,8 @@ int MainWindow::init()
     return -1;
   }
 
+  glClearColor(0, 0, 0, 1);
+
   if(m_imgui.init(m_sdlWindow))
     return -1;
 
@@ -104,14 +107,14 @@ int MainWindow::draw()
 {
   // Render imgui
   m_imgui.newFrame(m_sdlWindow);
+
+  glClear(GL_COLOR_BUFFER_BIT);
+
   if(m_mainMenu.draw())
     return -1;
 
-  // TODO render world
-  glViewport(0, 0,
-      (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
-  glClearColor(0, 0, 0, 1);
-  glClear(GL_COLOR_BUFFER_BIT);
+  // Render scene
+  m_scene.draw(m_sdlWindow);
 
   if(m_imgui.draw())
     return -1;

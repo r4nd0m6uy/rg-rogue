@@ -12,6 +12,8 @@ set(APP_SOURCES
   ui/ImGuiAdapter.cpp
   ui/MainWindow.cpp
   ui/MainMenu.cpp
+  ui/scenes/IScene.cpp
+  ui/scenes/SceneTitle.cpp
   event-loop/IKeyObserver.cpp
   event-loop/IMainLoop.cpp
   event-loop/MainLoop.cpp

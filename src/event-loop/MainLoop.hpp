@@ -24,6 +24,7 @@
 
 #include "../options/Options.hpp"
 #include "../ui/MainWindow.hpp"
+#include "../ui/scenes/IScene.hpp"
 #include "EventDispatcher.hpp"
 #include "IMainLoop.hpp"
 
@@ -33,7 +34,8 @@ class MainLoop:
     public IMainLoop
 {
 public:
-  MainLoop(Options& options, MainWindow& mainWindow, ImGuiAdapter& imgui);
+  MainLoop(Options& options, MainWindow& mainWindow, ImGuiAdapter& imgui,
+      IScene& scene);
   virtual ~MainLoop();
 
   int run();
@@ -46,6 +48,7 @@ private:
   Options& m_options;
   MainWindow& m_mainWindow;
   ImGuiAdapter& m_imgui;
+  IScene& m_scene;
   EventDispatcher m_evDispatcher;
   bool m_isRunning;
   std::list<std::reference_wrapper<IKeyObserver>> m_keyObservers;

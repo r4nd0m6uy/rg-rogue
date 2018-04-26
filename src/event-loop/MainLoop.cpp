@@ -27,10 +27,11 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 MainLoop::MainLoop(Options& options, MainWindow& mainWindow,
-    ImGuiAdapter& imgui):
+    ImGuiAdapter& imgui, IScene& scene):
   m_options(options),
   m_mainWindow(mainWindow),
   m_imgui(imgui),
+  m_scene(scene),
   m_isRunning(false)
 {
 }
@@ -69,13 +70,15 @@ int MainLoop::run()
         m_evDispatcher.dispatch(&event);
     }
 
-    // TODO: Tick world
-    lastTick = SDL_GetTicks();
+    // Tick world
+    m_scene.tick();
 
+    // Draw
     if(m_mainWindow.draw())
       return -1;
 
     // Limit FPS
+    lastTick = SDL_GetTicks();
     if(m_options.getFps() > 0)
     {
       Uint32 fpsDuration = 1000 / m_options.getFps();
