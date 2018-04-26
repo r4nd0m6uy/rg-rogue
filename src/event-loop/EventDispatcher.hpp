@@ -16,40 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_MAIN_LOOP_HPP_
-#define _RG_ROGUE_MAIN_LOOP_HPP_
+#ifndef _RG_ROGUE_EVENT_DISPATCHER_HPP_
+#define _RG_ROGUE_EVENT_DISPATCHER_HPP_
+
+#include <SDL.h>
 
 #include <list>
 #include <functional>
 
-#include "../options/Options.hpp"
-#include "../ui/MainWindow.hpp"
-#include "EventDispatcher.hpp"
-#include "IMainLoop.hpp"
+#include "IKeyObserver.hpp"
 
 namespace rgrogue {
 
-class MainLoop:
-    public IMainLoop
+class EventDispatcher
 {
 public:
-  MainLoop(Options& options, MainWindow& mainWindow, ImGuiAdapter& imgui);
-  virtual ~MainLoop();
+  EventDispatcher();
+  ~EventDispatcher();
 
-  int run();
-
-  // IMainLoop
-  virtual int registerKeyObserver(IKeyObserver& observer) override;
-  virtual void breakLoop() override;
+  void dispatch(SDL_Event* event);
+  int registerKeyObserver(IKeyObserver& observer);
 
 private:
-  Options& m_options;
-  MainWindow& m_mainWindow;
-  ImGuiAdapter& m_imgui;
-  EventDispatcher m_evDispatcher;
-  bool m_isRunning;
   std::list<std::reference_wrapper<IKeyObserver>> m_keyObservers;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_MAIN_LOOP_HPP_
+#endif  // _RG_ROGUE_EVENT_DISPATCHER_HPP_

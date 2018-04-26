@@ -15,6 +15,7 @@ set(APP_SOURCES
   event-loop/IKeyObserver.cpp
   event-loop/IMainLoop.cpp
   event-loop/MainLoop.cpp
+  event-loop/EventDispatcher.cpp
   options/Options.cpp
   RgRogue.cpp
   main.cpp

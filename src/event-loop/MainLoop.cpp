@@ -57,37 +57,16 @@ int MainLoop::run()
 
     while(SDL_PollEvent(&event) != 0 )
     {
-      m_imgui.processEvent(&event);
-
       if(event.type == SDL_QUIT)
       {
         m_isRunning = false;
         return 0;
       }
 
+      m_imgui.processEvent(&event);
       if(!ImGui::GetIO().WantCaptureMouse &&
           !ImGui::GetIO().WantCaptureMouse)
-      {
-        switch(event.type)
-        {
-        case SDL_KEYDOWN:
-          for(auto& keyObserver : m_keyObservers)
-            keyObserver.get().onKeyPressed(
-                event.key.keysym.scancode,
-                event.key.keysym.sym,
-                event.key.keysym.mod);
-          break;
-        case SDL_KEYUP:
-          for(auto& keyObserver : m_keyObservers)
-            keyObserver.get().onKeyReleased(
-                event.key.keysym.scancode,
-                event.key.keysym.sym,
-                event.key.keysym.mod);
-          break;
-//          default:
-//            LOG_DB() << "Unhandled SDL event " << event.type;
-        }
-      }
+        m_evDispatcher.dispatch(&event);
     }
 
     // TODO: Tick world
@@ -124,9 +103,7 @@ int MainLoop::run()
 //------------------------------------------------------------------------------
 int MainLoop::registerKeyObserver(IKeyObserver& observer)
 {
-  m_keyObservers.push_back(observer);
-
-  return 0;
+  return m_evDispatcher.registerKeyObserver(observer);
 }
 
 //------------------------------------------------------------------------------
