@@ -16,39 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_MAIN_WINDOW_HPP_
-#define _RG_ROGUE_MAIN_WINDOW_HPP_
+#ifndef _RG_ROGUE_IM_GUI_HPP_
+#define _RG_ROGUE_IM_GUI_HPP_
 
 #include <SDL.h>
-#include <SDL_opengl.h>
-
-#include "../options/Options.hpp"
-#include "MainMenu.hpp"
-#include "ImGuiAdapter.hpp"
-#include "IMainWindow.hpp"
 
 namespace rgrogue {
 
-class MainWindow:
-    public IMainWindow
+class ImGuiAdapter
 {
 public:
-  MainWindow(Options& options, IMainLoop& mainLoop);
-  ~MainWindow();
+  ImGuiAdapter();
+  ~ImGuiAdapter();
 
-  int init();
+  int init(SDL_Window *window);
+  void cleanup();
+  void newFrame(SDL_Window *window);
   int draw();
-
-  // IMainWindow
-  int applyVideoConfig(Options& options) override;
-
-private:
-  Options& m_options;
-  MainMenu m_mainMenu;
-  ImGuiAdapter m_imgui;
-  SDL_Window* m_sdlWindow;
-  SDL_GLContext m_sdlGlContext;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_MAIN_WINDOW_HPP_
+#endif  // _RG_ROGUE_IM_GUI_HPP_

@@ -76,13 +76,27 @@ int MainWindow::init()
     LOG_ER() << "Error creating OpenGl context: " << SDL_GetError();
     return -1;
   }
-  SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-  SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-  SDL_GL_SetSwapInterval(0);
 
-  ImGui::CreateContext();
-  ImGui_ImplSdlGL2_Init(m_sdlWindow);
-  ImGui::StyleColorsDark();
+  if(SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1))
+  {
+    LOG_ER() << "Cannot set OpenGl double buffering: " << SDL_GetError();
+    return -1;
+  }
+
+  if(SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24))
+  {
+    LOG_ER() << "Cannot set OpenGl color deppth: " << SDL_GetError();
+    return -1;
+  }
+
+  if(SDL_GL_SetSwapInterval(0))
+  {
+    LOG_ER() << "Cannot set OpenGl swap interval: " << SDL_GetError();
+    return -1;
+  }
+
+  if(m_imgui.init(m_sdlWindow))
+    return -1;
 
   return m_mainMenu.init();
 }
@@ -91,7 +105,7 @@ int MainWindow::init()
 int MainWindow::draw()
 {
   // Render imgui
-  ImGui_ImplSdlGL2_NewFrame(m_sdlWindow);
+  m_imgui.newFrame(m_sdlWindow);
   if(m_mainMenu.draw())
     return -1;
 
@@ -101,8 +115,9 @@ int MainWindow::draw()
   glClearColor(0, 0, 0, 1);
   glClear(GL_COLOR_BUFFER_BIT);
 
-  ImGui::Render();
-  ImGui_ImplSdlGL2_RenderDrawData(ImGui::GetDrawData());
+  if(m_imgui.draw())
+    return -1;
+
   SDL_GL_SwapWindow(m_sdlWindow);
 
   return 0;
