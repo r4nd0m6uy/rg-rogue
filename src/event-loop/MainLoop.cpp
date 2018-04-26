@@ -19,7 +19,6 @@
 #include <SDL.h>
 
 #include <imgui.h>
-#include <imgui_impl_sdl_gl2.h>
 
 #include "../logging/Loggers.hpp"
 #include "MainLoop.hpp"
@@ -27,9 +26,11 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainLoop::MainLoop(Options& options, MainWindow& mainWindow):
+MainLoop::MainLoop(Options& options, MainWindow& mainWindow,
+    ImGuiAdapter& imgui):
   m_options(options),
   m_mainWindow(mainWindow),
+  m_imgui(imgui),
   m_isRunning(false)
 {
 }
@@ -56,7 +57,8 @@ int MainLoop::run()
 
     while(SDL_PollEvent(&event) != 0 )
     {
-      ImGui_ImplSdlGL2_ProcessEvent(&event);
+      m_imgui.processEvent(&event);
+
       if(event.type == SDL_QUIT)
       {
         m_isRunning = false;

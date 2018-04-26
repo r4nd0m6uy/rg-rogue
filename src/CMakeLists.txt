@@ -2,7 +2,6 @@ set(APP_NAME rg-rogue)
 set(APP_SOURCES
   ../imgui/imgui.cpp
   ../imgui/imgui_draw.cpp
-  ../imgui/examples/sdl_opengl2_example/imgui_impl_sdl_gl2.cpp
   logging/ILogSink.cpp
   logging/LogFormatter.cpp
   logging/ILogger.cpp
@@ -30,7 +29,6 @@ include_directories(
   ${SDL2_INCLUDE_DIRS}
   ${OPENGL_INCLUDE_DIRS}
   ${PROJECT_SOURCE_DIR}/imgui
-  ${PROJECT_SOURCE_DIR}/imgui/examples/sdl_opengl2_example/
 )
 
 

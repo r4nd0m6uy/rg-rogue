@@ -33,7 +33,7 @@ class MainWindow:
     public IMainWindow
 {
 public:
-  MainWindow(Options& options, IMainLoop& mainLoop);
+  MainWindow(Options& options, IMainLoop& mainLoop, ImGuiAdapter& imgui);
   ~MainWindow();
 
   int init();
@@ -45,7 +45,7 @@ public:
 private:
   Options& m_options;
   MainMenu m_mainMenu;
-  ImGuiAdapter m_imgui;
+  ImGuiAdapter& m_imgui;
   SDL_Window* m_sdlWindow;
   SDL_GLContext m_sdlGlContext;
 };

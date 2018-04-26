@@ -32,7 +32,7 @@ class MainLoop:
     public IMainLoop
 {
 public:
-  MainLoop(Options& options, MainWindow& mainWindow);
+  MainLoop(Options& options, MainWindow& mainWindow, ImGuiAdapter& imgui);
   ~MainLoop();
 
   int run();
@@ -44,6 +44,7 @@ public:
 private:
   Options& m_options;
   MainWindow& m_mainWindow;
+  ImGuiAdapter& m_imgui;
   bool m_isRunning;
   std::list<std::reference_wrapper<IKeyObserver>> m_keyObservers;
 };

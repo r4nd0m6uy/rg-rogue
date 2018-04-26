@@ -35,6 +35,7 @@ public:
 
 private:
   Options m_options;
+  ImGuiAdapter m_imgui;
   MainLoop m_mainLoop;
   MainWindow m_mainWindow;
 };

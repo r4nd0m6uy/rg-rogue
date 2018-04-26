@@ -16,18 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <imgui.h>
-#include <imgui_impl_sdl_gl2.h>
-
 #include "../logging/Loggers.hpp"
 #include "MainWindow.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-MainWindow::MainWindow(Options& options, IMainLoop& mainLoop):
+MainWindow::MainWindow(Options& options, IMainLoop& mainLoop,
+    ImGuiAdapter& imgui):
   m_options(options),
   m_mainMenu(options, mainLoop, *this),
+  m_imgui(imgui),
   m_sdlWindow(nullptr),
   m_sdlGlContext(nullptr)
 {
@@ -36,8 +35,7 @@ MainWindow::MainWindow(Options& options, IMainLoop& mainLoop):
 //------------------------------------------------------------------------------
 MainWindow::~MainWindow()
 {
-  ImGui_ImplSdlGL2_Shutdown();
-  ImGui::DestroyContext();
+  m_imgui.cleanup();
 
   if(m_sdlWindow)
     SDL_DestroyWindow(m_sdlWindow);

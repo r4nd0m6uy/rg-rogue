@@ -20,6 +20,9 @@
 #define _RG_ROGUE_IM_GUI_HPP_
 
 #include <SDL.h>
+#include <SDL_opengl.h>
+
+#include <imgui.h>
 
 namespace rgrogue {
 
@@ -33,6 +36,18 @@ public:
   void cleanup();
   void newFrame(SDL_Window *window);
   int draw();
+  void processEvent(SDL_Event* event);
+
+private:
+  SDL_Cursor* m_mouseCursors[ImGuiMouseCursor_COUNT];
+  GLuint m_fontTexture;
+  Uint64 m_time;
+  bool m_mousePressed[3];
+
+  static void setClipboardText(void* ctx, const char* text);
+  static const char* getClipboardText(void* ctx);
+  void createDeviceObjects();
+  void invalidateDeviceObjects();
 };
 
 }       // namespace
