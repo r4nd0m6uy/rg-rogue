@@ -28,9 +28,9 @@ namespace rgrogue {
 
 static const std::string STR_GAME_NAME  = "RGRogue";
 static const float WINDOW_WIDTH         = 300;
-static const float WINDOW_HEIGHT        = 150;
 
 // FIXME: Translation
+static const std::string STR_TITLE      = "Title";
 static const std::string STR_NEW_GAME   = "New game";
 static const std::string STR_OPTIONS    = "Options";
 static const std::string STR_VIDEO      = "Video";
@@ -47,7 +47,7 @@ MainMenu::MainMenu(Options& options, IMainLoop& mainLoop,
   m_mainLoop(mainLoop),
   m_mainWindow(mainWindow),
   m_rgRogue(rgRogue),
-  m_isVisible(true)
+  m_isVisible(false)
 {
 }
 
@@ -81,15 +81,16 @@ int MainMenu::draw()
       ImGuiWindowFlags_NoMove |
       ImGuiWindowFlags_NoTitleBar |
       ImGuiWindowFlags_NoResize |
-      ImGuiWindowFlags_NoSavedSettings))
+      ImGuiWindowFlags_NoSavedSettings |
+      ImGuiWindowFlags_AlwaysAutoResize))
   {
+    float windowHeight = ImGui::GetWindowSize().y;
+
     ImGui::SetWindowPos(
         ImVec2(
             (m_options.getXResolution() / 2) - (WINDOW_WIDTH / 2),
-            (m_options.getYResolution() / 2) - (WINDOW_HEIGHT / 2)),
+            (m_options.getYResolution() / 2) - (windowHeight * 2)),
         ImGuiCond_Once);
-    ImGui::SetWindowSize(
-        ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), ImGuiCond_Once);
 
     // Header text
     std::string currentText = getHeaderText();
@@ -98,11 +99,29 @@ int MainMenu::draw()
         ImVec2((WINDOW_WIDTH / 2) - (textSize.x / 2), ImGui::GetCursorPosY()));
     ImGui::Text(currentText.c_str());
 
+    // Main menu
+    if(m_rgRogue.getCurrentSceneId() != SceneId::MAIN_TITLE)
+    {
+      currentText = STR_TITLE;
+      textSize = ImGui::CalcTextSize(currentText.c_str());
+      ImGui::SetCursorPos(
+          ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + 20));
+      if(ImGui::Button(
+          currentText.c_str(), ImVec2(WINDOW_WIDTH, textSize.y + 10)))
+      {
+        m_rgRogue.setScene(SceneId::MAIN_TITLE);
+        m_isVisible = false;
+      }
+    }
+
     // New game
     currentText = STR_NEW_GAME;
     textSize = ImGui::CalcTextSize(currentText.c_str());
-    ImGui::SetCursorPos(
-        ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + 20));
+
+    if(m_rgRogue.getCurrentSceneId() == SceneId::MAIN_TITLE)
+      ImGui::SetCursorPos(
+          ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + 20));
+
     if(ImGui::Button(
         currentText.c_str(), ImVec2(WINDOW_WIDTH, textSize.y + 10)))
     {
@@ -122,7 +141,7 @@ int MainMenu::draw()
       static bool isFullScreen = m_options.isFullScreen();
       static int newFps = m_options.getFps();
 
-      ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, WINDOW_HEIGHT), ImGuiCond_Once);
+      ImGui::SetWindowSize(ImVec2(WINDOW_WIDTH, windowHeight), ImGuiCond_Once);
 
       // Video
       if (ImGui::CollapsingHeader(STR_VIDEO.c_str()))
@@ -177,7 +196,7 @@ void MainMenu::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
   if(keyCode == SDLK_ESCAPE)
-    m_isVisible = true;
+    m_isVisible = !m_isVisible;
 }
 
 //------------------------------------------------------------------------------
