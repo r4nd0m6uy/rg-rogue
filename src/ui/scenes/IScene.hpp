@@ -21,6 +21,8 @@
 
 #include <SDL.h>
 
+#include "SceneIds.hpp"
+
 namespace rgrogue {
 
 class IScene
@@ -32,6 +34,7 @@ public:
   virtual int reset() = 0;
   virtual int tick() = 0;
   virtual int draw(SDL_Window* window) = 0;
+  virtual SceneId getId() = 0;
 };
 
 }       // namespace

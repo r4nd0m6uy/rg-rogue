@@ -14,12 +14,15 @@ set(APP_SOURCES
   ui/MainMenu.cpp
   ui/scenes/IScene.cpp
   ui/scenes/ScenesPool.cpp
+  ui/scenes/Scene.cpp
   ui/scenes/SceneTitle.cpp
+  ui/scenes/SceneGame.cpp
   event-loop/IKeyObserver.cpp
   event-loop/IMainLoop.cpp
   event-loop/MainLoop.cpp
   event-loop/EventDispatcher.cpp
   options/Options.cpp
+  IRgRogue.cpp
   RgRogue.cpp
   main.cpp
 )

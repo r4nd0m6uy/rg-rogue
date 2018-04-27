@@ -25,10 +25,9 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 RgRogue::RgRogue():
-  m_mainLoop(m_options, m_mainWindow, m_imgui,
-      m_scenes.getScene(SceneId::MAIN_TITLE)),
-  m_mainWindow(m_options, m_mainLoop, m_imgui,
-      m_scenes.getScene(SceneId::MAIN_TITLE))
+  m_currentScene(m_scenes.getScene(SceneId::MAIN_TITLE)),
+  m_mainLoop(m_options, m_mainWindow, m_imgui, m_currentScene),
+  m_mainWindow(m_options, m_mainLoop, m_imgui, m_currentScene, *this)
 {
 }
 
@@ -63,7 +62,24 @@ int RgRogue::init()
 //------------------------------------------------------------------------------
 int RgRogue::runGame()
 {
+
   return m_mainLoop.run();
+}
+
+//------------------------------------------------------------------------------
+void RgRogue::setScene(SceneId id)
+{
+  m_currentScene = m_scenes.getScene(id);
+
+  m_currentScene.get().reset();
+  m_mainLoop.setScene(m_currentScene.get());
+  m_mainWindow.setScene(m_currentScene.get());
+}
+
+//------------------------------------------------------------------------------
+SceneId RgRogue::getCurrentSceneId()
+{
+  return m_currentScene.get().getId();
 }
 
 }

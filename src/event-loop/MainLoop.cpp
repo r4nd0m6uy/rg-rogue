@@ -71,7 +71,7 @@ int MainLoop::run()
     }
 
     // Tick world
-    m_scene.tick();
+    m_scene.get().tick();
 
     // Draw
     if(m_mainWindow.draw())
@@ -101,6 +101,12 @@ int MainLoop::run()
   }
 
   return 0;
+}
+
+//------------------------------------------------------------------------------
+void MainLoop::setScene(IScene& scene)
+{
+  m_scene = scene;
 }
 
 //------------------------------------------------------------------------------

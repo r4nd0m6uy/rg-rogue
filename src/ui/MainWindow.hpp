@@ -35,11 +35,12 @@ class MainWindow:
 {
 public:
   MainWindow(Options& options, IMainLoop& mainLoop, ImGuiAdapter& imgui,
-      IScene& scene);
+      IScene& scene, IRgRogue& rgRogue);
   ~MainWindow();
 
   int init();
   int draw();
+  void setScene(IScene& scene);
 
   // IMainWindow
   int applyVideoConfig(Options& options) override;
@@ -48,7 +49,7 @@ private:
   Options& m_options;
   MainMenu m_mainMenu;
   ImGuiAdapter& m_imgui;
-  IScene& m_scene;
+  std::reference_wrapper<IScene> m_scene;
   SDL_Window* m_sdlWindow;
   SDL_GLContext m_sdlGlContext;
 };

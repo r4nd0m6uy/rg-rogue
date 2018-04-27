@@ -23,9 +23,9 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 MainWindow::MainWindow(Options& options, IMainLoop& mainLoop,
-    ImGuiAdapter& imgui, IScene& scene):
+    ImGuiAdapter& imgui, IScene& scene, IRgRogue& rgRogue):
   m_options(options),
-  m_mainMenu(options, mainLoop, *this),
+  m_mainMenu(options, mainLoop, *this, rgRogue),
   m_imgui(imgui),
   m_scene(scene),
   m_sdlWindow(nullptr),
@@ -114,7 +114,7 @@ int MainWindow::draw()
     return -1;
 
   // Render scene
-  m_scene.draw(m_sdlWindow);
+  m_scene.get().draw(m_sdlWindow);
 
   if(m_imgui.draw())
     return -1;
@@ -122,6 +122,12 @@ int MainWindow::draw()
   SDL_GL_SwapWindow(m_sdlWindow);
 
   return 0;
+}
+
+//------------------------------------------------------------------------------
+void MainWindow::setScene(IScene& scene)
+{
+  m_scene = scene;
 }
 
 //------------------------------------------------------------------------------

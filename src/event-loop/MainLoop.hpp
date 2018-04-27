@@ -39,6 +39,7 @@ public:
   virtual ~MainLoop();
 
   int run();
+  void setScene(IScene& scene);
 
   // IMainLoop
   virtual int registerKeyObserver(IKeyObserver& observer) override;
@@ -48,7 +49,7 @@ private:
   Options& m_options;
   MainWindow& m_mainWindow;
   ImGuiAdapter& m_imgui;
-  IScene& m_scene;
+  std::reference_wrapper<IScene> m_scene;
   EventDispatcher m_evDispatcher;
   bool m_isRunning;
   std::list<std::reference_wrapper<IKeyObserver>> m_keyObservers;

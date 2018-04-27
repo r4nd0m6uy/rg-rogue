@@ -18,12 +18,15 @@
  */
 #include <SDL_opengl.h>
 
+#include "../../logging/Loggers.hpp"
+
 #include "SceneTitle.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-SceneTitle::SceneTitle()
+SceneTitle::SceneTitle(SceneId id):
+    Scene(id)
 {
 }
 
@@ -47,6 +50,8 @@ int SceneTitle::tick()
 //------------------------------------------------------------------------------
 int SceneTitle::draw(SDL_Window* window)
 {
+//  LOG_DB() << "Draw title";
+
   glBegin(GL_QUADS);
   glVertex2f(-1, 0);
   glVertex2f(1, -0.5f);

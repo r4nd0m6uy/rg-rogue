@@ -16,38 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
+#ifndef _RG_ROGUE_SCENE_GAME_HPP_
+#define _RG_ROGUE_SCENE_GAME_HPP_
 
-#include "ui/MainWindow.hpp"
-#include "ui/scenes/ScenesPool.hpp"
-#include "event-loop/MainLoop.hpp"
-#include "IRgRogue.hpp"
+#include "Scene.hpp"
 
 namespace rgrogue {
 
-class RgRogue:
-    public IRgRogue
+class SceneGame:
+    public Scene
 {
 public:
-  RgRogue();
-  virtual ~RgRogue();
+  SceneGame(SceneId id);
+  virtual ~SceneGame();
 
-  int init();
-  int runGame();
-
-  // IRgRogue
-  virtual void setScene(SceneId id) override;
-  virtual SceneId getCurrentSceneId() override;
-
-private:
-  Options m_options;
-  ScenesPool m_scenes;
-  std::reference_wrapper<IScene> m_currentScene;
-  ImGuiAdapter m_imgui;
-  MainLoop m_mainLoop;
-  MainWindow m_mainWindow;
+  // IScene
+  virtual int reset() override;
+  virtual int tick() override;
+  virtual int draw(SDL_Window* window) override;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_
+#endif  // _RG_ROGUE_SCENE_GAME_HPP_

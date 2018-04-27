@@ -42,10 +42,11 @@ static const std::string STR_EXIT       = "Exit";
 
 //------------------------------------------------------------------------------
 MainMenu::MainMenu(Options& options, IMainLoop& mainLoop,
-    IMainWindow& mainWindow):
+    IMainWindow& mainWindow, IRgRogue& rgRogue):
   m_options(options),
   m_mainLoop(mainLoop),
   m_mainWindow(mainWindow),
+  m_rgRogue(rgRogue),
   m_isVisible(true)
 {
 }
@@ -104,7 +105,10 @@ int MainMenu::draw()
         ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + 20));
     if(ImGui::Button(
         currentText.c_str(), ImVec2(WINDOW_WIDTH, textSize.y + 10)))
+    {
+      m_rgRogue.setScene(SceneId::GAME);
       m_isVisible = false;
+    }
 
     // Options
     currentText = STR_OPTIONS;

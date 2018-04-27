@@ -21,6 +21,7 @@
 
 #include "../options/Options.hpp"
 #include "../event-loop/IMainLoop.hpp"
+#include "../IRgRogue.hpp"
 #include "IMainWindow.hpp"
 
 namespace rgrogue {
@@ -29,7 +30,8 @@ class MainMenu:
     public IKeyObserver
 {
 public:
-  MainMenu(Options& options, IMainLoop& mainLoop, IMainWindow& mainWindow);
+  MainMenu(Options& options, IMainLoop& mainLoop, IMainWindow& mainWindow,
+      IRgRogue& rgRogue);
   ~MainMenu();
 
   int init();
@@ -46,6 +48,7 @@ private:
   Options& m_options;
   IMainLoop& m_mainLoop;
   IMainWindow& m_mainWindow;
+  IRgRogue& m_rgRogue;
   bool m_isVisible;
 
   std::string getHeaderText();

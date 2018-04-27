@@ -26,10 +26,6 @@
 
 namespace rgrogue {
 
-enum class SceneId{
-  MAIN_TITLE  = 1
-};
-
 class ScenesPool
 {
 public:

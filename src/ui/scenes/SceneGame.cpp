@@ -16,57 +16,47 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <SDL_opengl.h>
+
 #include "../../logging/Loggers.hpp"
-#include "SceneTitle.hpp"
 #include "SceneGame.hpp"
-#include "ScenesPool.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-ScenesPool::ScenesPool()
+SceneGame::SceneGame(SceneId id):
+    Scene(id)
 {
 }
 
 //------------------------------------------------------------------------------
-ScenesPool::~ScenesPool()
+SceneGame::~SceneGame()
 {
 }
 
 //------------------------------------------------------------------------------
-IScene& ScenesPool::getScene(SceneId id)
+int SceneGame::reset()
 {
-  const auto& foundScene = m_scenes.find(id);
-
-  if(foundScene == m_scenes.end())
-  {
-    std::unique_ptr<IScene> newScene;
-
-    buildScene(id, newScene);
-    m_scenes[id] = std::move(newScene);
-
-    return *m_scenes[id];
-  }
-
-  return *foundScene->second;
+  return 0;
 }
 
+//------------------------------------------------------------------------------
+int SceneGame::tick()
+{
+  return 0;
+}
 
 //------------------------------------------------------------------------------
-void ScenesPool::buildScene(SceneId id, std::unique_ptr<IScene>& scene)
+int SceneGame::draw(SDL_Window* window)
 {
-  switch(id)
-  {
-  case SceneId::MAIN_TITLE:
-    scene.reset(new SceneTitle(id));
-    break;
-  case SceneId::GAME:
-    scene.reset(new SceneGame(id));
-    break;
-  default:
-    LOG_WA() << "Scene ID " << (int)id << " not found, buildling default!";
-    scene.reset(new SceneTitle(id));
-  }
+  glBegin(GL_QUADS);
+  glVertex2f(-1, 0);
+  glVertex2f(1, 1);
+  glVertex2f(0.5f, 0.5f);
+  glVertex2f(-0.5f, 0.5f);
+  glEnd();
+
+  return 0;
 }
 
 }       // namespace

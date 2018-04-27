@@ -19,15 +19,15 @@
 #ifndef _RG_ROGUE_SCENE_TITLE_HPP_
 #define _RG_ROGUE_SCENE_TITLE_HPP_
 
-#include "IScene.hpp"
+#include "Scene.hpp"
 
 namespace rgrogue {
 
 class SceneTitle:
-    public IScene
+    public Scene
 {
 public:
-  SceneTitle();
+  SceneTitle(SceneId id);
   virtual ~SceneTitle();
 
   // IScene
