@@ -16,31 +16,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_RG_ROGUE_HPP_
-#define _RG_ROGUE_RG_ROGUE_HPP_
+#ifndef _RG_ROGUE_SCENES_POOL_HPP_
+#define _RG_ROGUE_SCENES_POOL_HPP_
 
-#include "ui/MainWindow.hpp"
-#include "ui/scenes/ScenesPool.hpp"
-#include "event-loop/MainLoop.hpp"
+#include <unordered_map>
+#include <memory>
+
+#include "IScene.hpp"
 
 namespace rgrogue {
 
-class RgRogue
+enum class SceneId{
+  MAIN_TITLE  = 1
+};
+
+class ScenesPool
 {
 public:
-  RgRogue();
-  ~RgRogue();
+  ScenesPool();
+  virtual ~ScenesPool();
 
-  int init();
-  int runGame();
+  IScene& getScene(SceneId id);
 
 private:
-  Options m_options;
-  ScenesPool m_scenes;
-  ImGuiAdapter m_imgui;
-  MainLoop m_mainLoop;
-  MainWindow m_mainWindow;
+  std::unordered_map<SceneId, std::unique_ptr<IScene> > m_scenes;
+
+  static void buildScene(SceneId id, std::unique_ptr<IScene>& scene);
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_RG_ROGUE_HPP_
+#endif  // _RG_ROGUE_I_SCENE_HPP_

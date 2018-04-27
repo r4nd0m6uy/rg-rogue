@@ -16,54 +16,53 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL.h>
-
-#include "logging/Loggers.hpp"
-#include "RgRogue.hpp"
+#include "../../logging/Loggers.hpp"
+#include "SceneTitle.hpp"
+#include "ScenesPool.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-RgRogue::RgRogue():
-  m_mainLoop(m_options, m_mainWindow, m_imgui,
-      m_scenes.getScene(SceneId::MAIN_TITLE)),
-  m_mainWindow(m_options, m_mainLoop, m_imgui,
-      m_scenes.getScene(SceneId::MAIN_TITLE))
+ScenesPool::ScenesPool()
 {
 }
 
 //------------------------------------------------------------------------------
-RgRogue::~RgRogue()
+ScenesPool::~ScenesPool()
 {
-  SDL_Quit();
 }
 
 //------------------------------------------------------------------------------
-int RgRogue::init()
+IScene& ScenesPool::getScene(SceneId id)
 {
-  LOG_DB() << "Initializing";
+  const auto& foundScene = m_scenes.find(id);
 
-  if(m_options.init())
-    return -1;
-
-  if(SDL_Init(SDL_INIT_EVERYTHING))
+  if(foundScene == m_scenes.end())
   {
-    LOG_ER() << "SDL initialization failed:" << SDL_GetError();
-    return -1;
+    std::unique_ptr<IScene> newScene;
+
+    buildScene(id, newScene);
+    m_scenes[id] = std::move(newScene);
+
+    return *m_scenes[id];
   }
 
-  if(m_mainWindow.init())
-    return -1;
-
-  LOG_IN() << "Initialization done";
-
-  return 0;
+  return *foundScene->second;
 }
+
 
 //------------------------------------------------------------------------------
-int RgRogue::runGame()
+void ScenesPool::buildScene(SceneId id, std::unique_ptr<IScene>& scene)
 {
-  return m_mainLoop.run();
+  switch(id)
+  {
+  case SceneId::MAIN_TITLE:
+    scene.reset(new SceneTitle());
+    break;
+  default:
+    LOG_WA() << "Scene ID " << (int)id << " not found, buildling default!";
+    scene.reset(new SceneTitle());
+  }
 }
 
-}
+}       // namespace
