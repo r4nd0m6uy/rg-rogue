@@ -327,6 +327,16 @@ void ImGuiAdapter::processEvent(SDL_Event* event)
 }
 
 //------------------------------------------------------------------------------
+bool ImGuiAdapter::isHandledByImgui(SDL_Event* event)
+{
+  return
+      (ImGui::GetIO().WantCaptureMouse ||
+          ImGui::GetIO().WantCaptureMouse) &&
+      event->type != SDL_KEYDOWN &&
+      event->key.keysym.sym != SDLK_ESCAPE;
+}
+
+//------------------------------------------------------------------------------
 void ImGuiAdapter::setClipboardText(void* ctx, const char* text)
 {
   SDL_SetClipboardText(text);

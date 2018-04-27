@@ -65,8 +65,7 @@ int MainLoop::run()
       }
 
       m_imgui.processEvent(&event);
-      if(!ImGui::GetIO().WantCaptureMouse &&
-          !ImGui::GetIO().WantCaptureMouse)
+      if(!m_imgui.isHandledByImgui(&event))
         m_evDispatcher.dispatch(&event);
     }
 

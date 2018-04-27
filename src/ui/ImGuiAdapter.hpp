@@ -37,6 +37,7 @@ public:
   void newFrame(SDL_Window *window);
   int draw();
   void processEvent(SDL_Event* event);
+  bool isHandledByImgui(SDL_Event* event);
 
 private:
   SDL_Cursor* m_mouseCursors[ImGuiMouseCursor_COUNT];
