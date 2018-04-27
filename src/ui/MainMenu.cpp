@@ -195,7 +195,10 @@ int MainMenu::draw()
 void MainMenu::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
-  if(keyCode == SDLK_ESCAPE)
+  if(!m_isVisible &&
+      m_rgRogue.getCurrentSceneId() == SceneId::MAIN_TITLE)
+    m_isVisible = true;
+  else if(keyCode == SDLK_ESCAPE)
     m_isVisible = !m_isVisible;
 }
 
