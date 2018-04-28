@@ -16,24 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_SQUARE_HPP_
-#define _RG_ROGUE_SQUARE_HPP_
+#ifndef _RG_ROGUE_I_SHAPE_HPP_
+#define _RG_ROGUE_I_SHAPE_HPP_
 
-#include "Shape.hpp"
+#include "Vector2D.hpp"
 
 namespace rgrogue {
 
-class Square:
-    public Shape
+class IShape
 {
 public:
-  Square();
-  Square(float x, float y, float width);
-  virtual ~Square();
+  IShape();
+  virtual ~IShape();
 
-  Square& operator+(const Vector2D& rhs);
-  Square& operator+=(const Vector2D& rhs);
+  virtual const Vector2D& getPosition() const = 0;
+  virtual void setPosition(float x, float y) = 0;
+  virtual void setPosition(const Vector2D& pos) = 0;
+  virtual float getWidth() const = 0;;
+  virtual float getHeight() const = 0;
+
+  // XXX: IDrawable?
+  virtual int draw() const = 0;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_SQUARE_HPP_
+#endif  // _RG_ROGUE_I_SHAPE_HPP_

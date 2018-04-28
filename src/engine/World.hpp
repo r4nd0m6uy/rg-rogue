@@ -20,6 +20,7 @@
 #define _RG_ROGUE_WORLD_HPP_
 
 #include "Square.hpp"
+#include "Rectangle.hpp"
 
 namespace rgrogue {
 
@@ -34,7 +35,7 @@ public:
   int draw();
 
 private:
-  Square m_player;
+  Rectangle m_player;
   Square m_origin;
   Vector2D m_playerSpeed;
 };

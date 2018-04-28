@@ -39,7 +39,7 @@ World::~World()
 //------------------------------------------------------------------------------
 int World::reset()
 {
-  m_player = Square(0, 500, 20);
+  m_player = Rectangle(0, 500, 20, 50);
   m_playerSpeed = Vector2D(120, 0);
   m_origin = Square(-10, 10, 20);
 

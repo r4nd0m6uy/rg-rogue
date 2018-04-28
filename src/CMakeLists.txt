@@ -22,7 +22,10 @@ set(APP_SOURCES
   event-loop/EventDispatcher.cpp
   options/Options.cpp
   engine/Vector2D.cpp
+  engine/IShape.cpp
+  engine/Shape.cpp
   engine/Square.cpp
+  engine/Rectangle.cpp
   engine/World.cpp
   IRgRogue.cpp
   RgRogue.cpp
