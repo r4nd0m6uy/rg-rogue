@@ -47,6 +47,18 @@ const Vector2D& Square::getPosition() const
 }
 
 //------------------------------------------------------------------------------
+void Square::setPosition(float x, float y)
+{
+  setPosition(Vector2D(x, y));
+}
+
+//------------------------------------------------------------------------------
+void Square::setPosition(const Vector2D& pos)
+{
+  m_pos = pos;
+}
+
+//------------------------------------------------------------------------------
 float Square::getWidth() const
 {
   return m_width;

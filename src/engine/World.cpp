@@ -18,11 +18,13 @@
  */
 #include <SDL_opengl.h>
 
+#include "../logging/Loggers.hpp"
+
 #include "World.hpp"
 
 namespace rgrogue {
 
-static Vector2D GRAVITY = Vector2D(0, -0.09);
+static Vector2D GRAVITY = Vector2D(0, -8.9);
 
 //------------------------------------------------------------------------------
 World::World()
@@ -37,8 +39,8 @@ World::~World()
 //------------------------------------------------------------------------------
 int World::reset()
 {
-  m_player = Square(300, 300, 20);
-  m_playerSpeed = Vector2D(20, 1);
+  m_player = Square(0, 500, 20);
+  m_playerSpeed = Vector2D(120, 0);
   m_origin = Square(-10, 10, 20);
 
   return 0;
@@ -52,11 +54,14 @@ int World::tick(float deltaMs)
     m_playerSpeed = Vector2D(m_playerSpeed.getX() * -1, m_playerSpeed.getY());
 
   if(m_player.getPosition().getY() - m_player.getWidth() <= 0)
-    m_playerSpeed = Vector2D(m_playerSpeed.getX(), 5);
+  {
+    m_playerSpeed = Vector2D(m_playerSpeed.getX(), -m_playerSpeed.getY() - 5);
+    m_player.setPosition(m_player.getPosition().getX(), m_player.getWidth());
+  }
   else
     m_playerSpeed += GRAVITY;
 
-  m_player += m_playerSpeed;
+  m_player += Vector2D(m_playerSpeed) * (1 / deltaMs);
 
   return 0;
 }

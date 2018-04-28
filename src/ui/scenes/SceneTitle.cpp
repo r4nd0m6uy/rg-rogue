@@ -59,8 +59,6 @@ int SceneTitle::draw(SDL_Window* window)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 
-  glPopMatrix();
-
   glBegin(GL_QUADS);
   glVertex2f(-1, 0);
   glVertex2f(1, -0.5f);

@@ -56,7 +56,7 @@ int SceneGame::draw(SDL_Window* window)
   int height;
 
   SDL_GetWindowSize(window, &width, &height);
-  glViewport (0, 0, (GLsizei)width, (GLsizei)height);
+  glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
