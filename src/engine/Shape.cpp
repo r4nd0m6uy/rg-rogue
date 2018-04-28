@@ -84,7 +84,7 @@ float Shape::getHeight() const
 //------------------------------------------------------------------------------
 void Shape::setSize(float width, float height)
 {
-  setSize(Vector2D(height, width));
+  setSize(Vector2D(width, height));
 }
 
 //------------------------------------------------------------------------------

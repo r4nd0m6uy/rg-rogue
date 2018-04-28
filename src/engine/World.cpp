@@ -82,7 +82,7 @@ int World::tick()
   // Center camera to player
   Vector2D playerCenter(
       m_player.getX() + (m_player.getWidth() / 2),
-      m_player.getY() + (m_player.getHeight() / 2));
+      m_player.getY() - (m_player.getHeight() / 2));
 
   m_camera.setPosition(
       playerCenter.getX() - (m_camera.getWidth() / 2),
