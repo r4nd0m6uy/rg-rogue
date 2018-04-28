@@ -25,15 +25,14 @@
 
 namespace rgrogue {
 
+static const Vector2D GRAVITY = Vector2D(0, -0.9);
+
 //------------------------------------------------------------------------------
 SceneGame::SceneGame(SceneId id):
-    Scene(id),
-    m_radius(50),
-    m_xPos(0),
-    m_yPos(0 + m_radius),
-    m_xSpeed(4.2),
-    m_ySpeed(10),
-    m_lastTick(0)
+  Scene(id),
+  m_player(0, 30, 30),
+  m_playerSpeed(4.2, 10),
+  m_lastTick(0)
 {
 }
 
@@ -53,17 +52,16 @@ int SceneGame::tick()
 {
   m_lastTick++;
 
-  m_xPos += m_xSpeed;
-  m_yPos += m_ySpeed;
+  if(m_player.getPosition().getX() + m_player.getWidth() > 800 ||
+      m_player.getPosition().getX() < -800)
+    m_playerSpeed = Vector2D(m_playerSpeed.getX() * -1, m_playerSpeed.getY());
 
-  if(m_xPos + m_radius > 400 || m_xPos < -400)
-    m_xSpeed *= -1;
-
-  if(m_yPos - m_radius <= 0)
-    m_ySpeed = 10;
+  if(m_player.getPosition().getY() - m_player.getWidth() <= 0)
+    m_playerSpeed = Vector2D(m_playerSpeed.getX(), 40);
   else
-    m_ySpeed -= 0.2;
+    m_playerSpeed += GRAVITY;
 
+  m_player += m_playerSpeed;
 
   return 0;
 }
@@ -80,21 +78,30 @@ int SceneGame::draw(SDL_Window* window)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 //  glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
-//  width *= 3;
-//  height *= 3;
+  width *= 3;
+  height *= 3;
   glOrtho(-(width / 2), width / 2, -(height / 2), height / 2, 0.0f, 1.0f);
 
   glBegin(GL_QUADS);
 
   glColor3f(0.0f, 1.0f, 0.0f); // Green
-  glVertex2f(m_xPos, m_yPos);
+  glVertex2f(
+      m_player.getPosition().getX(),
+      m_player.getPosition().getY());
   glColor3f(1.0f, 0.0f, 0.0f); // Red
-  glVertex2f(m_xPos + m_radius, m_yPos);
+  glVertex2f(
+      m_player.getPosition().getX() + m_player.getWidth(),
+      m_player.getPosition().getY());
   glColor3f(0.2f, 0.2f, 0.2f); // Dark Gray
-  glVertex2f(m_xPos + m_radius, m_yPos - m_radius);
+  glVertex2f(
+      m_player.getPosition().getX() + m_player.getWidth(),
+      m_player.getPosition().getY() - m_player.getWidth());
   glColor3f(1.0f, 1.0f, 1.0f); // White
-  glVertex2f(m_xPos, m_yPos - m_radius);
+  glVertex2f(
+      m_player.getPosition().getX(),
+      m_player.getPosition().getY() - m_player.getWidth());
 
+  // Ground
   glVertex2f(-(width / 2), 0);
   glVertex2f(width / 2, 0);
   glVertex2f(width / 2, -50);

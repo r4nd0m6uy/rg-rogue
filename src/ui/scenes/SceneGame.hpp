@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_SCENE_GAME_HPP_
 #define _RG_ROGUE_SCENE_GAME_HPP_
 
+#include "../../engine/Square.hpp"
+
 #include "Scene.hpp"
 
 namespace rgrogue {
@@ -36,11 +38,8 @@ public:
   virtual int draw(SDL_Window* window) override;
 
 private:
-  float m_radius;
-  float m_xPos;
-  float m_yPos;
-  float m_xSpeed;
-  float m_ySpeed;
+  Square m_player;
+  Vector2D m_playerSpeed;
   unsigned int m_lastTick;
 };
 
