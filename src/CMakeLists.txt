@@ -1,4 +1,3 @@
-set(APP_NAME rg-rogue)
 set(APP_SOURCES
   ../imgui/imgui.cpp
   ../imgui/imgui_draw.cpp
@@ -22,12 +21,12 @@ set(APP_SOURCES
   event-loop/MainLoop.cpp
   event-loop/EventDispatcher.cpp
   options/Options.cpp
+  engine/Vector2D.cpp
   IRgRogue.cpp
   RgRogue.cpp
-  main.cpp
 )
 
-find_package(PkgConfig REQUIRED)
+add_library(${APP_LIB_NAME} ${APP_SOURCES})
 
 pkg_search_module(SDL2 REQUIRED sdl2>=2.0.0)
 pkg_search_module(OPENGL REQUIRED gl>=17.3.3)
@@ -39,8 +38,10 @@ include_directories(
 )
 
 
-add_executable(${APP_NAME} ${APP_SOURCES})
-target_link_libraries(${APP_NAME}
+add_executable(${APP_NAME} main.cpp)
+target_link_libraries(
+  ${APP_NAME}
+  ${APP_LIB_NAME}
   ${SDL2_LIBRARIES}
   ${OPENGL_LIBRARIES}
 )

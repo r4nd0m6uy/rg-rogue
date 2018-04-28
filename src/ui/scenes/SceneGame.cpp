@@ -80,6 +80,8 @@ int SceneGame::draw(SDL_Window* window)
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
 //  glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
+//  width *= 3;
+//  height *= 3;
   glOrtho(-(width / 2), width / 2, -(height / 2), height / 2, 0.0f, 1.0f);
 
   glBegin(GL_QUADS);
