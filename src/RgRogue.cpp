@@ -71,9 +71,11 @@ int RgRogue::runGame()
 //------------------------------------------------------------------------------
 void RgRogue::setScene(SceneId id)
 {
+  m_currentScene.get().onHidden(m_mainLoop);
+
   m_currentScene = m_scenes.getScene(id);
 
-  m_currentScene.get().reset();
+  m_currentScene.get().onDisplayed(m_mainLoop);
   m_mainLoop.setScene(m_currentScene.get());
   m_mainWindow.setScene(m_currentScene.get());
 }

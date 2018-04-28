@@ -32,6 +32,7 @@ public:
 
   int reset();
   void setCameraSize(int width, int height);
+  Vector2D& getPlayerSpeed();
   int tick();
   int draw();
 

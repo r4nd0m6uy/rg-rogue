@@ -27,7 +27,8 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 SceneGame::SceneGame(SceneId id):
-  Scene(id)
+  Scene(id),
+  m_isRegistered(false)
 {
 }
 
@@ -37,8 +38,15 @@ SceneGame::~SceneGame()
 }
 
 //------------------------------------------------------------------------------
-int SceneGame::reset()
+int SceneGame::onDisplayed(IMainLoop& mainLoop)
 {
+  // FIXME: Deregister key handler
+  if(!m_isRegistered)
+  {
+    mainLoop.registerKeyObserver(*this);
+    m_isRegistered = true;
+  }
+
   return m_world.reset();
 }
 
@@ -60,6 +68,54 @@ int SceneGame::draw(SDL_Window* window)
   m_world.draw();
 
   return 0;
+}
+
+//------------------------------------------------------------------------------
+int SceneGame::onHidden(IMainLoop& mainLoop)
+{
+  // FIXME: Deregister key event handler
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+    Uint16 mode)
+{
+  switch(scanCode)
+  {
+  case SDL_SCANCODE_A:
+    m_world.getPlayerSpeed() += Vector2D(-100, 0);
+    break;
+  case SDL_SCANCODE_D:
+    m_world.getPlayerSpeed() += Vector2D(100, 0);
+    break;
+  case SDL_SCANCODE_SPACE:
+    if(m_world.getPlayerSpeed().getY() == 0)
+      m_world.getPlayerSpeed() += Vector2D(0, 200);
+    break;
+  default:
+    LOG_DB() << "Hello " << scanCode;
+    break;
+  }
+
+
+}
+
+//------------------------------------------------------------------------------
+void SceneGame::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+    Uint16 mode)
+{
+  switch(scanCode)
+  {
+  case SDL_SCANCODE_A:
+    m_world.getPlayerSpeed() += Vector2D(100, 0);
+    break;
+  case SDL_SCANCODE_D:
+    m_world.getPlayerSpeed() += Vector2D(-100, 0);
+    break;
+  default:
+    break;
+  }
 }
 
 }       // namespace

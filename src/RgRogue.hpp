@@ -42,9 +42,9 @@ public:
 
 private:
   Options m_options;
+  ImGuiAdapter m_imgui;
   ScenesPool m_scenes;
   std::reference_wrapper<IScene> m_currentScene;
-  ImGuiAdapter m_imgui;
   MainLoop m_mainLoop;
   MainWindow m_mainWindow;
 };

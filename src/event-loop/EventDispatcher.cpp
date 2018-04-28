@@ -33,6 +33,9 @@ EventDispatcher::~EventDispatcher()
 //------------------------------------------------------------------------------
 void EventDispatcher::dispatch(SDL_Event* event)
 {
+  if(event->key.repeat)
+    return;
+
   switch(event->type)
   {
   case SDL_KEYDOWN:

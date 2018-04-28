@@ -20,25 +20,35 @@
 #define _RG_ROGUE_SCENE_GAME_HPP_
 
 #include "../../engine/World.hpp"
-
+#include "../../event-loop/IMainLoop.hpp"
 #include "Scene.hpp"
 
 namespace rgrogue {
 
 class SceneGame:
-    public Scene
+    public Scene,
+    public IKeyObserver
 {
 public:
   SceneGame(SceneId id);
   virtual ~SceneGame();
 
+  int init();
+
   // IScene
-  virtual int reset() override;
+  virtual int onDisplayed(IMainLoop& mainLoop) override;
   virtual int tick() override;
   virtual int draw(SDL_Window* window) override;
+  virtual int onHidden(IMainLoop& mainLoop) override;
+
+  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) override;
+  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode) override;
 
 private:
   World m_world;
+  bool m_isRegistered;
 };
 
 }       // namespace

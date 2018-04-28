@@ -21,6 +21,7 @@
 
 #include <SDL.h>
 
+#include "../../event-loop/IMainLoop.hpp"
 #include "SceneIds.hpp"
 
 namespace rgrogue {
@@ -31,10 +32,11 @@ public:
   IScene();
   virtual ~IScene();
 
-  virtual int reset() = 0;
+  virtual int onDisplayed(IMainLoop& mainLoop) = 0;
   virtual int tick() = 0;
   virtual int draw(SDL_Window* window) = 0;
   virtual SceneId getId() = 0;
+  virtual int onHidden(IMainLoop& mainLoop) = 0;
 };
 
 }       // namespace

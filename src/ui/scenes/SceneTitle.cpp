@@ -36,7 +36,7 @@ SceneTitle::~SceneTitle()
 }
 
 //------------------------------------------------------------------------------
-int SceneTitle::reset()
+int SceneTitle::onDisplayed(IMainLoop& mainLoop)
 {
   return 0;
 }
@@ -68,6 +68,12 @@ int SceneTitle::draw(SDL_Window* window)
 
   glPopMatrix();
 
+  return 0;
+}
+
+//------------------------------------------------------------------------------
+int SceneTitle::onHidden(IMainLoop& mainLoop)
+{
   return 0;
 }
 

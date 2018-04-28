@@ -31,9 +31,10 @@ public:
   virtual ~SceneTitle();
 
   // IScene
-  virtual int reset() override;
+  virtual int onDisplayed(IMainLoop& mainLoop) override;
   virtual int tick() override;
   virtual int draw(SDL_Window* window) override;
+  virtual int onHidden(IMainLoop& mainLoop) override;
 };
 
 }       // namespace
