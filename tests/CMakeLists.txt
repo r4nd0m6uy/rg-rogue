@@ -21,6 +21,8 @@ include_directories(
 )
 
 link_directories(
+  ${SDL2_LIBRARIES}
+  ${OPENGL_LIBRARIES}
   ${CPPUTEST_LIBRARIES}
 )
 
@@ -28,6 +30,8 @@ add_executable(${TEST_APP_NAME} ${TEST_SOURCES})
 target_link_libraries(
   ${TEST_APP_NAME}
   ${APP_LIB_NAME}
+  ${SDL2_LIBRARIES}
+  ${OPENGL_LIBRARIES}
   ${CPPUTEST_LDFLAGS}
 )
 

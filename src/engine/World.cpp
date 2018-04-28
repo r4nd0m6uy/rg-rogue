@@ -16,59 +16,70 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <cmath>
-
 #include <SDL_opengl.h>
 
-#include "../../logging/Loggers.hpp"
-#include "SceneGame.hpp"
+#include "World.hpp"
 
 namespace rgrogue {
 
+static Vector2D GRAVITY = Vector2D(0, -0.09);
+
 //------------------------------------------------------------------------------
-SceneGame::SceneGame(SceneId id):
-  Scene(id)
+World::World()
 {
 }
 
 //------------------------------------------------------------------------------
-SceneGame::~SceneGame()
+World::~World()
 {
 }
 
 //------------------------------------------------------------------------------
-int SceneGame::reset()
+int World::reset()
 {
-  return m_world.reset();
+  m_player = Square(300, 300, 20);
+  m_playerSpeed = Vector2D(20, 1);
+  m_origin = Square(-10, 10, 20);
+
+  return 0;
 }
 
 //------------------------------------------------------------------------------
-int SceneGame::tick()
+int World::tick(float deltaMs)
 {
-  // FIXME: Always 60 fps, get actual tick in ms
-  return m_world.tick(1000 / 60);
+  if(m_player.getPosition().getX() + m_player.getWidth() > 400 ||
+      m_player.getPosition().getX() < -400)
+    m_playerSpeed = Vector2D(m_playerSpeed.getX() * -1, m_playerSpeed.getY());
+
+  if(m_player.getPosition().getY() - m_player.getWidth() <= 0)
+    m_playerSpeed = Vector2D(m_playerSpeed.getX(), 5);
+  else
+    m_playerSpeed += GRAVITY;
+
+  m_player += m_playerSpeed;
+
+  return 0;
 }
 
 //------------------------------------------------------------------------------
-int SceneGame::draw(SDL_Window* window)
+int World::draw()
 {
-  int width;
-  int height;
+  float width = 1000;
 
-  SDL_GetWindowSize(window, &width, &height);
-  glViewport (0, 0, (GLsizei)width, (GLsizei)height);
+  if(m_player.draw())
+    return -1;
 
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-//  glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
-//  width *= 3;
-//  height *= 3;
-  glOrtho(-(width / 2), width / 2, -(height / 2), height / 2, 0.0f, 1.0f);
+  // Ground
+  glBegin(GL_QUADS);
+  glColor3f(1.0f, 0.0f, 0.0f); // Red
+  glVertex2f(-(width / 2), 0);
+  glVertex2f(width / 2, 0);
+  glVertex2f(width / 2, -50);
+  glVertex2f(-(width / 2), -50);
+  glEnd();
 
-  m_world.draw();
-
-  glPopMatrix();
-
+  if(m_origin.draw())
+    return -1;
   return 0;
 }
 

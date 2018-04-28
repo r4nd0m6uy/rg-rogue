@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <SDL_opengl.h>
+
 #include "Square.hpp"
 
 namespace rgrogue {
@@ -48,6 +50,33 @@ const Vector2D& Square::getPosition() const
 float Square::getWidth() const
 {
   return m_width;
+}
+
+//------------------------------------------------------------------------------
+int Square::draw() const
+{
+  glBegin(GL_QUADS);
+
+  glColor3f(0.0f, 1.0f, 0.0f); // Green
+  glVertex2f(
+      m_pos.getX(),
+      m_pos.getY());
+  glColor3f(1.0f, 0.0f, 0.0f); // Red
+  glVertex2f(
+      m_pos.getX() + m_width,
+      m_pos.getY());
+  glColor3f(0.2f, 0.2f, 0.2f); // Dark Gray
+  glVertex2f(
+      m_pos.getX() + m_width,
+      m_pos.getY() - m_width);
+  glColor3f(1.0f, 1.0f, 1.0f); // White
+  glVertex2f(
+      m_pos.getX(),
+      m_pos.getY() - m_width);
+
+  glEnd();
+
+  return 0;
 }
 
 //------------------------------------------------------------------------------

@@ -16,30 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_SCENE_GAME_HPP_
-#define _RG_ROGUE_SCENE_GAME_HPP_
+#ifndef _RG_ROGUE_WORLD_HPP_
+#define _RG_ROGUE_WORLD_HPP_
 
-#include "../../engine/World.hpp"
-
-#include "Scene.hpp"
+#include "Square.hpp"
 
 namespace rgrogue {
 
-class SceneGame:
-    public Scene
+class World
 {
 public:
-  SceneGame(SceneId id);
-  virtual ~SceneGame();
+  World();
+  ~World();
 
-  // IScene
-  virtual int reset() override;
-  virtual int tick() override;
-  virtual int draw(SDL_Window* window) override;
+  int reset();
+  int tick(float deltaMs);
+  int draw();
 
 private:
-  World m_world;
+  Square m_player;
+  Square m_origin;
+  Vector2D m_playerSpeed;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_SCENE_GAME_HPP_
+#endif  // _RG_ROGUE_WORLD_HPP_

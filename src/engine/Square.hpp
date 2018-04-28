@@ -32,6 +32,7 @@ public:
 
   const Vector2D& getPosition() const;
   float getWidth() const;
+  int draw() const;
 
   Square& operator+(const Vector2D& rhs);
   Square& operator+=(const Vector2D& rhs);

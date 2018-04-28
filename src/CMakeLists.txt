@@ -23,14 +23,12 @@ set(APP_SOURCES
   options/Options.cpp
   engine/Vector2D.cpp
   engine/Square.cpp
+  engine/World.cpp
   IRgRogue.cpp
   RgRogue.cpp
 )
 
 add_library(${APP_LIB_NAME} ${APP_SOURCES})
-
-pkg_search_module(SDL2 REQUIRED sdl2>=2.0.0)
-pkg_search_module(OPENGL REQUIRED gl>=17.3.3)
 
 include_directories(
   ${SDL2_INCLUDE_DIRS}
