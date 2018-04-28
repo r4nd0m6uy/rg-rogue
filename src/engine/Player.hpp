@@ -20,6 +20,7 @@
 #define _RG_ROGUE_PLAYER_HPP_
 
 #include "Rectangle.hpp"
+#include "ColoredShape.hpp"
 
 namespace rgrogue {
 
@@ -42,6 +43,7 @@ public:
 private:
   Vector2D m_velocity;
   Rectangle m_hitBox;
+  ColoredShape m_hitBoxPainter;
 };
 
 }       // namespace

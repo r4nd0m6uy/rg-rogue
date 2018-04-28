@@ -27,7 +27,9 @@ namespace rgrogue {
 static Vector2D GRAVITY = Vector2D(0, -8.9);
 
 //------------------------------------------------------------------------------
-World::World()
+World::World():
+  m_gray(0.5, 0.5, 0.5, 0),
+  m_red(1, 0, 0, 0.5)
 {
 }
 
@@ -104,9 +106,9 @@ int World::draw()
 
   if(m_player.draw())
     return -1;
-  if(m_floor.draw())
+  if(m_gray.draw(m_floor))
     return -1;
-  if(m_origin.draw())
+  if(m_red.draw(m_origin))
     return -1;
 
   glPopMatrix();

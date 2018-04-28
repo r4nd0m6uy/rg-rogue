@@ -98,19 +98,15 @@ int Shape::draw() const
 {
   glBegin(GL_QUADS);
 
-  glColor3f(0.0f, 1.0f, 0.0f); // Green
   glVertex2f(
       m_pos.getX(),
       m_pos.getY());
-  glColor3f(1.0f, 0.0f, 0.0f); // Red
   glVertex2f(
       m_pos.getX() + m_size.getX(),
       m_pos.getY());
-  glColor3f(0.2f, 0.2f, 0.2f); // Dark Gray
   glVertex2f(
       m_pos.getX() + m_size.getX(),
       m_pos.getY() - m_size.getY());
-  glColor3f(1.0f, 1.0f, 1.0f); // White
   glVertex2f(
       m_pos.getX(),
       m_pos.getY() - m_size.getY());

@@ -16,34 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_WORLD_HPP_
-#define _RG_ROGUE_WORLD_HPP_
+#ifndef _RG_ROGUE_COLORED_SHAPE_HPP_
+#define _RG_ROGUE_COLORED_SHAPE_HPP_
 
-#include "Square.hpp"
-#include "Player.hpp"
+#include "IShape.hpp"
 
 namespace rgrogue {
 
-class World
+class ColoredShape
 {
 public:
-  World();
-  ~World();
+  ColoredShape(float r, float g, float b, float alpha);
+  ColoredShape();
+  virtual ~ColoredShape();
 
-  int reset();
-  void setCameraSize(int width, int height);
-  Player& getPlayer();
-  int tick();
-  int draw();
+  virtual int draw(const IShape& shape) const;
 
 private:
-  Rectangle m_camera;
-  Player m_player;
-  Rectangle m_floor;
-  Square m_origin;
-  ColoredShape m_gray;
-  ColoredShape m_red;
+  float m_r;
+  float m_g;
+  float m_b;
+  float m_a;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_WORLD_HPP_
+#endif  // _RG_ROGUE_COLORED_SHAPE_HPP_

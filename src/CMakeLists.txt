@@ -24,6 +24,7 @@ set(APP_SOURCES
   engine/Vector2D.cpp
   engine/IShape.cpp
   engine/Shape.cpp
+  engine/ColoredShape.cpp
   engine/Square.cpp
   engine/Rectangle.cpp
   engine/Player.cpp

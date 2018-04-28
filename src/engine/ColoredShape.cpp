@@ -16,34 +16,40 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_WORLD_HPP_
-#define _RG_ROGUE_WORLD_HPP_
+#include <SDL_opengl.h>
 
-#include "Square.hpp"
-#include "Player.hpp"
+#include "ColoredShape.hpp"
 
 namespace rgrogue {
 
-class World
+//------------------------------------------------------------------------------
+ColoredShape::ColoredShape(float r, float g, float b, float alpha):
+  m_r(r),
+  m_g(g),
+  m_b(b),
+  m_a(1)
 {
-public:
-  World();
-  ~World();
+}
+//------------------------------------------------------------------------------
+ColoredShape::ColoredShape():
+  m_r(1),
+  m_g(1),
+  m_b(1),
+  m_a(0)
+{
+}
 
-  int reset();
-  void setCameraSize(int width, int height);
-  Player& getPlayer();
-  int tick();
-  int draw();
+//------------------------------------------------------------------------------
+ColoredShape::~ColoredShape()
+{
+}
 
-private:
-  Rectangle m_camera;
-  Player m_player;
-  Rectangle m_floor;
-  Square m_origin;
-  ColoredShape m_gray;
-  ColoredShape m_red;
-};
+//------------------------------------------------------------------------------
+int ColoredShape::draw(const IShape& shape) const
+{
+  glColor3f(m_r, m_g, m_b);
+
+  return shape.draw();
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_WORLD_HPP_
