@@ -16,118 +16,127 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_opengl.h>
+#include "../logging/Loggers.hpp"
 
-#include "Shape.hpp"
+#include "Camera.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Shape::Shape()
+Camera::Camera():
+  m_zoom(1)
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::Shape(float x, float y, float width, float height):
-  m_pos(x, y),
-  m_size(width, height)
+Camera::Camera(float x, float y, float width, float height):
+  m_shape(x, y, width, height),
+  m_zoom(1)
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::~Shape()
+Camera::~Camera()
 {
 }
 
+
 //------------------------------------------------------------------------------
-int Shape::draw() const
+void Camera::increaseZoom(float step)
 {
-  glBegin(GL_QUADS);
+  m_zoom += step;
 
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY() - m_size.getY());
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY() - m_size.getY());
+  if(m_zoom > 5)
+    m_zoom = 5;
+}
 
-  glEnd();
+//------------------------------------------------------------------------------
+void Camera::decreaseZoom(float step)
+{
+  m_zoom -= step;
 
+  if(m_zoom < 0)
+    m_zoom = 0;
+}
+
+//------------------------------------------------------------------------------
+float Camera::getScaledWidth() const
+
+{
+  return m_shape.getWidth() * m_zoom;
+}
+
+//------------------------------------------------------------------------------
+float Camera::getScaledHeight() const
+{
+  return m_shape.getHeight() * m_zoom;
+}
+
+//------------------------------------------------------------------------------
+float Camera::getZoom() const
+{
+  return m_zoom;
+}
+
+//------------------------------------------------------------------------------
+const Vector2D& Camera::getPosition() const
+{
+  return m_shape.getPosition();
+}
+
+//------------------------------------------------------------------------------
+float Camera::getX() const
+{
+  return m_shape.getX();
+}
+
+//------------------------------------------------------------------------------
+float Camera::getY() const
+{
+  return m_shape.getY();
+}
+
+//------------------------------------------------------------------------------
+void Camera::setPosition(float x, float y)
+{
+  m_shape.setPosition(x, y);
+}
+
+//------------------------------------------------------------------------------
+void Camera::setPosition(const Vector2D& pos)
+{
+  m_shape.setPosition(pos);
+}
+
+//------------------------------------------------------------------------------
+float Camera::getWidth() const
+{
+  return m_shape.getWidth();
+}
+
+//------------------------------------------------------------------------------
+float Camera::getHeight() const
+{
+  return m_shape.getHeight();
+}
+
+//------------------------------------------------------------------------------
+void Camera::setSize(float width, float height)
+{
+  m_shape.setSize(width, height);
+}
+
+//------------------------------------------------------------------------------
+void Camera::setSize(const Vector2D& size)
+{
+  m_shape.setSize(size);
+}
+
+//------------------------------------------------------------------------------
+int Camera::draw() const
+{
+  // FIXME
   return 0;
-}
-
-//------------------------------------------------------------------------------
-const Vector2D& Shape::getPosition()const
-{
-  return m_pos;
-}
-
-//------------------------------------------------------------------------------
-float Shape::getX() const
-{
-  return m_pos.getX();
-}
-
-//------------------------------------------------------------------------------
-float Shape::getY() const
-{
-  return m_pos.getY();
-}
-
-//------------------------------------------------------------------------------
-void Shape::setPosition(float x, float y)
-{
-  setPosition(Vector2D(x, y));
-}
-
-//------------------------------------------------------------------------------
-void Shape::setPosition(const Vector2D& pos)
-{
-  m_pos = pos;
-}
-
-//------------------------------------------------------------------------------
-float Shape::getWidth() const
-{
-  return m_size.getX();
-}
-
-//------------------------------------------------------------------------------
-float Shape::getHeight() const
-{
-  return m_size.getY();
-}
-
-//------------------------------------------------------------------------------
-void Shape::setSize(float width, float height)
-{
-  setSize(Vector2D(width, height));
-}
-
-//------------------------------------------------------------------------------
-void Shape::setSize(const Vector2D& size)
-{
-  m_size = size;
-}
-
-//------------------------------------------------------------------------------
-Shape& Shape::operator+(const Vector2D& rhs)
-{
-  m_pos += rhs;
-
-  return *this;
-}
-
-//------------------------------------------------------------------------------
-Shape& Shape::operator+=(const Vector2D& rhs)
-{
-  return *this + rhs;
 }
 
 }       // namespace

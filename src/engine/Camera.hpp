@@ -16,22 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_SHAPE_HPP_
-#define _RG_ROGUE_SHAPE_HPP_
+#ifndef _RG_ROGUE_CAMERA_HPP_
+#define _RG_ROGUE_CAMERA_HPP_
 
-#include "IShape.hpp"
+#include "Rectangle.hpp"
 
 namespace rgrogue {
 
-class Shape:
+class Camera:
     public IShape
 {
 public:
-  Shape();
-  Shape(float x, float y, float width, float height);
-  virtual ~Shape();
+  Camera();
+  Camera(float x, float y, float width, float height);
+  virtual ~Camera();
 
-  virtual int draw() const;
+  void increaseZoom(float step);
+  void decreaseZoom(float step);
+  float getScaledWidth() const;
+  float getScaledHeight() const;
+  float getZoom() const;
 
   // IShape
   virtual const Vector2D& getPosition() const override;
@@ -43,15 +47,13 @@ public:
   virtual float getHeight() const override;
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
+  // FIXME: Remove me "Drawable"
+  virtual int draw() const override;
 
-
-  Shape& operator+(const Vector2D& rhs);
-  Shape& operator+=(const Vector2D& rhs);
-
-protected:
-  Vector2D m_pos;
-  Vector2D m_size;
+private:
+  Rectangle m_shape;
+  float m_zoom;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_SHAPE_HPP_
+#endif  // _RG_ROGUE_CAMERA_HPP_

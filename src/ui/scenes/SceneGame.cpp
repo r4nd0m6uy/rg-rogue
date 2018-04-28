@@ -63,7 +63,7 @@ int SceneGame::draw(SDL_Window* window)
   int height;
 
   SDL_GetWindowSize(window, &width, &height);
-  m_world.setCameraSize(width, height);
+  m_world.getCamera().setSize(width, height);
 
   m_world.draw();
 
@@ -92,6 +92,12 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
   case SDL_SCANCODE_SPACE:
     if(m_world.getPlayer().getY() <= m_world.getPlayer().getHeight())
       m_world.getPlayer().getVelocity() += Vector2D(0, 200);
+    break;
+  case SDL_SCANCODE_O:
+    m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
+    break;
+  case SDL_SCANCODE_P:
+    m_world.getCamera().decreaseZoom(m_world.getCamera().getZoom() * 0.1);
     break;
   default:
     break;

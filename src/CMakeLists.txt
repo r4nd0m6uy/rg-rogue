@@ -27,6 +27,7 @@ set(APP_SOURCES
   engine/ColoredShape.cpp
   engine/Square.cpp
   engine/Rectangle.cpp
+  engine/Camera.cpp
   engine/Player.cpp
   engine/World.cpp
   IRgRogue.cpp

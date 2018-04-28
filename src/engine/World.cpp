@@ -42,6 +42,7 @@ World::~World()
 int World::reset()
 {
   m_player.setPosition(0, 400);
+  m_player.setVelocity(0, 0);
   m_origin = Square(-10, 10, 20);
   m_floor =  Rectangle(-500, 0, 1000, 50);
 
@@ -49,15 +50,15 @@ int World::reset()
 }
 
 //------------------------------------------------------------------------------
-void World::setCameraSize(int width, int height)
-{
-  m_camera.setSize(width, height);
-}
-
-//------------------------------------------------------------------------------
 Player& World::getPlayer()
 {
   return m_player;
+}
+
+//------------------------------------------------------------------------------
+Camera& World::getCamera()
+{
+  return m_camera;
 }
 
 //------------------------------------------------------------------------------
@@ -85,8 +86,8 @@ int World::tick()
       m_player.getY() - (m_player.getHeight() / 2));
 
   m_camera.setPosition(
-      playerCenter.getX() - (m_camera.getWidth() / 2),
-      playerCenter.getY() + (m_camera.getHeight() / 2));
+      playerCenter.getX() - (m_camera.getScaledWidth() / 2),
+      playerCenter.getY() + (m_camera.getScaledHeight() / 2));
 
   return 0;
 }
@@ -100,8 +101,8 @@ int World::draw()
   glLoadIdentity();
   glOrtho(
     m_camera.getX(),
-    m_camera.getX() + m_camera.getWidth(),
-    m_camera.getY() - m_camera.getHeight(), m_camera.getY(),
+    m_camera.getX() + m_camera.getScaledWidth(),
+    m_camera.getY() - m_camera.getScaledHeight(), m_camera.getY(),
     0.0f, 1.0f);
 
   if(m_player.draw())

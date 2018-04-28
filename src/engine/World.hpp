@@ -21,6 +21,7 @@
 
 #include "Square.hpp"
 #include "Player.hpp"
+#include "Camera.hpp"
 
 namespace rgrogue {
 
@@ -31,13 +32,13 @@ public:
   ~World();
 
   int reset();
-  void setCameraSize(int width, int height);
   Player& getPlayer();
+  Camera& getCamera();
   int tick();
   int draw();
 
 private:
-  Rectangle m_camera;
+  Camera m_camera;
   Player m_player;
   Rectangle m_floor;
   Square m_origin;
