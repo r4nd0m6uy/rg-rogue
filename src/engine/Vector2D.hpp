@@ -31,8 +31,10 @@ public:
   float getX() const;
   float getY() const;
 
-  Vector2D& operator+=(const Vector2D& rhs);
   Vector2D& operator+(const Vector2D& rhs);
+  Vector2D& operator+=(const Vector2D& rhs);
+  Vector2D& operator*(float rhs);
+  Vector2D& operator*=(float rhs);
   bool operator==(const Vector2D& rhs);
   bool operator!=(const Vector2D& rhs);
 

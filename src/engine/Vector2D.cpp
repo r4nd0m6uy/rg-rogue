@@ -52,6 +52,14 @@ float Vector2D::getY() const
 }
 
 //------------------------------------------------------------------------------
+Vector2D& Vector2D::operator+(const Vector2D& rhs)
+{
+  *this += rhs;
+
+  return *this;
+}
+
+//------------------------------------------------------------------------------
 Vector2D& Vector2D::operator+=(const Vector2D& rhs)
 {
   m_x += rhs.m_x;
@@ -61,9 +69,16 @@ Vector2D& Vector2D::operator+=(const Vector2D& rhs)
 }
 
 //------------------------------------------------------------------------------
-Vector2D& Vector2D::operator+(const Vector2D& rhs)
+Vector2D& Vector2D::operator*(float rhs)
 {
-  *this += rhs;
+  return *this *= rhs;
+}
+
+//------------------------------------------------------------------------------
+Vector2D& Vector2D::operator*=(float rhs)
+{
+  m_x *= rhs;
+  m_y *= rhs;
 
   return *this;
 }

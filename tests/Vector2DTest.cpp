@@ -35,6 +35,33 @@ TEST_GROUP(Vector2DTest)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorTimeEqalFloat)
+{
+  float mul = 4.2;
+  float x = 3.4;
+  float y = 2.1;
+  Vector2D v1(x, y);
+
+  v1 *= mul;
+
+  CHECK_EQUAL(x * mul, v1.getX());
+  CHECK_EQUAL(y * mul, v1.getY());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorTimeFloat)
+{
+  float mul = 4.2;
+  float x = 3.4;
+  float y = 2.1;
+  Vector2D v1(x, y);
+  Vector2D v2 = v1 * mul;
+
+  CHECK_EQUAL(x * mul, v2.getX());
+  CHECK_EQUAL(y * mul, v2.getY());
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2DTest, operatorEqualEqualNotEqual)
 {
   Vector2D v1(3, 5);

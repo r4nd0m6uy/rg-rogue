@@ -20,6 +20,8 @@ set(APP_NAME rg-rogue)
 set(APP_LIB_NAME ${APP_NAME}lib)
 
 find_package(PkgConfig REQUIRED)
+pkg_search_module(SDL2 REQUIRED sdl2>=2.0.0)
+pkg_search_module(OPENGL REQUIRED gl>=17.3.3)
 
 add_subdirectory(src)
 
