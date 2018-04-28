@@ -50,7 +50,16 @@ int SceneTitle::tick()
 //------------------------------------------------------------------------------
 int SceneTitle::draw(SDL_Window* window)
 {
-//  LOG_DB() << "Draw title";
+  int width;
+  int height;
+
+  SDL_GetWindowSize(window, &width, &height);
+  glViewport (0, 0, (GLsizei)width, (GLsizei)height);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+
+  glPopMatrix();
 
   glBegin(GL_QUADS);
   glVertex2f(-1, 0);
@@ -58,6 +67,8 @@ int SceneTitle::draw(SDL_Window* window)
   glVertex2f(0.5f, 0.5f);
   glVertex2f(-0.5f, 0.5f);
   glEnd();
+
+  glPopMatrix();
 
   return 0;
 }

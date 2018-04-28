@@ -34,6 +34,14 @@ public:
   virtual int reset() override;
   virtual int tick() override;
   virtual int draw(SDL_Window* window) override;
+
+private:
+  float m_radius;
+  float m_xPos;
+  float m_yPos;
+  float m_xSpeed;
+  float m_ySpeed;
+  unsigned int m_lastTick;
 };
 
 }       // namespace

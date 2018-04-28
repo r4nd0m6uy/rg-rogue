@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <cmath>
+
 #include <SDL_opengl.h>
 
 #include "../../logging/Loggers.hpp"
@@ -25,7 +27,13 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 SceneGame::SceneGame(SceneId id):
-    Scene(id)
+    Scene(id),
+    m_radius(50),
+    m_xPos(0),
+    m_yPos(0 + m_radius),
+    m_xSpeed(4.2),
+    m_ySpeed(10),
+    m_lastTick(0)
 {
 }
 
@@ -43,18 +51,57 @@ int SceneGame::reset()
 //------------------------------------------------------------------------------
 int SceneGame::tick()
 {
+  m_lastTick++;
+
+  m_xPos += m_xSpeed;
+  m_yPos += m_ySpeed;
+
+  if(m_xPos + m_radius > 400 || m_xPos < -400)
+    m_xSpeed *= -1;
+
+  if(m_yPos - m_radius <= 0)
+    m_ySpeed = 10;
+  else
+    m_ySpeed -= 0.2;
+
+
   return 0;
 }
 
 //------------------------------------------------------------------------------
 int SceneGame::draw(SDL_Window* window)
 {
+  int width;
+  int height;
+
+  SDL_GetWindowSize(window, &width, &height);
+  glViewport (0, 0, (GLsizei)width, (GLsizei)height);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+//  glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
+  glOrtho(-(width / 2), width / 2, -(height / 2), height / 2, 0.0f, 1.0f);
+
   glBegin(GL_QUADS);
-  glVertex2f(-1, 0);
-  glVertex2f(1, 1);
-  glVertex2f(0.5f, 0.5f);
-  glVertex2f(-0.5f, 0.5f);
+
+  glColor3f(0.0f, 1.0f, 0.0f); // Green
+  glVertex2f(m_xPos, m_yPos);
+  glColor3f(1.0f, 0.0f, 0.0f); // Red
+  glVertex2f(m_xPos + m_radius, m_yPos);
+  glColor3f(0.2f, 0.2f, 0.2f); // Dark Gray
+  glVertex2f(m_xPos + m_radius, m_yPos - m_radius);
+  glColor3f(1.0f, 1.0f, 1.0f); // White
+  glVertex2f(m_xPos, m_yPos - m_radius);
+
+  glVertex2f(-(width / 2), 0);
+  glVertex2f(width / 2, 0);
+  glVertex2f(width / 2, -50);
+  glVertex2f(-(width / 2), -50);
+
+
   glEnd();
+
+  glPopMatrix();
 
   return 0;
 }
