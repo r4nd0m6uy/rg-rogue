@@ -31,11 +31,12 @@ public:
   Camera(float x, float y, float width, float height);
   virtual ~Camera();
 
+  float getZoom() const;
+  void setZoom(float zoom);
   void increaseZoom(float step);
   void decreaseZoom(float step);
   float getScaledWidth() const;
   float getScaledHeight() const;
-  float getZoom() const;
 
   // IShape
   virtual const Vector2D& getPosition() const override;

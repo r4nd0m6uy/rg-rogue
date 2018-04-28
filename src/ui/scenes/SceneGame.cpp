@@ -91,13 +91,16 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
     break;
   case SDL_SCANCODE_SPACE:
     if(m_world.getPlayer().getY() <= m_world.getPlayer().getHeight())
-      m_world.getPlayer().getVelocity() += Vector2D(0, 200);
+      m_world.getPlayer().getVelocity() += Vector2D(0, 300);
     break;
   case SDL_SCANCODE_O:
     m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
     break;
   case SDL_SCANCODE_P:
     m_world.getCamera().decreaseZoom(m_world.getCamera().getZoom() * 0.1);
+    break;
+  case SDL_SCANCODE_I:
+    m_world.getCamera().setZoom(1);
     break;
   default:
     break;
@@ -116,6 +119,10 @@ void SceneGame::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
     break;
   case SDL_SCANCODE_D:
     m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
+    break;
+  case SDL_SCANCODE_SPACE:
+    if(m_world.getPlayer().getVelocity().getY() > 50)
+      m_world.getPlayer().getVelocity() = Vector2D(m_world.getPlayer().getVelocity().getX(), 50);
     break;
   default:
     break;

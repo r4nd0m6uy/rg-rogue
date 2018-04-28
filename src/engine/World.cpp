@@ -28,7 +28,9 @@ static Vector2D GRAVITY = Vector2D(0, -8.9);
 
 //------------------------------------------------------------------------------
 World::World():
-  m_gray(0.5, 0.5, 0.5, 0),
+  m_floor(-500, 0, 1000, 50),
+  m_origin(-10, 10, 20),
+  m_gray(0.2, 0.9, 0.9, 0),
   m_red(1, 0, 0, 0.5)
 {
 }
@@ -43,8 +45,7 @@ int World::reset()
 {
   m_player.setPosition(0, 400);
   m_player.setVelocity(0, 0);
-  m_origin = Square(-10, 10, 20);
-  m_floor =  Rectangle(-500, 0, 1000, 50);
+  m_camera.setZoom(1);
 
   return 0;
 }
