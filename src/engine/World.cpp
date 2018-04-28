@@ -39,8 +39,7 @@ World::~World()
 //------------------------------------------------------------------------------
 int World::reset()
 {
-  m_player = Rectangle(0, 800, 50, 100);
-  m_playerSpeed = Vector2D(0, 0);
+  m_player.setPosition(0, 400);
   m_origin = Square(-10, 10, 20);
   m_floor =  Rectangle(-500, 0, 1000, 50);
 
@@ -54,9 +53,9 @@ void World::setCameraSize(int width, int height)
 }
 
 //------------------------------------------------------------------------------
-Vector2D& World::getPlayerSpeed()
+Player& World::getPlayer()
 {
-  return m_playerSpeed;
+  return m_player;
 }
 
 //------------------------------------------------------------------------------
@@ -65,18 +64,20 @@ int World::tick()
   // FIXME: Always 60 fps, get actual tick in ms
   float deltaMs = 1000 / 60;
 
-  // Apply gravity
-  if(m_player.getPosition().getY() - m_player.getWidth() <= 0)
+  // Apply gravity (each moving objects)
+  if(m_player.getY() - m_player.getHeight() <= 0)
   {
-    if(m_playerSpeed.getY() < 0)
-      m_playerSpeed = Vector2D(m_playerSpeed.getX(), 0);
-    m_player.setPosition(m_player.getPosition().getX(), m_player.getWidth());
+    if(m_player.getVelocity().getY() <= 0)
+      m_player.getVelocity() = Vector2D(m_player.getVelocity().getX(), 0);
+
+    m_player.setPosition(m_player.getX(), m_player.getHeight());
   }
   else
-    m_playerSpeed += GRAVITY;
+    m_player.getVelocity() += GRAVITY;
+
+  m_player.move(deltaMs);
 
   // Center camera to player
-  m_player += Vector2D(m_playerSpeed) * (1 / deltaMs);
   Vector2D playerCenter(
       m_player.getX() + (m_player.getWidth() / 2),
       m_player.getY() + (m_player.getHeight() / 2));

@@ -84,20 +84,18 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
   switch(scanCode)
   {
   case SDL_SCANCODE_A:
-    m_world.getPlayerSpeed() += Vector2D(-100, 0);
+    m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
     break;
   case SDL_SCANCODE_D:
-    m_world.getPlayerSpeed() += Vector2D(100, 0);
+    m_world.getPlayer().getVelocity() += Vector2D(100, 0);
     break;
   case SDL_SCANCODE_SPACE:
-    if(m_world.getPlayerSpeed().getY() == 0)
-      m_world.getPlayerSpeed() += Vector2D(0, 200);
+    if(m_world.getPlayer().getY() <= m_world.getPlayer().getHeight())
+      m_world.getPlayer().getVelocity() += Vector2D(0, 200);
     break;
   default:
-    LOG_DB() << "Hello " << scanCode;
     break;
   }
-
 
 }
 
@@ -108,10 +106,10 @@ void SceneGame::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
   switch(scanCode)
   {
   case SDL_SCANCODE_A:
-    m_world.getPlayerSpeed() += Vector2D(100, 0);
+    m_world.getPlayer().getVelocity() += Vector2D(100, 0);
     break;
   case SDL_SCANCODE_D:
-    m_world.getPlayerSpeed() += Vector2D(-100, 0);
+    m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
     break;
   default:
     break;

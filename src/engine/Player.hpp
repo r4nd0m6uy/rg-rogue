@@ -16,32 +16,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_WORLD_HPP_
-#define _RG_ROGUE_WORLD_HPP_
+#ifndef _RG_ROGUE_PLAYER_HPP_
+#define _RG_ROGUE_PLAYER_HPP_
 
-#include "Square.hpp"
-#include "Player.hpp"
+#include "Rectangle.hpp"
 
 namespace rgrogue {
 
-class World
+class Player
 {
 public:
-  World();
-  ~World();
+  Player();
+  virtual ~Player();
 
-  int reset();
-  void setCameraSize(int width, int height);
-  Player& getPlayer();
-  int tick();
-  int draw();
+  void move(float deltaMs);
+  void setPosition(float x, float y);
+  float getX();
+  float getY();
+  float getWidth();
+  float getHeight();
+  Vector2D& getVelocity();
+  void setVelocity(float x, float y);
+  int draw() const;
 
 private:
-  Rectangle m_camera;
-  Player m_player;
-  Rectangle m_floor;
-  Square m_origin;
+  Vector2D m_velocity;
+  Rectangle m_hitBox;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_WORLD_HPP_
+#endif  // _RG_ROGUE_I_SHAPE_HPP_

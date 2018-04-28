@@ -26,6 +26,7 @@ set(APP_SOURCES
   engine/Shape.cpp
   engine/Square.cpp
   engine/Rectangle.cpp
+  engine/Player.cpp
   engine/World.cpp
   IRgRogue.cpp
   RgRogue.cpp

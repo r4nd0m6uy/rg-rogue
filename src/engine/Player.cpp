@@ -16,122 +16,75 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_opengl.h>
+#include "../logging/Loggers.hpp"
 
-#include "Shape.hpp"
+#include "Player.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Shape::Shape()
+Player::Player():
+  m_hitBox(0, 0, 20, 120)
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::Shape(float x, float y, float width, float height):
-  m_pos(x, y),
-  m_size(width, height)
+Player::~Player()
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::~Shape()
+void Player::move(float deltaMs)
 {
+  m_hitBox += Vector2D(m_velocity) * (1 / deltaMs);
 }
 
 //------------------------------------------------------------------------------
-const Vector2D& Shape::getPosition()const
+void Player::setPosition(float x, float y)
 {
-  return m_pos;
+  m_hitBox.setPosition(x, y);
 }
 
 //------------------------------------------------------------------------------
-float Shape::getX() const
+float Player::getX()
 {
-  return m_pos.getX();
+  return m_hitBox.getX();
 }
 
 //------------------------------------------------------------------------------
-float Shape::getY() const
+float Player::getY()
 {
-  return m_pos.getY();
+  return m_hitBox.getY();
 }
 
 //------------------------------------------------------------------------------
-void Shape::setPosition(float x, float y)
+float Player::getWidth()
 {
-  setPosition(Vector2D(x, y));
+  return m_hitBox.getWidth();
 }
 
 //------------------------------------------------------------------------------
-void Shape::setPosition(const Vector2D& pos)
+float Player::getHeight()
 {
-  m_pos = pos;
+  return m_hitBox.getHeight();
 }
 
 //------------------------------------------------------------------------------
-float Shape::getWidth() const
+Vector2D& Player::getVelocity()
 {
-  return m_size.getX();
+  return m_velocity;
 }
 
 //------------------------------------------------------------------------------
-float Shape::getHeight() const
+int Player::draw() const
 {
-  return m_size.getY();
+  return m_hitBox.draw();
 }
 
 //------------------------------------------------------------------------------
-void Shape::setSize(float width, float height)
+void Player::setVelocity(float x, float y)
 {
-  setSize(Vector2D(height, width));
-}
-
-//------------------------------------------------------------------------------
-void Shape::setSize(const Vector2D& size)
-{
-  m_size = size;
-}
-
-//------------------------------------------------------------------------------
-int Shape::draw() const
-{
-  glBegin(GL_QUADS);
-
-  glColor3f(0.0f, 1.0f, 0.0f); // Green
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY());
-  glColor3f(1.0f, 0.0f, 0.0f); // Red
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY());
-  glColor3f(0.2f, 0.2f, 0.2f); // Dark Gray
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY() - m_size.getY());
-  glColor3f(1.0f, 1.0f, 1.0f); // White
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY() - m_size.getY());
-
-  glEnd();
-
-  return 0;
-}
-
-//------------------------------------------------------------------------------
-Shape& Shape::operator+(const Vector2D& rhs)
-{
-  m_pos += rhs;
-
-  return *this;
-}
-
-//------------------------------------------------------------------------------
-Shape& Shape::operator+=(const Vector2D& rhs)
-{
-  return *this + rhs;
+  m_velocity = Vector2D(x, y);
 }
 
 }       // namespace
