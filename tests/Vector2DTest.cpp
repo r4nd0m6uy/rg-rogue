@@ -35,6 +35,33 @@ TEST_GROUP(Vector2DTest)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorEqualEqualNotEqual)
+{
+  Vector2D v1(3, 5);
+  Vector2D v2(6, 7);
+
+  CHECK_FALSE(v1 == v2);
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorNotEqualForEqual)
+{
+  Vector2D v1(3, 5);
+  Vector2D v2 = v1;
+
+  CHECK_FALSE(v1 != v2);
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorEqualEqualForEqual)
+{
+  Vector2D v1(3, 5);
+  Vector2D v2 = v1;
+
+  CHECK(v1 == v2);
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2DTest, operatorEqualPlus)
 {
   float x1 = 1.2;

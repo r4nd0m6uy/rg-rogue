@@ -16,30 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_VECTOR_2D_HPP_
-#define _RG_ROGUE_VECTOR_2D_HPP_
+#ifndef _RG_ROGUE_SQUARE_HPP_
+#define _RG_ROGUE_SQUARE_HPP_
+
+#include "Vector2D.hpp"
 
 namespace rgrogue {
 
-class Vector2D
+class Square
 {
 public:
-  Vector2D();
-  Vector2D(float x, float y);
-  ~Vector2D();
+  Square();
+  Square(float x, float y, float width);
+  ~Square();
 
-  float getX() const;
-  float getY() const;
+  const Vector2D& getPosition() const;
+  float getWidth() const;
 
-  Vector2D& operator+=(const Vector2D& rhs);
-  Vector2D& operator+(const Vector2D& rhs);
-  bool operator==(const Vector2D& rhs);
-  bool operator!=(const Vector2D& rhs);
+  Square& operator+(const Vector2D& rhs);
+  Square& operator+=(const Vector2D& rhs);
 
 private:
-  float m_x;
-  float m_y;
+  Vector2D m_pos;
+  float m_width;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_VECTOR_2D_HPP_
+#endif  // _RG_ROGUE_SQUARE_HPP_

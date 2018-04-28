@@ -16,69 +16,52 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "Vector2D.hpp"
+#include "Square.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Vector2D::Vector2D():
-  m_x(0),
-  m_y(0)
+Square::Square():
+    m_width(0)
 {
 }
 
 //------------------------------------------------------------------------------
-Vector2D::Vector2D(float x, float y):
-  m_x(x),
-  m_y(y)
+Square::Square(float x, float y, float width):
+    m_pos(x, y),
+    m_width(width)
 {
 }
 
 //------------------------------------------------------------------------------
-Vector2D::~Vector2D()
+Square::~Square()
 {
 }
 
 //------------------------------------------------------------------------------
-float Vector2D::getX() const
+const Vector2D& Square::getPosition() const
 {
-  return m_x;
+  return m_pos;
 }
 
 //------------------------------------------------------------------------------
-float Vector2D::getY() const
+float Square::getWidth() const
 {
-  return m_y;
+  return m_width;
 }
 
 //------------------------------------------------------------------------------
-Vector2D& Vector2D::operator+=(const Vector2D& rhs)
+Square& Square::operator+(const Vector2D& rhs)
 {
-  m_x += rhs.m_x;
-  m_y += rhs.m_y;
+  m_pos += rhs;
 
   return *this;
 }
 
 //------------------------------------------------------------------------------
-Vector2D& Vector2D::operator+(const Vector2D& rhs)
+Square& Square::operator+=(const Vector2D& rhs)
 {
-  *this += rhs;
-
-  return *this;
-}
-
-//------------------------------------------------------------------------------
-bool Vector2D::operator==(const Vector2D& rhs)
-{
-  return m_x == rhs.m_x &&
-      m_y == rhs.m_y;
-}
-
-//------------------------------------------------------------------------------
-bool Vector2D::operator!=(const Vector2D& rhs)
-{
-  return !(*this == rhs);
+  return *this + rhs;
 }
 
 }       // namespace
