@@ -46,6 +46,18 @@ const Vector2D& Shape::getPosition()const
 }
 
 //------------------------------------------------------------------------------
+float Shape::getX() const
+{
+  return m_pos.getX();
+}
+
+//------------------------------------------------------------------------------
+float Shape::getY() const
+{
+  return m_pos.getY();
+}
+
+//------------------------------------------------------------------------------
 void Shape::setPosition(float x, float y)
 {
   setPosition(Vector2D(x, y));
@@ -67,6 +79,18 @@ float Shape::getWidth() const
 float Shape::getHeight() const
 {
   return m_size.getX();
+}
+
+//------------------------------------------------------------------------------
+void Shape::setSize(float width, float height)
+{
+  setSize(Vector2D(height, width));
+}
+
+//------------------------------------------------------------------------------
+void Shape::setSize(const Vector2D& size)
+{
+  m_size = size;
 }
 
 //------------------------------------------------------------------------------

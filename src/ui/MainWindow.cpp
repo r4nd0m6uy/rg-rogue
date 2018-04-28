@@ -105,10 +105,9 @@ int MainWindow::init()
 //------------------------------------------------------------------------------
 int MainWindow::draw()
 {
-  // Render imgui
-  m_imgui.newFrame(m_sdlWindow);
-
   glClear(GL_COLOR_BUFFER_BIT);
+
+  m_imgui.newFrame(m_sdlWindow);
 
   if(m_mainMenu.draw())
     return -1;

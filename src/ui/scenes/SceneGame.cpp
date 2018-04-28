@@ -45,8 +45,7 @@ int SceneGame::reset()
 //------------------------------------------------------------------------------
 int SceneGame::tick()
 {
-  // FIXME: Always 60 fps, get actual tick in ms
-  return m_world.tick(1000 / 60);
+  return m_world.tick();
 }
 
 //------------------------------------------------------------------------------
@@ -56,18 +55,9 @@ int SceneGame::draw(SDL_Window* window)
   int height;
 
   SDL_GetWindowSize(window, &width, &height);
-  glViewport(0, 0, (GLsizei)width, (GLsizei)height);
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-//  glOrtho(0.0f, width, height, 0.0f, 0.0f, 1.0f);
-//  width *= 3;
-//  height *= 3;
-  glOrtho(-(width / 2), width / 2, -(height / 2), height / 2, 0.0f, 1.0f);
+  m_world.setCameraSize(width, height);
 
   m_world.draw();
-
-  glPopMatrix();
 
   return 0;
 }

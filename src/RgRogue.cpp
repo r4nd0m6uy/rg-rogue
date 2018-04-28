@@ -54,6 +54,8 @@ int RgRogue::init()
   if(m_mainWindow.init())
     return -1;
 
+  setScene(SceneId::MAIN_TITLE);
+
   LOG_IN() << "Initialization done";
 
   return 0;

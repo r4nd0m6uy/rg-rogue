@@ -31,11 +31,14 @@ public:
   ~World();
 
   int reset();
-  int tick(float deltaMs);
+  void setCameraSize(int width, int height);
+  int tick();
   int draw();
 
 private:
+  Rectangle m_camera;
   Rectangle m_player;
+  Rectangle m_floor;
   Square m_origin;
   Vector2D m_playerSpeed;
 };

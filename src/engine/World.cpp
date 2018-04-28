@@ -39,16 +39,26 @@ World::~World()
 //------------------------------------------------------------------------------
 int World::reset()
 {
-  m_player = Rectangle(0, 500, 20, 50);
+  m_player = Rectangle(0, 500, 50, 100);
   m_playerSpeed = Vector2D(120, 0);
   m_origin = Square(-10, 10, 20);
+  m_floor =  Rectangle(-500, 0, 1000, 50);
 
   return 0;
 }
 
 //------------------------------------------------------------------------------
-int World::tick(float deltaMs)
+void World::setCameraSize(int width, int height)
 {
+  m_camera.setSize(width, height);
+}
+
+//------------------------------------------------------------------------------
+int World::tick()
+{
+  // FIXME: Always 60 fps, get actual tick in ms
+  float deltaMs = 1000 / 60;
+
   if(m_player.getPosition().getX() + m_player.getWidth() > 400 ||
       m_player.getPosition().getX() < -400)
     m_playerSpeed = Vector2D(m_playerSpeed.getX() * -1, m_playerSpeed.getY());
@@ -63,28 +73,39 @@ int World::tick(float deltaMs)
 
   m_player += Vector2D(m_playerSpeed) * (1 / deltaMs);
 
+  Vector2D playerCenter(
+      m_player.getX() + (m_player.getWidth() / 2),
+      m_player.getY() + (m_player.getHeight() / 2));
+
+  m_camera.setPosition(
+      playerCenter.getX() - (m_camera.getWidth() / 2),
+      playerCenter.getY() + (m_camera.getHeight() / 2));
+
   return 0;
 }
 
 //------------------------------------------------------------------------------
 int World::draw()
 {
-  float width = 1000;
+  glViewport(0, 0, (GLsizei)m_camera.getWidth(), (GLsizei)m_camera.getHeight());
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(
+    m_camera.getX(),
+    m_camera.getX() + m_camera.getWidth(),
+    m_camera.getY() - m_camera.getHeight(), m_camera.getY(),
+    0.0f, 1.0f);
 
   if(m_player.draw())
     return -1;
-
-  // Ground
-  glBegin(GL_QUADS);
-  glColor3f(1.0f, 0.0f, 0.0f); // Red
-  glVertex2f(-(width / 2), 0);
-  glVertex2f(width / 2, 0);
-  glVertex2f(width / 2, -50);
-  glVertex2f(-(width / 2), -50);
-  glEnd();
-
+  if(m_floor.draw())
+    return -1;
   if(m_origin.draw())
     return -1;
+
+  glPopMatrix();
+
   return 0;
 }
 

@@ -33,10 +33,15 @@ public:
 
   // IShape
   virtual const Vector2D& getPosition() const override;
+  virtual float getX() const override;
+  virtual float getY() const override;
   virtual void setPosition(float x, float y) override;
   virtual void setPosition(const Vector2D& pos) override;
   virtual float getWidth() const override;
   virtual float getHeight() const override;
+  virtual void setSize(float width, float height) override;
+  virtual void setSize(const Vector2D& size) override;
+
   virtual int draw() const override;
 
   Shape& operator+(const Vector2D& rhs);
