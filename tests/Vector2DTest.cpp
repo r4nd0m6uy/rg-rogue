@@ -35,6 +35,51 @@ TEST_GROUP(Vector2DTest)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorEqualPlus)
+{
+  float x1 = 1.2;
+  float y1 = 5.6;
+  Vector2D v1(x1, y1);
+  float x2 = -3.4;
+  float y2 = 7.9;
+  Vector2D v2(x2, y2);
+  Vector2D v3;
+
+  v3 = v1 + v2;
+
+  CHECK_EQUAL(x1 + x2, v3.getX());
+  CHECK_EQUAL(y1 + y2, v3.getY());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorEqual)
+{
+  float x = 1.2;
+  float y = 5.6;
+  Vector2D v1(x, y);
+  Vector2D v2 = v1;
+
+  CHECK_EQUAL(x, v2.getX());
+  CHECK_EQUAL(y, v2.getY());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2DTest, operatorPlusEqual)
+{
+  float x1 = 1.2;
+  float y1 = 5.6;
+  Vector2D v1(x1, y1);
+  float x2 = -3.4;
+  float y2 = 7.9;
+  Vector2D v2(x2, y2);
+
+  v1 += v2;
+
+  CHECK_EQUAL(x1 + x2, v1.getX());
+  CHECK_EQUAL(y1 + y2, v1.getY());
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2DTest, constructorXY)
 {
   float x = 3.4;

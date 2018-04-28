@@ -31,6 +31,9 @@ public:
   float getX() const;
   float getY() const;
 
+  Vector2D& operator+=(const Vector2D& rhs);
+  Vector2D& operator+(const Vector2D& rhs);
+
 private:
   float m_x;
   float m_y;
