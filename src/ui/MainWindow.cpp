@@ -105,6 +105,8 @@ int MainWindow::init()
 //------------------------------------------------------------------------------
 int MainWindow::draw()
 {
+  GLenum err;
+
   glClear(GL_COLOR_BUFFER_BIT);
 
   m_imgui.newFrame(m_sdlWindow);
@@ -112,13 +114,20 @@ int MainWindow::draw()
   if(m_mainMenu.draw())
     return -1;
 
-  // Render scene
-  m_scene.get().draw(m_sdlWindow);
+  if(m_scene.get().draw(m_sdlWindow))
+    return -1;
 
   if(m_imgui.draw())
     return -1;
 
   SDL_GL_SwapWindow(m_sdlWindow);
+
+  err = glGetError();
+  if(err != GL_NO_ERROR)
+  {
+    LOG_ER() << "OpenGl error:  " << err;
+    return -1;
+  }
 
   return 0;
 }

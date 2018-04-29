@@ -66,8 +66,6 @@ int SceneTitle::draw(SDL_Window* window)
   glVertex2f(-0.5f, 0.5f);
   glEnd();
 
-  glPopMatrix();
-
   return 0;
 }
 

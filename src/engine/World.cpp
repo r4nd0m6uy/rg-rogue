@@ -113,8 +113,6 @@ int World::draw()
   if(m_red.draw(m_origin))
     return -1;
 
-  glPopMatrix();
-
   return 0;
 }
 
