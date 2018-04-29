@@ -21,12 +21,12 @@ set(APP_SOURCES
   event-loop/MainLoop.cpp
   event-loop/EventDispatcher.cpp
   options/Options.cpp
-  engine/Vector2D.cpp
-  engine/IShape.cpp
-  engine/Shape.cpp
-  engine/ColoredShape.cpp
-  engine/Square.cpp
-  engine/Rectangle.cpp
+  engine/shape/Vector2D.cpp
+  engine/shape/IShape.cpp
+  engine/shape/Shape.cpp
+  engine/shape/Square.cpp
+  engine/shape/Rectangle.cpp
+  engine/shape/ColoredShape.cpp
   engine/Camera.cpp
   engine/Player.cpp
   engine/World.cpp

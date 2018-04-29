@@ -19,7 +19,7 @@
 #ifndef _RG_ROGUE_WORLD_HPP_
 #define _RG_ROGUE_WORLD_HPP_
 
-#include "Square.hpp"
+#include "shape/Square.hpp"
 #include "Player.hpp"
 #include "Camera.hpp"
 

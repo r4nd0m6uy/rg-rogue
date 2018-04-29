@@ -19,7 +19,7 @@
 #ifndef _RG_ROGUE_CAMERA_HPP_
 #define _RG_ROGUE_CAMERA_HPP_
 
-#include "Rectangle.hpp"
+#include "shape/Rectangle.hpp"
 
 namespace rgrogue {
 

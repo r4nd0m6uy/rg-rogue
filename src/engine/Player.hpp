@@ -19,8 +19,8 @@
 #ifndef _RG_ROGUE_PLAYER_HPP_
 #define _RG_ROGUE_PLAYER_HPP_
 
-#include "Rectangle.hpp"
-#include "ColoredShape.hpp"
+#include "shape/Rectangle.hpp"
+#include "shape/ColoredShape.hpp"
 
 namespace rgrogue {
 
