@@ -16,37 +16,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_PLAYER_AI_HPP_
-#define _RG_ROGUE_PLAYER_AI_HPP_
+#ifndef _RG_ROGUE_COMMAND_MOVE_HPP_
+#define _RG_ROGUE_COMMAND_MOVE_HPP_
 
-#include "../engine/commands/IControllable.hpp"
-#include "../engine/commands/CommandJump.hpp"
-#include "../engine/commands/CommandStopJump.hpp"
-#include "../engine/commands/CommandMove.hpp"
-#include "../event-loop/IKeyObserver.hpp"
+#include "ICommand.hpp"
 
 namespace rgrogue {
 
-class PlayerAI:
-    public IKeyObserver
+enum class Direction
+{
+  LEFT  = 0,
+  RIGHT = 1
+};
+
+class CommandMove:
+    public ICommand
 {
 public:
-  PlayerAI(IControllable& actor);
-  virtual ~PlayerAI();
+  CommandMove(Direction direction);
+  virtual ~CommandMove();
 
-  // IKeyObserver
-  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode);
-  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode);
+  // ICommand
+  virtual void execute(IControllable& actor) override;
 
 private:
-  IControllable& m_actor;
-  CommandJump m_jump;
-  CommandStopJump m_stopJump;
-  CommandMove m_moveRight;
-  CommandMove m_moveLeft;
+  Direction m_direction;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_PLAYER_AI_HPP_
+#endif  // _RG_ROGUE_COMMAND_MOVE_HPP_

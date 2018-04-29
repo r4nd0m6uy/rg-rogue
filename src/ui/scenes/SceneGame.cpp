@@ -85,12 +85,6 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
 {
   switch(scanCode)
   {
-  case SDL_SCANCODE_A:
-    m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
-    break;
-  case SDL_SCANCODE_D:
-    m_world.getPlayer().getVelocity() += Vector2D(100, 0);
-    break;
   case SDL_SCANCODE_O:
     m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
     break;
@@ -109,17 +103,7 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
 void SceneGame::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
-  switch(scanCode)
-  {
-  case SDL_SCANCODE_A:
-    m_world.getPlayer().getVelocity() += Vector2D(100, 0);
-    break;
-  case SDL_SCANCODE_D:
-    m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
-    break;
-  default:
-    break;
-  }
+  /* Nothing to do */
 }
 
 }       // namespace

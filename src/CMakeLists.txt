@@ -33,6 +33,7 @@ set(APP_SOURCES
   engine/commands/ICommand.cpp
   engine/commands/CommandJump.cpp
   engine/commands/CommandStopJump.cpp
+  engine/commands/CommandMove.cpp
   engine/Camera.cpp
   engine/Player.cpp
   engine/PlayerAI.cpp

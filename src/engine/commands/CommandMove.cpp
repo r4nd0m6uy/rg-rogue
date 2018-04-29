@@ -16,37 +16,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_PLAYER_AI_HPP_
-#define _RG_ROGUE_PLAYER_AI_HPP_
-
-#include "../engine/commands/IControllable.hpp"
-#include "../engine/commands/CommandJump.hpp"
-#include "../engine/commands/CommandStopJump.hpp"
-#include "../engine/commands/CommandMove.hpp"
-#include "../event-loop/IKeyObserver.hpp"
+#include "CommandMove.hpp"
 
 namespace rgrogue {
 
-class PlayerAI:
-    public IKeyObserver
+//------------------------------------------------------------------------------
+CommandMove::CommandMove(Direction direction):
+    m_direction(direction)
 {
-public:
-  PlayerAI(IControllable& actor);
-  virtual ~PlayerAI();
+}
 
-  // IKeyObserver
-  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode);
-  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
-      Uint16 mode);
+//------------------------------------------------------------------------------
+CommandMove::~CommandMove()
+{
+}
 
-private:
-  IControllable& m_actor;
-  CommandJump m_jump;
-  CommandStopJump m_stopJump;
-  CommandMove m_moveRight;
-  CommandMove m_moveLeft;
-};
+//------------------------------------------------------------------------------
+void CommandMove::execute(IControllable& actor)
+{
+  if(m_direction == Direction::RIGHT)
+    actor.getVelocity() += Vector2D(100, 0);
+  else  // LEFT
+    actor.getVelocity() += Vector2D(-100, 0);
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_PLAYER_AI_HPP_

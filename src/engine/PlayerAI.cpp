@@ -22,7 +22,9 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 PlayerAI::PlayerAI(IControllable& actor):
-  m_actor(actor)
+  m_actor(actor),
+  m_moveRight(Direction::RIGHT),
+  m_moveLeft(Direction::LEFT)
 {
 }
 
@@ -37,6 +39,12 @@ void PlayerAI::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
 {
   switch(scanCode)
   {
+  case SDL_SCANCODE_A:
+    m_moveLeft.execute(m_actor);
+    break;
+  case SDL_SCANCODE_D:
+    m_moveRight.execute(m_actor);
+    break;
   case SDL_SCANCODE_SPACE:
     m_jump.execute(m_actor);
     break;
@@ -51,6 +59,12 @@ void PlayerAI::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
 {
   switch(scanCode)
   {
+  case SDL_SCANCODE_A:
+    m_moveRight.execute(m_actor);
+    break;
+  case SDL_SCANCODE_D:
+    m_moveLeft.execute(m_actor);
+    break;
   case SDL_SCANCODE_SPACE:
     m_stopJump.execute(m_actor);
     break;
