@@ -31,6 +31,7 @@ public:
 
   virtual bool isOnFloor() = 0;
   virtual Vector2D& getVelocity() = 0;
+  virtual float getStrength() = 0;
 };
 
 }       // namespace

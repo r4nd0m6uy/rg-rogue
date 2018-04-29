@@ -24,6 +24,7 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 Player::Player():
+  m_strength(0.1),
   m_hitBox(0, 0, 20, 120),
   m_hitBoxPainter(0, 1, 0, 0)
 {
@@ -87,6 +88,12 @@ bool Player::isOnFloor()
 Vector2D& Player::getVelocity()
 {
   return m_velocity;
+}
+
+//------------------------------------------------------------------------------
+float Player::getStrength()
+{
+  return m_strength;
 }
 
 //------------------------------------------------------------------------------

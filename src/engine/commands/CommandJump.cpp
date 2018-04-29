@@ -34,7 +34,8 @@ CommandJump::~CommandJump()
 void CommandJump::execute(IControllable& actor)
 {
   if(actor.isOnFloor())
-    actor.getVelocity() += Vector2D(0, 300);
+    actor.getVelocity() += Vector2D(0, 300) +
+    (Vector2D(0, 300) * (actor.getStrength() * 0.5));
 }
 
 }       // namespace
