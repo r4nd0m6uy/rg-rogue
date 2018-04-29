@@ -45,9 +45,11 @@ ColoredShape::~ColoredShape()
 }
 
 //------------------------------------------------------------------------------
-int ColoredShape::draw(const IShape& shape) const
+int ColoredShape::draw(const IDrawable& shape) const
 {
   glColor3f(m_r, m_g, m_b);
+
+  // TODO: alpha?
 
   return shape.draw();
 }

@@ -19,12 +19,12 @@
 #ifndef _RG_ROGUE_SQUARE_HPP_
 #define _RG_ROGUE_SQUARE_HPP_
 
-#include "Shape.hpp"
+#include "Rectangle.hpp"
 
 namespace rgrogue {
 
 class Square:
-    public Shape
+    public Rectangle
 {
 public:
   Square();

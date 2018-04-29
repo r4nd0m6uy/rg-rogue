@@ -16,43 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "Square.hpp"
+#ifndef _RG_ROGUE_I_DRAWABLE_HPP_
+#define _RG_ROGUE_I_DRAWABLE_HPP_
 
 namespace rgrogue {
 
-//------------------------------------------------------------------------------
-Square::Square()
+class IDrawable
 {
-}
+public:
+  IDrawable();
+  virtual ~IDrawable();
 
-//------------------------------------------------------------------------------
-Square::Square(float x, float y, float width):
-  Rectangle(x, y, width, width)
-{
-}
-
-//------------------------------------------------------------------------------
-Square::~Square()
-{
-}
-
-//------------------------------------------------------------------------------
-Square& Square::operator+(const Vector2D& rhs)
-{
-  (Shape&)(*this) += rhs;
-
-  return *this;
-}
-
-
-//------------------------------------------------------------------------------
-Square& Square::operator+=(const Vector2D& rhs)
-{
-  Shape& shape = *this;
-
-  shape += rhs;
-
-  return *this;
-}
+  virtual int draw() const = 0;
+};
 
 }       // namespace
+#endif  // _RG_ROGUE_I_DRAWABLE_HPP_

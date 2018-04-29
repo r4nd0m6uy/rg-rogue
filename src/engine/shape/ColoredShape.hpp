@@ -19,7 +19,7 @@
 #ifndef _RG_ROGUE_COLORED_SHAPE_HPP_
 #define _RG_ROGUE_COLORED_SHAPE_HPP_
 
-#include "IShape.hpp"
+#include "../../ui/IDrawable.hpp"
 
 namespace rgrogue {
 
@@ -30,7 +30,7 @@ public:
   ColoredShape();
   virtual ~ColoredShape();
 
-  virtual int draw(const IShape& shape) const;
+  virtual int draw(const IDrawable& shape) const;
 
 private:
   float m_r;

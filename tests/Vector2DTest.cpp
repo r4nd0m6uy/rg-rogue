@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../src/engine/Vector2D.hpp"
+#include "../src/engine/shape/Vector2D.hpp"
 
 #include <CppUTest/TestHarness.h>
 

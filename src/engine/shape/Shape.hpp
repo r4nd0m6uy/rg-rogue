@@ -31,8 +31,6 @@ public:
   Shape(float x, float y, float width, float height);
   virtual ~Shape();
 
-  virtual int draw() const;
-
   // IShape
   virtual const Vector2D& getPosition() const override;
   virtual float getX() const override;
@@ -43,7 +41,6 @@ public:
   virtual float getHeight() const override;
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
-
 
   Shape& operator+(const Vector2D& rhs);
   Shape& operator+=(const Vector2D& rhs);

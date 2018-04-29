@@ -19,17 +19,22 @@
 #ifndef _RG_ROGUE_RECTANGLE_HPP_
 #define _RG_ROGUE_RECTANGLE_HPP_
 
+#include "../../ui/IDrawable.hpp"
 #include "Shape.hpp"
 
 namespace rgrogue {
 
 class Rectangle:
-    public Shape
+    public Shape,
+    public IDrawable
 {
 public:
   Rectangle();
   Rectangle(float x, float y, float width, float height);
   ~Rectangle();
+
+  // IDrawable
+  virtual int draw() const override;
 };
 
 }       // namespace

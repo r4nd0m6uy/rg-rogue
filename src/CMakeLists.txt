@@ -11,6 +11,7 @@ set(APP_SOURCES
   ui/ImGuiAdapter.cpp
   ui/MainWindow.cpp
   ui/MainMenu.cpp
+  ui/IDrawable.cpp
   ui/scenes/IScene.cpp
   ui/scenes/ScenesPool.cpp
   ui/scenes/Scene.cpp

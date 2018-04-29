@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_opengl.h>
-
 #include "Shape.hpp"
 
 namespace rgrogue {
@@ -37,29 +35,6 @@ Shape::Shape(float x, float y, float width, float height):
 //------------------------------------------------------------------------------
 Shape::~Shape()
 {
-}
-
-//------------------------------------------------------------------------------
-int Shape::draw() const
-{
-  glBegin(GL_QUADS);
-
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY() - m_size.getY());
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY() - m_size.getY());
-
-  glEnd();
-
-  return 0;
 }
 
 //------------------------------------------------------------------------------

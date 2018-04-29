@@ -48,8 +48,6 @@ public:
   virtual float getHeight() const override;
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
-  // FIXME: Remove me "Drawable"
-  virtual int draw() const override;
 
 private:
   Rectangle m_shape;

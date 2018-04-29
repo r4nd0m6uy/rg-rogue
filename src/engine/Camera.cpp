@@ -134,11 +134,4 @@ void Camera::setSize(const Vector2D& size)
   m_shape.setSize(size);
 }
 
-//------------------------------------------------------------------------------
-int Camera::draw() const
-{
-  // FIXME
-  return 0;
-}
-
 }       // namespace
