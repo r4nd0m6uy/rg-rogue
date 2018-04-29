@@ -77,6 +77,13 @@ int Player::draw() const
 }
 
 //------------------------------------------------------------------------------
+bool Player::isOnFloor()
+{
+  // FIXME: Collision with object above
+  return getY() <= m_hitBox.getHeight();
+}
+
+//------------------------------------------------------------------------------
 Vector2D& Player::getVelocity()
 {
   return m_velocity;

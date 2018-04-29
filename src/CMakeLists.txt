@@ -30,8 +30,11 @@ set(APP_SOURCES
   engine/shape/Square.cpp
   engine/shape/Rectangle.cpp
   engine/commands/IControllable.cpp
+  engine/commands/ICommand.cpp
+  engine/commands/CommandJump.cpp
   engine/Camera.cpp
   engine/Player.cpp
+  engine/PlayerAI.cpp
   engine/World.cpp
   IRgRogue.cpp
   RgRogue.cpp

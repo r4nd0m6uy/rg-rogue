@@ -16,44 +16,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_PLAYER_HPP_
-#define _RG_ROGUE_PLAYER_HPP_
+#ifndef _RG_ROGUE_PLAYER_AI_HPP_
+#define _RG_ROGUE_PLAYER_AI_HPP_
 
-#include "../ui/decorators/ColoredShape.hpp"
-#include "../ui/IDrawable.hpp"
-#include "commands/IControllable.hpp"
-#include "shape/Rectangle.hpp"
+#include "../engine/commands/CommandJump.hpp"
+#include "../engine/commands/IControllable.hpp"
+#include "../event-loop/IKeyObserver.hpp"
 
 namespace rgrogue {
 
-class Player:
-    public IDrawable,
-    public IControllable
+class PlayerAI:
+    public IKeyObserver
 {
 public:
-  Player();
-  virtual ~Player();
+  PlayerAI(IControllable& actor);
+  virtual ~PlayerAI();
 
-  void move(float deltaMs);
-  void setPosition(float x, float y);
-  float getX();
-  float getY();
-  float getWidth();
-  float getHeight();
-  void setVelocity(float x, float y);
-
-  // IControllable
-  virtual bool isOnFloor() override;
-  virtual Vector2D& getVelocity() override;
-
-  // IDrawable
-  virtual int draw() const override;
+  // IKeyObserver
+  virtual void onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode);
+  virtual void onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
+      Uint16 mode);
 
 private:
-  Vector2D m_velocity;
-  Rectangle m_hitBox;
-  ColoredShape m_hitBoxPainter;
+  IControllable& m_actor;
+  CommandJump m_jumpCmd;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_I_SHAPE_HPP_
+#endif  // _RG_ROGUE_PLAYER_AI_HPP_

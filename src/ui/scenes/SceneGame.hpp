@@ -20,6 +20,7 @@
 #define _RG_ROGUE_SCENE_GAME_HPP_
 
 #include "../../engine/World.hpp"
+#include "../../engine/PlayerAI.hpp"
 #include "../../event-loop/IMainLoop.hpp"
 #include "Scene.hpp"
 
@@ -48,6 +49,7 @@ public:
 
 private:
   World m_world;
+  PlayerAI m_playerAi;
   bool m_isRegistered;
 };
 

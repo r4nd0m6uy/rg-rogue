@@ -28,6 +28,7 @@ namespace rgrogue {
 //------------------------------------------------------------------------------
 SceneGame::SceneGame(SceneId id):
   Scene(id),
+  m_playerAi(m_world.getPlayer()),
   m_isRegistered(false)
 {
 }
@@ -44,6 +45,7 @@ int SceneGame::onDisplayed(IMainLoop& mainLoop)
   if(!m_isRegistered)
   {
     mainLoop.registerKeyObserver(*this);
+    mainLoop.registerKeyObserver(m_playerAi);
     m_isRegistered = true;
   }
 
@@ -89,10 +91,6 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
   case SDL_SCANCODE_D:
     m_world.getPlayer().getVelocity() += Vector2D(100, 0);
     break;
-  case SDL_SCANCODE_SPACE:
-    if(m_world.getPlayer().getY() <= m_world.getPlayer().getHeight())
-      m_world.getPlayer().getVelocity() += Vector2D(0, 300);
-    break;
   case SDL_SCANCODE_O:
     m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
     break;
@@ -105,7 +103,6 @@ void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
   default:
     break;
   }
-
 }
 
 //------------------------------------------------------------------------------
