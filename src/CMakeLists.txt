@@ -29,6 +29,7 @@ set(APP_SOURCES
   engine/shape/Shape.cpp
   engine/shape/Square.cpp
   engine/shape/Rectangle.cpp
+  engine/commands/IControllable.cpp
   engine/Camera.cpp
   engine/Player.cpp
   engine/World.cpp
