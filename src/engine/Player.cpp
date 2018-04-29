@@ -116,4 +116,10 @@ void Player::setVelocity(float x, float y)
   m_velocity = Vector2D(x, y);
 }
 
+//------------------------------------------------------------------------------
+const IShape& Player::getHitBox() const
+{
+  return m_hitBox;
+}
+
 }       // namespace

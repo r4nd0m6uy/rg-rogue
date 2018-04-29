@@ -34,7 +34,7 @@ public:
   ~Rectangle();
 
   // IShape
-  virtual bool overlaps(const IShape& rhs) override;
+  virtual bool overlaps(const IShape& rhs) const override;
 
   // IDrawable
   virtual int draw() const override;

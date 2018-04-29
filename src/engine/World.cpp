@@ -28,7 +28,8 @@ static Vector2D GRAVITY = Vector2D(0, -8.9);
 
 //------------------------------------------------------------------------------
 World::World():
-  m_floor(-500, 0, 1000, 50),
+  m_floor(-500, 0, 2000, 50),
+  m_platform(150, 300, 200, 50),
   m_origin(-10, 10, 20),
   m_gray(0.2, 0.9, 0.9, 0),
   m_red(1, 0, 0, 0.5)
@@ -69,17 +70,25 @@ int World::tick()
   float deltaMs = 1000 / 60;
 
   // Apply gravity (each moving objects)
-  if(m_player.getY() - m_player.getHeight() <= 0)
-  {
-    if(m_player.getVelocity().getY() <= 0)
-      m_player.getVelocity() = Vector2D(m_player.getVelocity().getX(), 0);
-
-    m_player.setPosition(m_player.getX(), m_player.getHeight());
-  }
-  else
-    m_player.getVelocity() += GRAVITY;
+  m_player.getVelocity() += GRAVITY;
 
   m_player.move(deltaMs);
+
+  // Quick and dirty collision
+  // FIXME: Use prediction can pass through wall, any other size!
+  if(m_player.getHitBox().overlaps(m_floor))
+  {
+    m_player.setPosition(
+        m_player.getX(), m_floor.getY() + m_player.getHeight());
+    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+  }
+
+  if(m_player.getHitBox().overlaps(m_platform))
+  {
+    m_player.setPosition(
+        m_player.getX(), m_platform.getY() + m_player.getHeight());
+    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+  }
 
   // Center camera to player
   Vector2D playerCenter(
@@ -106,14 +115,16 @@ int World::draw()
     m_camera.getY() - m_camera.getScaledHeight(), m_camera.getY(),
     0.0f, 1.0f);
 
+  // FIXME: Draw what is contained in camera
   if(m_player.draw())
     return -1;
   if(m_gray.draw(m_floor))
+    return -1;
+  if(m_gray.draw(m_platform))
     return -1;
   if(m_red.draw(m_origin))
     return -1;
 
   return 0;
 }
-
 }       // namespace

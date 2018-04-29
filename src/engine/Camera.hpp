@@ -48,7 +48,7 @@ public:
   virtual float getHeight() const override;
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
-  virtual bool overlaps(const IShape& rhs) override;
+  virtual bool overlaps(const IShape& rhs) const override;
 
 private:
   Rectangle m_shape;

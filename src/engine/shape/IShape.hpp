@@ -38,7 +38,7 @@ public:
   virtual float getHeight() const = 0;
   virtual void setSize(float width, float height) = 0;
   virtual void setSize(const Vector2D& size) = 0;
-  virtual bool overlaps(const IShape& rhs) = 0;
+  virtual bool overlaps(const IShape& rhs) const = 0;
 };
 
 }       // namespace

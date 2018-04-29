@@ -39,7 +39,7 @@ Rectangle::~Rectangle()
 }
 
 //------------------------------------------------------------------------------
-bool Rectangle::overlaps(const IShape& rhs)
+bool Rectangle::overlaps(const IShape& rhs) const
 {
   return this->getX() + this->getWidth() > rhs.getX() &&
       this->getX() < rhs.getX() + rhs.getWidth() &&

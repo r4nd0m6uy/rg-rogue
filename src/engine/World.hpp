@@ -41,6 +41,7 @@ private:
   Camera m_camera;
   Player m_player;
   Rectangle m_floor;
+  Rectangle m_platform;
   Square m_origin;
   ColoredShape m_gray;
   ColoredShape m_red;
