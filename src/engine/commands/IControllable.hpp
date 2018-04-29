@@ -29,9 +29,19 @@ public:
   IControllable();
   virtual ~IControllable();
 
+  // FIXME: Move to world interface -> bool isOnFloor(Actor&);
   virtual bool isOnFloor() = 0;
+
+  // FIXME: World properties
   virtual Vector2D& getVelocity() = 0;
+
+  // Race properties [Human, Skeleton, Slug, Bat, ...]
+  virtual float getBaseSpeed() = 0;
+
+  // Stats [Mage, Knight, Thief, ...]
   virtual float getStrength() = 0;
+  virtual float getSpeed() = 0;
+
 };
 
 }       // namespace

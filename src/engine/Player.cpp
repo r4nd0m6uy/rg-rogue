@@ -24,7 +24,9 @@ namespace rgrogue {
 
 //------------------------------------------------------------------------------
 Player::Player():
+  m_baseSpeed(100),
   m_strength(0.1),
+  m_speed(0.1),
   m_hitBox(0, 0, 20, 120),
   m_hitBoxPainter(0, 1, 0, 0)
 {
@@ -94,6 +96,18 @@ Vector2D& Player::getVelocity()
 float Player::getStrength()
 {
   return m_strength;
+}
+
+//------------------------------------------------------------------------------
+float Player::getBaseSpeed()
+{
+  return m_baseSpeed;
+}
+
+//------------------------------------------------------------------------------
+float Player::getSpeed()
+{
+  return m_speed;
 }
 
 //------------------------------------------------------------------------------

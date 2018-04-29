@@ -16,13 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "../../logging/Loggers.hpp"
+
 #include "CommandMove.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
 CommandMove::CommandMove(Direction direction):
-    m_direction(direction)
+  m_direction(direction)
 {
 }
 
@@ -34,10 +36,18 @@ CommandMove::~CommandMove()
 //------------------------------------------------------------------------------
 void CommandMove::execute(IControllable& actor)
 {
+  float newSpeed = actor.getBaseSpeed();
+  float direction;
+
   if(m_direction == Direction::RIGHT)
-    actor.getVelocity() += Vector2D(100, 0);
+    direction = 1;
   else  // LEFT
-    actor.getVelocity() += Vector2D(-100, 0);
+    direction = -1;
+
+  newSpeed += newSpeed * actor.getSpeed();
+  newSpeed *= direction;
+
+  actor.getVelocity() += Vector2D(newSpeed, 0);
 }
 
 }       // namespace

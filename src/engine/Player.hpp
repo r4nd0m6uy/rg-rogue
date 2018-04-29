@@ -45,13 +45,17 @@ public:
   // IControllable
   virtual bool isOnFloor() override;
   virtual Vector2D& getVelocity() override;
+  virtual float getBaseSpeed() override;
   virtual float getStrength() override;
+  virtual float getSpeed() override;
 
   // IDrawable
   virtual int draw() const override;
 
 private:
+  float m_baseSpeed;
   float m_strength;
+  float m_speed;
   Vector2D m_velocity;
   Rectangle m_hitBox;
   ColoredShape m_hitBoxPainter;
