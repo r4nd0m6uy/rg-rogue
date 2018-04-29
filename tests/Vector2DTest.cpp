@@ -23,7 +23,7 @@
 using namespace rgrogue;
 
 //--------------------------------------------------------------------------------------------
-TEST_GROUP(Vector2DTest)
+TEST_GROUP(Vector2D)
 {
   TEST_SETUP()
   {
@@ -35,7 +35,7 @@ TEST_GROUP(Vector2DTest)
 };
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorTimeEqalFloat)
+TEST(Vector2D, operatorTimeEqalFloat)
 {
   float mul = 4.2;
   float x = 3.4;
@@ -49,7 +49,7 @@ TEST(Vector2DTest, operatorTimeEqalFloat)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorTimeFloat)
+TEST(Vector2D, operatorTimeFloat)
 {
   float mul = 4.2;
   float x = 3.4;
@@ -62,7 +62,7 @@ TEST(Vector2DTest, operatorTimeFloat)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorEqualEqualNotEqual)
+TEST(Vector2D, operatorEqualEqualNotEqual)
 {
   Vector2D v1(3, 5);
   Vector2D v2(6, 7);
@@ -71,7 +71,7 @@ TEST(Vector2DTest, operatorEqualEqualNotEqual)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorNotEqualForEqual)
+TEST(Vector2D, operatorNotEqualForEqual)
 {
   Vector2D v1(3, 5);
   Vector2D v2 = v1;
@@ -80,7 +80,7 @@ TEST(Vector2DTest, operatorNotEqualForEqual)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorEqualEqualForEqual)
+TEST(Vector2D, operatorEqualEqualForEqual)
 {
   Vector2D v1(3, 5);
   Vector2D v2 = v1;
@@ -89,7 +89,7 @@ TEST(Vector2DTest, operatorEqualEqualForEqual)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorEqualPlus)
+TEST(Vector2D, operatorEqualPlus)
 {
   float x1 = 1.2;
   float y1 = 5.6;
@@ -106,7 +106,7 @@ TEST(Vector2DTest, operatorEqualPlus)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorEqual)
+TEST(Vector2D, operatorEqual)
 {
   float x = 1.2;
   float y = 5.6;
@@ -118,7 +118,7 @@ TEST(Vector2DTest, operatorEqual)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, operatorPlusEqual)
+TEST(Vector2D, operatorPlusEqual)
 {
   float x1 = 1.2;
   float y1 = 5.6;
@@ -134,7 +134,7 @@ TEST(Vector2DTest, operatorPlusEqual)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, constructorXY)
+TEST(Vector2D, constructorXY)
 {
   float x = 3.4;
   float y = 5.6;
@@ -145,7 +145,7 @@ TEST(Vector2DTest, constructorXY)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(Vector2DTest, defaultConstructor)
+TEST(Vector2D, defaultConstructor)
 {
   Vector2D v;
 

@@ -23,7 +23,7 @@
 using namespace rgrogue;
 
 //--------------------------------------------------------------------------------------------
-TEST_GROUP(SquareTest)
+TEST_GROUP(Square)
 {
   TEST_SETUP()
   {
@@ -35,7 +35,7 @@ TEST_GROUP(SquareTest)
 };
 
 //--------------------------------------------------------------------------------------------
-TEST(SquareTest, operatorPlusEqualVector)
+TEST(Square, operatorPlusEqualVector)
 {
   float speedX = 3.4;
   float speedY = 4.3;
@@ -52,7 +52,7 @@ TEST(SquareTest, operatorPlusEqualVector)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(SquareTest, operatorEqualPlusVector)
+TEST(Square, operatorEqualPlusVector)
 {
   float speedX = 3.4;
   float speedY = 4.3;
@@ -68,7 +68,7 @@ TEST(SquareTest, operatorEqualPlusVector)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(SquareTest, constructorXYW)
+TEST(Square, constructorXYW)
 {
   float x = 3.2;
   float y = 1.2;
@@ -81,7 +81,7 @@ TEST(SquareTest, constructorXYW)
 }
 
 //--------------------------------------------------------------------------------------------
-TEST(SquareTest, defaultConstructor)
+TEST(Square, defaultConstructor)
 {
   Square s;
 
