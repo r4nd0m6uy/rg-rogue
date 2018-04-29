@@ -39,6 +39,15 @@ Rectangle::~Rectangle()
 }
 
 //------------------------------------------------------------------------------
+bool Rectangle::overlaps(const IShape& rhs)
+{
+  return this->getX() + this->getWidth() > rhs.getX() &&
+      this->getX() < rhs.getX() + rhs.getWidth() &&
+      this->getY() > rhs.getY() - getHeight() &&
+      this->getY() - this->getHeight() < rhs.getY();
+}
+
+//------------------------------------------------------------------------------
 int Rectangle::draw() const
 {
   glBegin(GL_QUADS);

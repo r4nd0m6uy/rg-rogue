@@ -134,4 +134,10 @@ void Camera::setSize(const Vector2D& size)
   m_shape.setSize(size);
 }
 
+//------------------------------------------------------------------------------
+bool Camera::overlaps(const IShape& rhs)
+{
+  return m_shape.overlaps(rhs);
+}
+
 }       // namespace

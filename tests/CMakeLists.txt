@@ -11,6 +11,7 @@ endif()
 set(TEST_APP_NAME ${APP_NAME}_tests)
 set(TEST_SOURCES
   Vector2DTest.cpp
+  RectangleTest.cpp
   SquareTest.cpp
   main.cpp
 )
