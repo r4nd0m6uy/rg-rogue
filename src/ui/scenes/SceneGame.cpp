@@ -117,10 +117,6 @@ void SceneGame::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
   case SDL_SCANCODE_D:
     m_world.getPlayer().getVelocity() += Vector2D(-100, 0);
     break;
-  case SDL_SCANCODE_SPACE:
-    if(m_world.getPlayer().getVelocity().getY() > 50)
-      m_world.getPlayer().getVelocity() = Vector2D(m_world.getPlayer().getVelocity().getX(), 50);
-    break;
   default:
     break;
   }

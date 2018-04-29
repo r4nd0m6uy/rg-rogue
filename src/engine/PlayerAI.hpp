@@ -19,8 +19,9 @@
 #ifndef _RG_ROGUE_PLAYER_AI_HPP_
 #define _RG_ROGUE_PLAYER_AI_HPP_
 
-#include "../engine/commands/CommandJump.hpp"
 #include "../engine/commands/IControllable.hpp"
+#include "../engine/commands/CommandJump.hpp"
+#include "../engine/commands/CommandStopJump.hpp"
 #include "../event-loop/IKeyObserver.hpp"
 
 namespace rgrogue {
@@ -40,7 +41,8 @@ public:
 
 private:
   IControllable& m_actor;
-  CommandJump m_jumpCmd;
+  CommandJump m_jump;
+  CommandStopJump m_stopJump;
 };
 
 }       // namespace

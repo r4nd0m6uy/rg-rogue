@@ -16,25 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "CommandJump.hpp"
+#include "CommandStopJump.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-CommandJump::CommandJump()
+CommandStopJump::CommandStopJump()
 {
 }
 
 //------------------------------------------------------------------------------
-CommandJump::~CommandJump()
+CommandStopJump::~CommandStopJump()
 {
 }
 
 //------------------------------------------------------------------------------
-void CommandJump::execute(IControllable& actor)
+void CommandStopJump::execute(IControllable& actor)
 {
-  if(actor.isOnFloor())
-    actor.getVelocity() += Vector2D(0, 300);
+  if(actor.getVelocity().getY() > 50)
+    actor.getVelocity() = Vector2D(actor.getVelocity().getX(), 50);
 }
 
 }       // namespace

@@ -38,8 +38,7 @@ void PlayerAI::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
   switch(scanCode)
   {
   case SDL_SCANCODE_SPACE:
-    if(m_actor.isOnFloor())
-      m_jumpCmd.execute(m_actor);
+    m_jump.execute(m_actor);
     break;
   default:
     break;
@@ -50,6 +49,14 @@ void PlayerAI::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
 void PlayerAI::onKeyReleased(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
+  switch(scanCode)
+  {
+  case SDL_SCANCODE_SPACE:
+    m_stopJump.execute(m_actor);
+    break;
+  default:
+    break;
+  }
 }
 
 }       // namespace
