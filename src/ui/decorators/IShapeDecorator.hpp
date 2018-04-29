@@ -16,42 +16,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <SDL_opengl.h>
+#ifndef _RG_ROGUE_I_SHAPE_DECORATOR_HPP_
+#define _RG_ROGUE_I_SHAPE_DECORATOR_HPP_
 
-#include "ColoredShape.hpp"
+#include "../../ui/IDrawable.hpp"
 
 namespace rgrogue {
 
-//------------------------------------------------------------------------------
-ColoredShape::ColoredShape(float r, float g, float b, float alpha):
-  m_r(r),
-  m_g(g),
-  m_b(b),
-  m_a(1)
+class IShapeDecorator
 {
-}
-//------------------------------------------------------------------------------
-ColoredShape::ColoredShape():
-  m_r(1),
-  m_g(1),
-  m_b(1),
-  m_a(0)
-{
-}
+public:
+  IShapeDecorator();
+  virtual ~IShapeDecorator();
 
-//------------------------------------------------------------------------------
-ColoredShape::~ColoredShape()
-{
-}
-
-//------------------------------------------------------------------------------
-int ColoredShape::draw(const IDrawable& shape) const
-{
-  glColor3f(m_r, m_g, m_b);
-
-  // TODO: alpha?
-
-  return shape.draw();
-}
+  virtual int draw(const IDrawable& shape) const = 0;
+};
 
 }       // namespace
+#endif  // _RG_ROGUE_I_SHAPE_DECORATOR_HPP_

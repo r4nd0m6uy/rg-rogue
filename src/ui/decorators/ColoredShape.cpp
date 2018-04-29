@@ -16,35 +16,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_PLAYER_HPP_
-#define _RG_ROGUE_PLAYER_HPP_
+#include "ColoredShape.hpp"
 
-#include "shape/Rectangle.hpp"
-#include "../ui/decorators/ColoredShape.hpp"
+#include <SDL_opengl.h>
+
 
 namespace rgrogue {
 
-class Player
+//------------------------------------------------------------------------------
+ColoredShape::ColoredShape(float r, float g, float b, float alpha):
+  m_r(r),
+  m_g(g),
+  m_b(b),
+  m_a(1)
 {
-public:
-  Player();
-  virtual ~Player();
+}
+//------------------------------------------------------------------------------
+ColoredShape::ColoredShape():
+  m_r(1),
+  m_g(1),
+  m_b(1),
+  m_a(0)
+{
+}
 
-  void move(float deltaMs);
-  void setPosition(float x, float y);
-  float getX();
-  float getY();
-  float getWidth();
-  float getHeight();
-  Vector2D& getVelocity();
-  void setVelocity(float x, float y);
-  int draw() const;
+//------------------------------------------------------------------------------
+ColoredShape::~ColoredShape()
+{
+}
 
-private:
-  Vector2D m_velocity;
-  Rectangle m_hitBox;
-  ColoredShape m_hitBoxPainter;
-};
+//------------------------------------------------------------------------------
+int ColoredShape::draw(const IDrawable& shape) const
+{
+  glColor3f(m_r, m_g, m_b);
+
+  // TODO: alpha?
+
+  return shape.draw();
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_I_SHAPE_HPP_

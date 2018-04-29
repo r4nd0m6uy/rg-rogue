@@ -17,6 +17,8 @@ set(APP_SOURCES
   ui/scenes/Scene.cpp
   ui/scenes/SceneTitle.cpp
   ui/scenes/SceneGame.cpp
+  ui/decorators/IShapeDecorator.cpp
+  ui/decorators/ColoredShape.cpp
   event-loop/IKeyObserver.cpp
   event-loop/IMainLoop.cpp
   event-loop/MainLoop.cpp
@@ -27,7 +29,6 @@ set(APP_SOURCES
   engine/shape/Shape.cpp
   engine/shape/Square.cpp
   engine/shape/Rectangle.cpp
-  engine/shape/ColoredShape.cpp
   engine/Camera.cpp
   engine/Player.cpp
   engine/World.cpp

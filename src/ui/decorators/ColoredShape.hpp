@@ -16,35 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_PLAYER_HPP_
-#define _RG_ROGUE_PLAYER_HPP_
+#ifndef _RG_ROGUE_COLORED_SHAPE_HPP_
+#define _RG_ROGUE_COLORED_SHAPE_HPP_
 
-#include "shape/Rectangle.hpp"
-#include "../ui/decorators/ColoredShape.hpp"
+#include "IShapeDecorator.hpp"
 
 namespace rgrogue {
 
-class Player
+class ColoredShape:
+    public IShapeDecorator
 {
 public:
-  Player();
-  virtual ~Player();
+  ColoredShape(float r, float g, float b, float alpha);
+  ColoredShape();
+  virtual ~ColoredShape();
 
-  void move(float deltaMs);
-  void setPosition(float x, float y);
-  float getX();
-  float getY();
-  float getWidth();
-  float getHeight();
-  Vector2D& getVelocity();
-  void setVelocity(float x, float y);
-  int draw() const;
+  // IShapeDecorator
+  virtual int draw(const IDrawable& shape) const override;
 
 private:
-  Vector2D m_velocity;
-  Rectangle m_hitBox;
-  ColoredShape m_hitBoxPainter;
+  float m_r;
+  float m_g;
+  float m_b;
+  float m_a;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_I_SHAPE_HPP_
+#endif  // _RG_ROGUE_COLORED_SHAPE_HPP_

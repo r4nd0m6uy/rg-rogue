@@ -16,28 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_COLORED_SHAPE_HPP_
-#define _RG_ROGUE_COLORED_SHAPE_HPP_
-
-#include "../../ui/IDrawable.hpp"
+#include "IShapeDecorator.hpp"
 
 namespace rgrogue {
 
-class ColoredShape
+//------------------------------------------------------------------------------
+IShapeDecorator::IShapeDecorator()
 {
-public:
-  ColoredShape(float r, float g, float b, float alpha);
-  ColoredShape();
-  virtual ~ColoredShape();
+}
 
-  virtual int draw(const IDrawable& shape) const;
-
-private:
-  float m_r;
-  float m_g;
-  float m_b;
-  float m_a;
-};
+//------------------------------------------------------------------------------
+IShapeDecorator::~IShapeDecorator()
+{
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_COLORED_SHAPE_HPP_
