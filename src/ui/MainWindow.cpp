@@ -48,6 +48,7 @@ MainWindow::~MainWindow()
 //------------------------------------------------------------------------------
 int MainWindow::init()
 {
+  GLenum glErr;
   Uint32 sdlCreateWindowFlag = SDL_WINDOW_OPENGL;
 
   if(SDL_Init(SDL_INIT_EVERYTHING))
@@ -95,6 +96,14 @@ int MainWindow::init()
   }
 
   glClearColor(0, 0, 0, 1);
+  glEnable(GL_TEXTURE_2D);
+
+  glErr = glGetError();
+  if(glErr != GL_NO_ERROR)
+  {
+    LOG_ER() << "Error initializing OpenGL: " << glErr;
+    return -1;
+  }
 
   if(m_imgui.init(m_sdlWindow))
     return -1;

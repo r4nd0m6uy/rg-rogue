@@ -46,6 +46,7 @@ add_library(${APP_LIB_NAME} ${APP_SOURCES})
 
 include_directories(
   ${SDL2_INCLUDE_DIRS}
+  ${SDL2_IMAGE_INCLUDE_DIRS}
   ${OPENGL_INCLUDE_DIRS}
   ${PROJECT_SOURCE_DIR}/imgui
 )
@@ -56,6 +57,7 @@ target_link_libraries(
   ${APP_NAME}
   ${APP_LIB_NAME}
   ${SDL2_LIBRARIES}
+  ${SDL2_IMAGE_LIBRARIES}
   ${OPENGL_LIBRARIES}
 )
 install(TARGETS ${APP_NAME} DESTINATION bin)

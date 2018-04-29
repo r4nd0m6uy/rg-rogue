@@ -19,6 +19,9 @@
 #ifndef _RG_ROGUE_PLAYER_HPP_
 #define _RG_ROGUE_PLAYER_HPP_
 
+#include <SDL.h>
+#include <SDL_opengl.h>
+
 #include "../ui/decorators/ColoredShape.hpp"
 #include "../ui/IDrawable.hpp"
 #include "commands/IControllable.hpp"
@@ -59,6 +62,8 @@ private:
   Vector2D m_velocity;
   Rectangle m_hitBox;
   ColoredShape m_hitBoxPainter;
+  SDL_Surface* m_playerTexture;
+  GLuint m_texturedId;
 };
 
 }       // namespace

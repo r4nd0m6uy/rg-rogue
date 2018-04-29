@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <SDL_image.h>
+
 #include "../logging/Loggers.hpp"
 
 #include "Player.hpp"
@@ -27,14 +29,55 @@ Player::Player():
   m_baseSpeed(100),
   m_strength(0.1),
   m_speed(0.1),
-  m_hitBox(0, 0, 20, 120),
-  m_hitBoxPainter(0, 1, 0, 0)
+  m_hitBox(0, 0, 64, 128),
+  m_hitBoxPainter(0, 1, 0, 0),
+  m_playerTexture(nullptr)
 {
+  // FIXME: init TexturePool
+//  int Mode = GL_RGB;
+  m_playerTexture = IMG_Load("../data/out/test.png");
+  if(m_playerTexture == nullptr)
+  {
+    LOG_ER() << "Cannot load player texture";
+    return;
+  }
+
+//  if(m_playerTexture->format->BytesPerPixel == 4) {
+//      Mode = GL_RGBA;
+//  }
+
+  glGenTextures(1, &m_texturedId);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexImage2D(GL_TEXTURE_2D, // target
+    0, // level, 0 = base, no minimap,
+    GL_RGBA, // internalformat
+    m_playerTexture->w, // width
+    m_playerTexture->h, // height
+    0, // border, always 0 in OpenGL ES
+    GL_RGBA, // format
+    GL_UNSIGNED_BYTE, // type
+    m_playerTexture->pixels);
+//  glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+//      glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+//  SDL_FreeSurface(res_texture);
+
+  GLenum err = glGetError();
+  if(err != GL_NO_ERROR)
+  {
+    LOG_ER() << "Error initializing texture " << err;
+    SDL_FreeSurface(m_playerTexture);
+    m_playerTexture = nullptr;
+  }
 }
 
 //------------------------------------------------------------------------------
 Player::~Player()
 {
+  if(m_playerTexture != nullptr)
+  {
+    SDL_FreeSurface(m_playerTexture);
+    glDeleteTextures(1, &m_texturedId);
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -76,7 +119,64 @@ float Player::getHeight()
 //------------------------------------------------------------------------------
 int Player::draw() const
 {
-  return m_hitBoxPainter.draw(m_hitBox);
+  /*
+   * GLuint TextureID = 0;
+
+// You should probably use CSurface::OnLoad ... ;)
+//-- and make sure the Surface pointer is good!
+SDL_Surface* Surface = IMG_Load("someimage.jpg");
+
+glGenTextures(1, &TextureID);
+glBindTexture(GL_TEXTURE_2D, TextureID);
+
+int Mode = GL_RGB;
+
+if(Surface->format->BytesPerPixel == 4) {
+    Mode = GL_RGBA;
+}
+
+glTexImage2D(GL_TEXTURE_2D, 0, Mode, Surface->w, Surface->h, 0, Mode, GL_UNSIGNED_BYTE, Surface->pixels);
+
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   */
+//  int Mode = GL_RGB;
+
+  if(m_playerTexture == nullptr)
+  {
+    LOG_WA() << " NO TEXTURE";
+    return m_hitBoxPainter.draw(m_hitBox);
+  }
+
+  glBindTexture(GL_TEXTURE_2D,m_texturedId);
+
+//  glActiveTexture(GL_TEXTURE0);
+//  glBindTexture(GL_TEXTURE_2D, m_texturedId);
+
+//  glColor3f(0, 0, 1);
+  glEnable(GL_TEXTURE_2D);
+  glBegin(GL_QUADS);
+  glTexCoord2f(0.0f,0.0f);
+  glVertex2f(
+      m_hitBox.getX(),
+      m_hitBox.getY());
+  glTexCoord2f(1.0f,0.0f);
+  glVertex2f(
+      m_hitBox.getX() + m_hitBox.getWidth(),
+      m_hitBox.getY());
+  glTexCoord2f(0.0f,1.0f);
+  glVertex2f(
+      m_hitBox.getX() + m_hitBox.getWidth(),
+      m_hitBox.getY() - m_hitBox.getHeight());
+  glTexCoord2f(1.0f,1.0f);
+  glVertex2f(
+      m_hitBox.getX(),
+      m_hitBox.getY() - m_hitBox.getHeight());
+
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+
+  return 0;
 }
 
 //------------------------------------------------------------------------------
