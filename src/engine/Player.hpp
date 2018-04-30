@@ -41,7 +41,7 @@ public:
   float getWidth();
   float getHeight();
   void setVelocity(float x, float y);
-  const IShape& getHitBox() const;
+  const IPolygon& getHitBox() const;
 
   // IControllable
   virtual bool isOnFloor() override;

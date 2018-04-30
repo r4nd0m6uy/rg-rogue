@@ -117,7 +117,7 @@ void Player::setVelocity(float x, float y)
 }
 
 //------------------------------------------------------------------------------
-const IShape& Player::getHitBox() const
+const IPolygon& Player::getHitBox() const
 {
   return m_hitBox;
 }

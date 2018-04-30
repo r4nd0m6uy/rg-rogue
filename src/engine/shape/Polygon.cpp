@@ -16,83 +16,83 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "Shape.hpp"
+#include "Polygon.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Shape::Shape()
+Polygon::Polygon()
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::Shape(float x, float y, float width, float height):
+Polygon::Polygon(float x, float y, float width, float height):
   m_pos(x, y),
   m_size(width, height)
 {
 }
 
 //------------------------------------------------------------------------------
-Shape::~Shape()
+Polygon::~Polygon()
 {
 }
 
 //------------------------------------------------------------------------------
-const Vector2D& Shape::getPosition()const
+const Vector2D& Polygon::getPosition()const
 {
   return m_pos;
 }
 
 //------------------------------------------------------------------------------
-float Shape::getX() const
+float Polygon::getX() const
 {
   return m_pos.getX();
 }
 
 //------------------------------------------------------------------------------
-float Shape::getY() const
+float Polygon::getY() const
 {
   return m_pos.getY();
 }
 
 //------------------------------------------------------------------------------
-void Shape::setPosition(float x, float y)
+void Polygon::setPosition(float x, float y)
 {
   setPosition(Vector2D(x, y));
 }
 
 //------------------------------------------------------------------------------
-void Shape::setPosition(const Vector2D& pos)
+void Polygon::setPosition(const Vector2D& pos)
 {
   m_pos = pos;
 }
 
 //------------------------------------------------------------------------------
-float Shape::getWidth() const
+float Polygon::getWidth() const
 {
   return m_size.getX();
 }
 
 //------------------------------------------------------------------------------
-float Shape::getHeight() const
+float Polygon::getHeight() const
 {
   return m_size.getY();
 }
 
 //------------------------------------------------------------------------------
-void Shape::setSize(float width, float height)
+void Polygon::setSize(float width, float height)
 {
   setSize(Vector2D(width, height));
 }
 
 //------------------------------------------------------------------------------
-void Shape::setSize(const Vector2D& size)
+void Polygon::setSize(const Vector2D& size)
 {
   m_size = size;
 }
 
 //------------------------------------------------------------------------------
-Shape& Shape::operator+(const Vector2D& rhs)
+Polygon& Polygon::operator+(const Vector2D& rhs)
 {
   m_pos += rhs;
 
@@ -100,7 +100,7 @@ Shape& Shape::operator+(const Vector2D& rhs)
 }
 
 //------------------------------------------------------------------------------
-Shape& Shape::operator+=(const Vector2D& rhs)
+Polygon& Polygon::operator+=(const Vector2D& rhs)
 {
   return *this + rhs;
 }

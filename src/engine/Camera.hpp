@@ -24,7 +24,7 @@
 namespace rgrogue {
 
 class Camera:
-    public IShape
+    public IPolygon
 {
 public:
   Camera();
@@ -48,7 +48,7 @@ public:
   virtual float getHeight() const override;
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
-  virtual bool overlaps(const IShape& rhs) const override;
+  virtual bool overlaps(const IPolygon& rhs) const override;
 
 private:
   Rectangle m_shape;

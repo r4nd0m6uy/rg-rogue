@@ -16,18 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "IShape.hpp"
+#ifndef _RG_ROGUE_I_POLYGON_HPP_
+#define _RG_ROGUE_I_POLYGON_HPP_
+
+#include "Vector2D.hpp"
 
 namespace rgrogue {
 
-//------------------------------------------------------------------------------
-IShape::IShape()
+class IPolygon
 {
-}
+public:
+  IPolygon();
+  virtual ~IPolygon();
 
-//------------------------------------------------------------------------------
-IShape::~IShape()
-{
-}
+  virtual const Vector2D& getPosition() const = 0;
+  virtual float getX() const = 0;
+  virtual float getY() const = 0;
+  virtual void setPosition(float x, float y) = 0;
+  virtual void setPosition(const Vector2D& pos) = 0;
+  virtual float getWidth() const = 0;
+  virtual float getHeight() const = 0;
+  virtual void setSize(float width, float height) = 0;
+  virtual void setSize(const Vector2D& size) = 0;
+  virtual bool overlaps(const IPolygon& rhs) const = 0;
+};
 
 }       // namespace
+#endif  // _RG_ROGUE_I_POLYGON_HPP_

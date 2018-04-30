@@ -135,7 +135,7 @@ void Camera::setSize(const Vector2D& size)
 }
 
 //------------------------------------------------------------------------------
-bool Camera::overlaps(const IShape& rhs) const
+bool Camera::overlaps(const IPolygon& rhs) const
 {
   return m_shape.overlaps(rhs);
 }

@@ -39,7 +39,7 @@ Square::~Square()
 //------------------------------------------------------------------------------
 Square& Square::operator+(const Vector2D& rhs)
 {
-  (Shape&)(*this) += rhs;
+  (Polygon&)(*this) += rhs;
 
   return *this;
 }
@@ -48,7 +48,7 @@ Square& Square::operator+(const Vector2D& rhs)
 //------------------------------------------------------------------------------
 Square& Square::operator+=(const Vector2D& rhs)
 {
-  Shape& shape = *this;
+  Polygon& shape = *this;
 
   shape += rhs;
 

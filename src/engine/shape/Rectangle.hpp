@@ -20,12 +20,12 @@
 #define _RG_ROGUE_RECTANGLE_HPP_
 
 #include "../../ui/IDrawable.hpp"
-#include "Shape.hpp"
+#include "Polygon.hpp"
 
 namespace rgrogue {
 
 class Rectangle:
-    public Shape,
+    public Polygon,
     public IDrawable
 {
 public:
@@ -34,7 +34,7 @@ public:
   ~Rectangle();
 
   // IShape
-  virtual bool overlaps(const IShape& rhs) const override;
+  virtual bool overlaps(const IPolygon& rhs) const override;
 
   // IDrawable
   virtual int draw() const override;

@@ -25,8 +25,8 @@ set(APP_SOURCES
   event-loop/EventDispatcher.cpp
   options/Options.cpp
   engine/shape/Vector2D.cpp
-  engine/shape/IShape.cpp
-  engine/shape/Shape.cpp
+  engine/shape/IPolygon.cpp
+  engine/shape/Polygon.cpp
   engine/shape/Square.cpp
   engine/shape/Rectangle.cpp
   engine/commands/IControllable.cpp

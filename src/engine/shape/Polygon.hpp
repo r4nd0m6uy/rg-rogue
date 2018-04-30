@@ -19,19 +19,19 @@
 #ifndef _RG_ROGUE_SHAPE_HPP_
 #define _RG_ROGUE_SHAPE_HPP_
 
-#include "IShape.hpp"
+#include "IPolygon.hpp"
 
 namespace rgrogue {
 
-class Shape:
-    public IShape
+class Polygon:
+    public IPolygon
 {
 public:
-  Shape();
-  Shape(float x, float y, float width, float height);
-  virtual ~Shape();
+  Polygon();
+  Polygon(float x, float y, float width, float height);
+  virtual ~Polygon();
 
-  // IShape
+  // IPolygon
   virtual const Vector2D& getPosition() const override;
   virtual float getX() const override;
   virtual float getY() const override;
@@ -42,8 +42,8 @@ public:
   virtual void setSize(float width, float height) override;
   virtual void setSize(const Vector2D& size) override;
 
-  Shape& operator+(const Vector2D& rhs);
-  Shape& operator+=(const Vector2D& rhs);
+  Polygon& operator+(const Vector2D& rhs);
+  Polygon& operator+=(const Vector2D& rhs);
 
 protected:
   Vector2D m_pos;

@@ -29,7 +29,7 @@ Rectangle::Rectangle()
 
 //------------------------------------------------------------------------------
 Rectangle::Rectangle(float x, float y, float width, float height):
-  Shape(x, y, width, height)
+  Polygon(x, y, width, height)
 {
 }
 
@@ -39,7 +39,7 @@ Rectangle::~Rectangle()
 }
 
 //------------------------------------------------------------------------------
-bool Rectangle::overlaps(const IShape& rhs) const
+bool Rectangle::overlaps(const IPolygon& rhs) const
 {
   return this->getX() + this->getWidth() > rhs.getX() &&
       this->getX() < rhs.getX() + rhs.getWidth() &&
