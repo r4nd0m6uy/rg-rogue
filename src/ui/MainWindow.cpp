@@ -89,10 +89,7 @@ int MainWindow::init()
   }
 
   if(SDL_GL_SetSwapInterval(0))
-  {
-    LOG_ER() << "Cannot set OpenGl swap interval: " << SDL_GetError();
-    return -1;
-  }
+    LOG_WA() << "Cannot set OpenGl swap interval: " << SDL_GetError();
 
   glClearColor(0, 0, 0, 1);
 
