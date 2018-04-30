@@ -97,7 +97,7 @@ int MainMenu::draw()
     ImVec2 textSize = ImGui::CalcTextSize(currentText.c_str());
     ImGui::SetCursorPos(
         ImVec2((WINDOW_WIDTH / 2) - (textSize.x / 2), ImGui::GetCursorPosY()));
-    ImGui::Text(currentText.c_str());
+    ImGui::Text("%s", currentText.c_str());
 
     // Main menu
     if(m_rgRogue.getCurrentSceneId() != SceneId::MAIN_TITLE)
