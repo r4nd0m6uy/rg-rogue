@@ -35,6 +35,14 @@ TEST_GROUP(Rectangle)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Rectangle, sameOverlaps)
+{
+  Rectangle r(20, -10,  5, 5);
+
+  CHECK(r.overlaps(r));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Rectangle, TopDesntOverlapBottom)
 {
   Rectangle rBottom(20, -10,  5, 5);
