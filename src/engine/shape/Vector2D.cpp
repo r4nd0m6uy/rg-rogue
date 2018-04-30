@@ -16,6 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include <cmath>
+
 #include "Vector2D.hpp"
 
 namespace rgrogue {
@@ -51,6 +53,14 @@ float Vector2D::getY() const
   return m_y;
 }
 
+//------------------------------------------------------------------------------
+float Vector2D::distance(const Vector2D& v) const
+{
+  float xDiff = this->getX() - v.getX();
+  float yDiff = this->getY() - v.getY();
+
+  return std::sqrt((xDiff * xDiff) + (yDiff * yDiff));
+}
 //------------------------------------------------------------------------------
 Vector2D& Vector2D::operator+(const Vector2D& rhs)
 {

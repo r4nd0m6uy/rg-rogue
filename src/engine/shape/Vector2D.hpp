@@ -30,6 +30,7 @@ public:
 
   float getX() const;
   float getY() const;
+  float distance(const Vector2D& v) const;
 
   Vector2D& operator+(const Vector2D& rhs);
   Vector2D& operator+=(const Vector2D& rhs);

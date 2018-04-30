@@ -35,6 +35,33 @@ TEST_GROUP(Vector2D)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2D, getDistanceFromOtherInQuadrant1)
+{
+  Vector2D origin(2, 2);
+  Vector2D remotePoint(0, 2);
+
+  CHECK_EQUAL(2, origin.distance(remotePoint));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2D, getDistanceFromOriginOnYAxis)
+{
+  Vector2D origin(0, 0);
+  Vector2D remotePoint(0, 5);
+
+  CHECK_EQUAL(5, origin.distance(remotePoint));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2D, getDistanceFromOriginOnXAxis)
+{
+  Vector2D origin(0, 0);
+  Vector2D remotePoint(0, 2);
+
+  CHECK_EQUAL(2, origin.distance(remotePoint));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2D, operatorTimeEqalFloat)
 {
   float mul = 4.2;
