@@ -23,13 +23,11 @@ not using a physic engine.
 
 ## Inspirations
 * [Rogue legacy](http://www.cellardoorgames.com/roguelegacy/)
-For the platform 2D action
-
+  * For the platform 2D action
 * [Enter the dungeon](https://store.steampowered.com/app/311690/Enter_the_Gungeon/)
-For using guns experience
-
+  * For using guns experience
 * [Mintest](https://www.minetest.net/)
-For the flexible lua modding
+  * For the flexible lua modding
 
 # Compiling
 
