@@ -18,6 +18,11 @@
  */
 #include "Polygon.hpp"
 
+
+#include <iostream>
+
+
+
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
@@ -46,15 +51,42 @@ const std::vector<Vector2D>& Polygon::getPoints() const
 //------------------------------------------------------------------------------
 bool Polygon::isIn(const Vector2D& p) const
 {
+  int crossingSegements = 0;
+  int currentPoint = 0;
+  Polygon crtSegment({Vector2D(0, 0), Vector2D(0, 0)});
+
   for(auto& polPoint: m_points)
   {
     // Two points are touching
     if(polPoint.getX() == p.getX() &&
         polPoint.getY() == p.getX())
       return true;
+
+    crtSegment = Polygon({crtSegment.getPoints()[1], polPoint});
+
+    if(currentPoint >= 1)
+    {
+      // Point is on the current segment
+      float d1 = crtSegment.getPoints()[0].distance(p);
+      float d2 = crtSegment.getPoints()[1].distance(p);
+      float d3 = crtSegment.getPoints()[0].distance(crtSegment.getPoints()[1]);
+
+      if((d1 + d2) - d3 == 0)
+        return true;
+
+      // TODO: casting, get the amount of crossing segments for a polygon
+      // If cross this segments
+      //   crossingsgemetns++
+    }
+    currentPoint++;
   }
 
-  return false;
+  // Two points are not on each other
+  if(currentPoint == 1)
+    return false;
+
+  // Impair amount of crossed segements (ray casting)
+  return (crossingSegements % 2) == 0;
 }
 
 //------------------------------------------------------------------------------

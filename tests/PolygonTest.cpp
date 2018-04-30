@@ -34,16 +34,16 @@ TEST_GROUP(Polygon)
   }
 };
 
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, pointIsOnALine)
-//{
-//  Vector2D start(0, 0);
-//  Vector2D end(3, 3);
-//  Vector2D point(2, 2);
-//  Polygon line({start, end});
-//
-//  CHECK(line.isIn(point));
-//}
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, pointIsOnALine)
+{
+  Vector2D start(0, 0);
+  Vector2D end(3, 3);
+  Vector2D point(2, 2);
+  Polygon line({start, end});
+
+  CHECK(line.isIn(point));
+}
 
 //--------------------------------------------------------------------------------------------
 TEST(Polygon, samePointsAreIn)
