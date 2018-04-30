@@ -33,9 +33,6 @@ public:
   Rectangle(float x, float y, float width, float height);
   ~Rectangle();
 
-  // IShape
-  virtual bool overlaps(const IPolygon& rhs) const override;
-
   // IDrawable
   virtual int draw() const override;
 };

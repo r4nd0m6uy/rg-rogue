@@ -38,71 +38,71 @@ Polygon::~Polygon()
 }
 
 //------------------------------------------------------------------------------
-const Vector2D& Polygon::getPosition()const
-{
-  return m_pos;
-}
-
-//------------------------------------------------------------------------------
-float Polygon::getX() const
-{
-  return m_pos.getX();
-}
-
-//------------------------------------------------------------------------------
-float Polygon::getY() const
-{
-  return m_pos.getY();
-}
-
-//------------------------------------------------------------------------------
-void Polygon::setPosition(float x, float y)
-{
-  setPosition(Vector2D(x, y));
-}
-
-//------------------------------------------------------------------------------
-void Polygon::setPosition(const Vector2D& pos)
-{
-  m_pos = pos;
-}
-
-//------------------------------------------------------------------------------
-float Polygon::getWidth() const
-{
-  return m_size.getX();
-}
-
-//------------------------------------------------------------------------------
-float Polygon::getHeight() const
-{
-  return m_size.getY();
-}
-
-//------------------------------------------------------------------------------
-void Polygon::setSize(float width, float height)
-{
-  setSize(Vector2D(width, height));
-}
-
-//------------------------------------------------------------------------------
-void Polygon::setSize(const Vector2D& size)
-{
-  m_size = size;
-}
-
-//------------------------------------------------------------------------------
-Polygon& Polygon::operator+(const Vector2D& rhs)
-{
-  m_pos += rhs;
-
-  return *this;
-}
-
-//------------------------------------------------------------------------------
-Polygon& Polygon::operator+=(const Vector2D& rhs)
-{
-  return *this + rhs;
-}
+//const Vector2D& Polygon::getPosition()const
+//{
+//  return m_pos;
+//}
+//
+////------------------------------------------------------------------------------
+//float Polygon::getX() const
+//{
+//  return m_pos.getX();
+//}
+//
+////------------------------------------------------------------------------------
+//float Polygon::getY() const
+//{
+//  return m_pos.getY();
+//}
+//
+////------------------------------------------------------------------------------
+//void Polygon::setPosition(float x, float y)
+//{
+//  setPosition(Vector2D(x, y));
+//}
+//
+////------------------------------------------------------------------------------
+//void Polygon::setPosition(const Vector2D& pos)
+//{
+//  m_pos = pos;
+//}
+//
+////------------------------------------------------------------------------------
+//float Polygon::getWidth() const
+//{
+//  return m_size.getX();
+//}
+//
+////------------------------------------------------------------------------------
+//float Polygon::getHeight() const
+//{
+//  return m_size.getY();
+//}
+//
+////------------------------------------------------------------------------------
+//void Polygon::setSize(float width, float height)
+//{
+//  setSize(Vector2D(width, height));
+//}
+//
+////------------------------------------------------------------------------------
+//void Polygon::setSize(const Vector2D& size)
+//{
+//  m_size = size;
+//}
+//
+////------------------------------------------------------------------------------
+//Polygon& Polygon::operator+(const Vector2D& rhs)
+//{
+//  m_pos += rhs;
+//
+//  return *this;
+//}
+//
+////------------------------------------------------------------------------------
+//Polygon& Polygon::operator+=(const Vector2D& rhs)
+//{
+//  return *this + rhs;
+//}
 
 }       // namespace

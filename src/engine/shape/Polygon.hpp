@@ -19,12 +19,11 @@
 #ifndef _RG_ROGUE_SHAPE_HPP_
 #define _RG_ROGUE_SHAPE_HPP_
 
-#include "IPolygon.hpp"
+#include "Vector2D.hpp"
 
 namespace rgrogue {
 
-class Polygon:
-    public IPolygon
+class Polygon
 {
 public:
   Polygon();
@@ -32,18 +31,18 @@ public:
   virtual ~Polygon();
 
   // IPolygon
-  virtual const Vector2D& getPosition() const override;
-  virtual float getX() const override;
-  virtual float getY() const override;
-  virtual void setPosition(float x, float y) override;
-  virtual void setPosition(const Vector2D& pos) override;
-  virtual float getWidth() const override;
-  virtual float getHeight() const override;
-  virtual void setSize(float width, float height) override;
-  virtual void setSize(const Vector2D& size) override;
+//  virtual const Vector2D& getPosition() const;
+//  virtual float getX() const;
+//  virtual float getY() const;
+//  virtual void setPosition(float x, float y);
+//  virtual void setPosition(const Vector2D& pos);
+//  virtual float getWidth() const;
+//  virtual float getHeight() const;
+//  virtual void setSize(float width, float height);
+//  virtual void setSize(const Vector2D& size);
 
-  Polygon& operator+(const Vector2D& rhs);
-  Polygon& operator+=(const Vector2D& rhs);
+//  Polygon& operator+(const Vector2D& rhs);
+//  Polygon& operator+=(const Vector2D& rhs);
 
 protected:
   Vector2D m_pos;

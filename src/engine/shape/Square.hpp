@@ -31,8 +31,8 @@ public:
   Square(float x, float y, float width);
   virtual ~Square();
 
-  Square& operator+(const Vector2D& rhs);
-  Square& operator+=(const Vector2D& rhs);
+//  Square& operator+(const Vector2D& rhs);
+//  Square& operator+=(const Vector2D& rhs);
 };
 
 }       // namespace

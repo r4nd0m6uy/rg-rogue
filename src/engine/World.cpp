@@ -76,28 +76,28 @@ int World::tick()
 
   // Quick and dirty collision
   // FIXME: Use prediction can pass through wall, any other size!
-  if(m_player.getHitBox().overlaps(m_floor))
-  {
-    m_player.setPosition(
-        m_player.getX(), m_floor.getY() + m_player.getHeight());
-    m_player.setVelocity(m_player.getVelocity().getX(), 0);
-  }
-
-  if(m_player.getHitBox().overlaps(m_platform))
-  {
-    m_player.setPosition(
-        m_player.getX(), m_platform.getY() + m_player.getHeight());
-    m_player.setVelocity(m_player.getVelocity().getX(), 0);
-  }
+//  if(m_player.getHitBox().overlaps(m_floor))
+//  {
+//    m_player.setPosition(
+//        m_player.getX(), m_floor.getY() + m_player.getHeight());
+//    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+//  }
+//
+//  if(m_player.getHitBox().overlaps(m_platform))
+//  {
+//    m_player.setPosition(
+//        m_player.getX(), m_platform.getY() + m_player.getHeight());
+//    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+//  }
 
   // Center camera to player
-  Vector2D playerCenter(
-      m_player.getX() + (m_player.getWidth() / 2),
-      m_player.getY() - (m_player.getHeight() / 2));
+//  Vector2D playerCenter(
+//      m_player.getX() + (m_player.getWidth() / 2),
+//      m_player.getY() - (m_player.getHeight() / 2));
 
-  m_camera.setPosition(
-      playerCenter.getX() - (m_camera.getScaledWidth() / 2),
-      playerCenter.getY() + (m_camera.getScaledHeight() / 2));
+//  m_camera.setPosition(
+//      playerCenter.getX() - (m_camera.getScaledWidth() / 2),
+//      playerCenter.getY() + (m_camera.getScaledHeight() / 2));
 
   return 0;
 }
@@ -105,15 +105,16 @@ int World::tick()
 //------------------------------------------------------------------------------
 int World::draw()
 {
-  glViewport(0, 0, (GLsizei)m_camera.getWidth(), (GLsizei)m_camera.getHeight());
+//  glViewport(0, 0, (GLsizei)m_camera.getWidth(), (GLsizei)m_camera.getHeight());
+  glViewport(0, 0, 0, 0);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(
-    m_camera.getX(),
-    m_camera.getX() + m_camera.getScaledWidth(),
-    m_camera.getY() - m_camera.getScaledHeight(), m_camera.getY(),
-    0.0f, 1.0f);
+//  glOrtho(
+//    m_camera.getX(),
+//    m_camera.getX() + m_camera.getScaledWidth(),
+//    m_camera.getY() - m_camera.getScaledHeight(), m_camera.getY(),
+//    0.0f, 1.0f);
 
   // FIXME: Draw what is contained in camera
   if(m_player.draw())

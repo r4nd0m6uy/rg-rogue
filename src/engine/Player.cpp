@@ -40,37 +40,37 @@ Player::~Player()
 //------------------------------------------------------------------------------
 void Player::move(float deltaMs)
 {
-  m_hitBox += Vector2D(m_velocity) * (1 / deltaMs);
+//  m_hitBox += Vector2D(m_velocity) * (1 / deltaMs);
 }
 
 //------------------------------------------------------------------------------
 void Player::setPosition(float x, float y)
 {
-  m_hitBox.setPosition(x, y);
+//  m_hitBox.setPosition(x, y);
 }
 
 //------------------------------------------------------------------------------
 float Player::getX()
 {
-  return m_hitBox.getX();
+  return 0;//m_hitBox.getX();
 }
 
 //------------------------------------------------------------------------------
 float Player::getY()
 {
-  return m_hitBox.getY();
+  return 0;//m_hitBox.getY();
 }
 
 //------------------------------------------------------------------------------
 float Player::getWidth()
 {
-  return m_hitBox.getWidth();
+  return 0;//m_hitBox.getWidth();
 }
 
 //------------------------------------------------------------------------------
 float Player::getHeight()
 {
-  return m_hitBox.getHeight();
+  return 0;//m_hitBox.getHeight();
 }
 
 //------------------------------------------------------------------------------
@@ -83,7 +83,8 @@ int Player::draw() const
 bool Player::isOnFloor()
 {
   // FIXME: Collision with object above
-  return getY() <= m_hitBox.getHeight();
+  //return getY() <= m_hitBox.getHeight();
+  return false;
 }
 
 //------------------------------------------------------------------------------
@@ -117,7 +118,7 @@ void Player::setVelocity(float x, float y)
 }
 
 //------------------------------------------------------------------------------
-const IPolygon& Player::getHitBox() const
+const Polygon& Player::getHitBox() const
 {
   return m_hitBox;
 }

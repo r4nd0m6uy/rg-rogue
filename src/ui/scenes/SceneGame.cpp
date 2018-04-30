@@ -65,7 +65,7 @@ int SceneGame::draw(SDL_Window* window)
   int height;
 
   SDL_GetWindowSize(window, &width, &height);
-  m_world.getCamera().setSize(width, height);
+//  m_world.getCamera().setSize(width, height);
 
   m_world.draw();
 

@@ -14,10 +14,10 @@ add_compile_options(-Wno-c++14-compat)
 set(TEST_APP_NAME ${APP_NAME}_tests)
 set(TEST_SOURCES
   Vector2DTest.cpp
-  RectangleTest.cpp
-  SquareTest.cpp
   main.cpp
 )
+#  RectangleTest.cpp
+#  SquareTest.cpp
 
 include_directories(
   ${CPPUTEST_INCLUDE_DIRS}

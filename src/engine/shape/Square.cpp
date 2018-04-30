@@ -36,23 +36,23 @@ Square::~Square()
 {
 }
 
-//------------------------------------------------------------------------------
-Square& Square::operator+(const Vector2D& rhs)
-{
-  (Polygon&)(*this) += rhs;
-
-  return *this;
-}
-
-
-//------------------------------------------------------------------------------
-Square& Square::operator+=(const Vector2D& rhs)
-{
-  Polygon& shape = *this;
-
-  shape += rhs;
-
-  return *this;
-}
+////------------------------------------------------------------------------------
+//Square& Square::operator+(const Vector2D& rhs)
+//{
+//  (Polygon&)(*this) += rhs;
+//
+//  return *this;
+//}
+//
+//
+////------------------------------------------------------------------------------
+//Square& Square::operator+=(const Vector2D& rhs)
+//{
+//  Polygon& shape = *this;
+//
+//  shape += rhs;
+//
+//  return *this;
+//}
 
 }       // namespace

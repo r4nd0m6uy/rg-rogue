@@ -67,77 +67,72 @@ void Camera::decreaseZoom(float step)
     m_zoom = 0;
 }
 
-//------------------------------------------------------------------------------
-float Camera::getScaledWidth() const
+////------------------------------------------------------------------------------
+//float Camera::getScaledWidth() const
+//
+//{
+//  return m_shape.getWidth() * m_zoom;
+//}
+//
+////------------------------------------------------------------------------------
+//float Camera::getScaledHeight() const
+//{
+//  return m_shape.getHeight() * m_zoom;
+//}
+//
+////------------------------------------------------------------------------------
+//const Vector2D& Camera::getPosition() const
+//{
+//  return m_shape.getPosition();
+//}
+//
+////------------------------------------------------------------------------------
+//float Camera::getX() const
+//{
+//  return m_shape.getX();
+//}
+//
+////------------------------------------------------------------------------------
+//float Camera::getY() const
+//{
+//  return m_shape.getY();
+//}
+//
+////------------------------------------------------------------------------------
+//void Camera::setPosition(float x, float y)
+//{
+//  m_shape.setPosition(x, y);
+//}
+//
+////------------------------------------------------------------------------------
+//void Camera::setPosition(const Vector2D& pos)
+//{
+//  m_shape.setPosition(pos);
+//}
+//
+////------------------------------------------------------------------------------
+//float Camera::getWidth() const
+//{
+//  return m_shape.getWidth();
+//}
+//
+////------------------------------------------------------------------------------
+//float Camera::getHeight() const
+//{
+//  return m_shape.getHeight();
+//}
+//
+////------------------------------------------------------------------------------
+//void Camera::setSize(float width, float height)
+//{
+//  m_shape.setSize(width, height);
+//}
+//
+////------------------------------------------------------------------------------
+//void Camera::setSize(const Vector2D& size)
+//{
+//  m_shape.setSize(size);
+//}
 
-{
-  return m_shape.getWidth() * m_zoom;
-}
-
-//------------------------------------------------------------------------------
-float Camera::getScaledHeight() const
-{
-  return m_shape.getHeight() * m_zoom;
-}
-
-//------------------------------------------------------------------------------
-const Vector2D& Camera::getPosition() const
-{
-  return m_shape.getPosition();
-}
-
-//------------------------------------------------------------------------------
-float Camera::getX() const
-{
-  return m_shape.getX();
-}
-
-//------------------------------------------------------------------------------
-float Camera::getY() const
-{
-  return m_shape.getY();
-}
-
-//------------------------------------------------------------------------------
-void Camera::setPosition(float x, float y)
-{
-  m_shape.setPosition(x, y);
-}
-
-//------------------------------------------------------------------------------
-void Camera::setPosition(const Vector2D& pos)
-{
-  m_shape.setPosition(pos);
-}
-
-//------------------------------------------------------------------------------
-float Camera::getWidth() const
-{
-  return m_shape.getWidth();
-}
-
-//------------------------------------------------------------------------------
-float Camera::getHeight() const
-{
-  return m_shape.getHeight();
-}
-
-//------------------------------------------------------------------------------
-void Camera::setSize(float width, float height)
-{
-  m_shape.setSize(width, height);
-}
-
-//------------------------------------------------------------------------------
-void Camera::setSize(const Vector2D& size)
-{
-  m_shape.setSize(size);
-}
-
-//------------------------------------------------------------------------------
-bool Camera::overlaps(const IPolygon& rhs) const
-{
-  return m_shape.overlaps(rhs);
-}
 
 }       // namespace
