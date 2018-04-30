@@ -19,11 +19,26 @@
 #ifndef _RG_ROGUE_SCENES_IDS_HPP_
 #define _RG_ROGUE_SCENES_IDS_HPP_
 
+#include <cstddef>
+
 namespace rgrogue {
 
 enum class SceneId{
   MAIN_TITLE  = 1,
   GAME        = 2
+};
+
+/**
+ * Scene ID hash function for GCC prior to 6.1
+ * https://gcc.gnu.org/bugzilla/show_bug.cgi?id=60970
+ */
+struct EnumClassHash
+{
+  template <typename T>
+  std::size_t operator()(T t) const
+  {
+    return static_cast<std::size_t>(t);
+  }
 };
 
 }       // namespace

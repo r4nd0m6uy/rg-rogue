@@ -35,7 +35,7 @@ public:
   IScene& getScene(SceneId id);
 
 private:
-  std::unordered_map<SceneId, std::unique_ptr<IScene> > m_scenes;
+  std::unordered_map<SceneId, std::unique_ptr<IScene>, EnumClassHash> m_scenes;
 
   static void buildScene(SceneId id, std::unique_ptr<IScene>& scene);
 };
