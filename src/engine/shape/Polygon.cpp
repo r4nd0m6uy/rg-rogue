@@ -49,6 +49,18 @@ const std::vector<Vector2D>& Polygon::getPoints() const
 }
 
 //------------------------------------------------------------------------------
+Vector2D Polygon::getMostLeftPoint() const
+{
+  Vector2D leftMost = m_points[0];
+
+  for(const auto& p: m_points)
+    if(leftMost.getX() > p.getX())
+      leftMost = p;
+
+  return leftMost;
+}
+
+//------------------------------------------------------------------------------
 bool Polygon::isIn(const Vector2D& p) const
 {
   int crossingSegements = 0;

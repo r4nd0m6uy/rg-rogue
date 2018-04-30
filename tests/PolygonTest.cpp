@@ -34,6 +34,26 @@ TEST_GROUP(Polygon)
   }
 };
 
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, mostLeftFromLine)
+{
+  Vector2D p1(2, 2);
+  Vector2D p2(-4, 3);
+  Polygon pol({p1, p2});
+
+  CHECK(p2 == pol.getMostLeftPoint());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, mostLeftSingPoint)
+{
+  Vector2D point(2, 2);
+  Polygon pol({point});
+
+  CHECK(point == pol.getMostLeftPoint());
+}
+
 //--------------------------------------------------------------------------------------------
 TEST(Polygon, pointIsOnALine)
 {

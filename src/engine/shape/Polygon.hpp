@@ -33,6 +33,7 @@ public:
   virtual ~Polygon();
 
   const std::vector<Vector2D>& getPoints() const;
+  Vector2D getMostLeftPoint() const;
   bool isIn(const Vector2D& p) const;
 
 private:
