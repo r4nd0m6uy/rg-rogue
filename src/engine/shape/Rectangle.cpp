@@ -29,7 +29,7 @@ Rectangle::Rectangle()
 
 //------------------------------------------------------------------------------
 Rectangle::Rectangle(float x, float y, float width, float height):
-  Polygon(x, y, width, height)
+  Polygon({Vector2D(0, 0)})
 {
 }
 
@@ -41,22 +41,22 @@ Rectangle::~Rectangle()
 //------------------------------------------------------------------------------
 int Rectangle::draw() const
 {
-  glBegin(GL_QUADS);
-
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY());
-  glVertex2f(
-      m_pos.getX() + m_size.getX(),
-      m_pos.getY() - m_size.getY());
-  glVertex2f(
-      m_pos.getX(),
-      m_pos.getY() - m_size.getY());
-
-  glEnd();
+//  glBegin(GL_QUADS);
+//
+//  glVertex2f(
+//      m_pos.getX(),
+//      m_pos.getY());
+//  glVertex2f(
+//      m_pos.getX() + m_size.getX(),
+//      m_pos.getY());
+//  glVertex2f(
+//      m_pos.getX() + m_size.getX(),
+//      m_pos.getY() - m_size.getY());
+//  glVertex2f(
+//      m_pos.getX(),
+//      m_pos.getY() - m_size.getY());
+//
+//  glEnd();
 
   return 0;
 }

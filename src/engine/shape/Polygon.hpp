@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_SHAPE_HPP_
 #define _RG_ROGUE_SHAPE_HPP_
 
+#include <vector>
+
 #include "Vector2D.hpp"
 
 namespace rgrogue {
@@ -27,26 +29,14 @@ class Polygon
 {
 public:
   Polygon();
-  Polygon(float x, float y, float width, float height);
+  Polygon(const std::vector<Vector2D>& points);
   virtual ~Polygon();
 
-  // IPolygon
-//  virtual const Vector2D& getPosition() const;
-//  virtual float getX() const;
-//  virtual float getY() const;
-//  virtual void setPosition(float x, float y);
-//  virtual void setPosition(const Vector2D& pos);
-//  virtual float getWidth() const;
-//  virtual float getHeight() const;
-//  virtual void setSize(float width, float height);
-//  virtual void setSize(const Vector2D& size);
+  const std::vector<Vector2D>& getPoints() const;
+  bool isIn(const Vector2D& p) const;
 
-//  Polygon& operator+(const Vector2D& rhs);
-//  Polygon& operator+=(const Vector2D& rhs);
-
-protected:
-  Vector2D m_pos;
-  Vector2D m_size;
+private:
+  std::vector<Vector2D> m_points;
 };
 
 }       // namespace

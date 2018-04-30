@@ -21,20 +21,40 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Polygon::Polygon()
+Polygon::Polygon():
+  m_points({Vector2D(0, 0)})
 {
 }
 
 //------------------------------------------------------------------------------
-Polygon::Polygon(float x, float y, float width, float height):
-  m_pos(x, y),
-  m_size(width, height)
+Polygon::Polygon(const std::vector<Vector2D>& points):
+  m_points(points)
 {
 }
 
 //------------------------------------------------------------------------------
 Polygon::~Polygon()
 {
+}
+
+//------------------------------------------------------------------------------
+const std::vector<Vector2D>& Polygon::getPoints() const
+{
+  return m_points;
+}
+
+//------------------------------------------------------------------------------
+bool Polygon::isIn(const Vector2D& p) const
+{
+  for(auto& polPoint: m_points)
+  {
+    // Two points are touching
+    if(polPoint.getX() == p.getX() &&
+        polPoint.getY() == p.getX())
+      return true;
+  }
+
+  return false;
 }
 
 //------------------------------------------------------------------------------
