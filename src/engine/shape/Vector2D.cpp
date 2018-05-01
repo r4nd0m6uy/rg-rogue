@@ -61,6 +61,7 @@ float Vector2D::distance(const Vector2D& v) const
 
   return std::sqrt((xDiff * xDiff) + (yDiff * yDiff));
 }
+
 //------------------------------------------------------------------------------
 Vector2D& Vector2D::operator+(const Vector2D& rhs)
 {

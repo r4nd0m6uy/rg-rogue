@@ -35,6 +35,69 @@ TEST_GROUP(Segment)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Segment, twoSegementsColinearHIntersect2)
+{
+  Segment s1(Vector2D(3, 3), Vector2D(10, 3));
+  Segment s2(Vector2D(1, 3), Vector2D(5, 3));
+
+  CHECK(s1.intesects(s2));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, twoSegementsColinearHIntersect1)
+{
+  Segment s1(Vector2D(3, 3), Vector2D(10, 3));
+  Segment s2(Vector2D(5, 3), Vector2D(15, 3));
+
+  CHECK(s1.intesects(s2));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, twoSegementsIntesect)
+{
+  Segment s1(Vector2D(3, 3), Vector2D(3, 10));
+  Segment s2(Vector2D(2, 5), Vector2D(10, 5));
+
+  CHECK(s1.intesects(s2));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, twoSegementsDontIntesect)
+{
+  Segment s1(Vector2D(2, 2), Vector2D(2, 7));
+  Segment s2(Vector2D(4, 2), Vector2D(4, 7));
+
+  CHECK_FALSE(s1.intesects(s2));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, orientationCounterClockwise)
+{
+  Segment s1(Vector2D(1, 1), Vector2D(2, 2));
+  Vector2D p(1, 2);
+
+  CHECK_EQUAL(-1, s1.orientation(p));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, orientationClockwise)
+{
+  Segment s1(Vector2D(1, 1), Vector2D(2, 2));
+  Vector2D p(2, 1);
+
+  CHECK_EQUAL(1, s1.orientation(p));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, orientationColinear)
+{
+  Segment s1(Vector2D(1, 1), Vector2D(2, 2));
+  Vector2D p(3, 3);
+
+  CHECK_EQUAL(0, s1.orientation(p));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Segment, isOnPointIsOn)
 {
   Vector2D p1(0, 5);

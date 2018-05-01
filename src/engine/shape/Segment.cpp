@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#include "Polygon.hpp"
 #include "Segment.hpp"
 
 namespace rgrogue {
@@ -56,6 +57,66 @@ bool Segment::isOn(const Vector2D& p) const
   distanceSegment = m_p1.distance(m_p2);
 
   return distanceP1 + distanceP2 == distanceSegment;
+}
+
+//------------------------------------------------------------------------------
+int Segment::orientation(const Vector2D& p) const
+{
+  int orientation =
+      (m_p2.getY() - m_p1.getY()) * (p.getX() - m_p2.getX()) -
+      (m_p2.getX() - m_p1.getX()) * (p.getY() - m_p2.getY());
+
+  if(!orientation)          // colinear
+    return 0;
+  else if(orientation > 0)  // clockwise
+    return 1;
+  return -1;                // counterclockwise
+}
+
+//------------------------------------------------------------------------------
+bool Segment::intesects(const Segment& segment) const
+{
+  // https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+  int o1 = this->orientation(segment.getP2());
+  int o2 = this->orientation(segment.getP1());
+
+  // FIXME: Test case!?
+//  int o3 = segment.orientation(getP1());
+//  int o4 = segment.orientation(getP2());
+
+  if(o1 != o2)// && o3 != o4)
+    return true;
+
+  // Colinear lines
+  if(!o1 && isOn(segment.getP2()))
+    return true;
+  if(!o2 && isOn(segment.getP1()))
+    return true;
+
+  return false;
+}
+
+//------------------------------------------------------------------------------
+int Segment::orientation(const Vector2D& p1, const Vector2D& p2,
+    const Vector2D& p3)
+{
+  int orientation =
+      (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
+      (p2.getX() - p1.getX()) * (p3.getY() - p2.getY());
+
+  if(!orientation)          // colinear
+    return 0;
+  else if(orientation > 0)  // clockwise
+    return 1;
+  return -1;                // counterclockwise
+}
+
+//------------------------------------------------------------------------------
+std::ostream& operator<<(std::ostream& s, const Segment& seg)
+{
+  s << Polygon({seg.getP1(), seg.getP2()});
+
+  return s;
 }
 
 }       // namespace

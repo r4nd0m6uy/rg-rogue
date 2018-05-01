@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_SEGMENT_HPP_
 #define _RG_ROGUE_SEGMENT_HPP_
 
+#include <ostream>
+
 #include "Vector2D.hpp"
 
 namespace rgrogue {
@@ -32,11 +34,17 @@ public:
   const Vector2D& getP1() const;
   const Vector2D& getP2() const;
   bool isOn(const Vector2D& p) const;
+  int orientation(const Vector2D& p) const;
+  bool intesects(const Segment& segment) const;
 
 private:
   Vector2D m_p1;
   Vector2D m_p2;
+
+  static int orientation(const Vector2D& p1, const Vector2D& p2, const Vector2D& p3);
 };
+
+std::ostream& operator<<(std::ostream& s, const Segment& seg);
 
 }       // namespace
 #endif  // _RG_ROGUE_POLYGON_HPP_
