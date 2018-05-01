@@ -19,24 +19,30 @@
 #ifndef _RG_ROGUE_POLYGON_HPP_
 #define _RG_ROGUE_POLYGON_HPP_
 
-#include "IPolygon.hpp"
+#include "IShape.hpp"
+#include "Segment.hpp"
 
 namespace rgrogue {
 
 class Polygon:
-    public IPolygon // FIXME: Required?
+    public IShape
 {
 public:
   Polygon();
   Polygon(const std::vector<Vector2D>& points);
   virtual ~Polygon();
 
-  const std::vector<Vector2D>& getPoints() const override;
-//  bool isIn(const Vector2D& p) const override;
-//  Vector2D getMostLeftPoint() const;
+  const std::vector<Vector2D>& getPoints() const;
+  std::vector<Segment> getSegments() const;
+
+  // IShape
+  bool isIn(const Vector2D& p) const override;
 
 private:
   std::vector<Vector2D> m_points;
+
+  Vector2D getMostLeftPoint() const;
+
 };
 
 std::ostream& operator<<(std::ostream& s, const Polygon& p);

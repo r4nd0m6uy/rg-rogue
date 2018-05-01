@@ -151,3 +151,13 @@ TEST(Segment, constructorWithPoint)
   CHECK(p1 == s.getP1());
   CHECK(p2 == s.getP2());
 }
+
+
+//--------------------------------------------------------------------------------------------
+TEST(Segment, defaultConstructor)
+{
+  Segment s;
+
+  CHECK(Vector2D(0, 0) == s.getP1());
+  CHECK(Vector2D(0, 0) == s.getP2());
+}

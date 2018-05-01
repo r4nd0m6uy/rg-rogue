@@ -16,37 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "IPolygon.hpp"
+#include "IShape.hpp"
 
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-IPolygon::IPolygon()
+IShape::IShape()
 {
 }
 
 //------------------------------------------------------------------------------
-IPolygon::~IPolygon()
+IShape::~IShape()
 {
-}
-
-//------------------------------------------------------------------------------
-std::ostream& operator<<(std::ostream& s, const IPolygon& p)
-{
-  int crtPoint = 1;
-  int pCount = p.getPoints().size();
-
-  s << "[";
-  for(const auto& point : p.getPoints())
-  {
-    s << point;
-    if(crtPoint < pCount)
-      s << " ";
-    ++crtPoint;
-  }
-  s << "]";
-
-  return s;
 }
 
 }       // namespace

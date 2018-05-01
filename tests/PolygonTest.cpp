@@ -34,46 +34,20 @@ TEST_GROUP(Polygon)
   }
 };
 
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInTwoLinesCross)
-//{
-//  Vector2D l1p1(2, 5);
-//  Vector2D l1p2(10, 5);
-//  Vector2D l2p1(6, 1);
-//  Vector2D l2p2(6, 10);
-//  Polygon line1({l1p1, l1p2});
-//  Polygon line2({l2p1, l2p2});
-//
-//  CHECK(line2.isIn(line1));
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInTwoLinesDontCross)
-//{
-//  Vector2D l1p1(0, 0);
-//  Vector2D l1p2(2, 2);
-//  Vector2D l2p1(5, 5);
-//  Vector2D l2p2(7, 7);
-//  Polygon line1({l1p1, l1p2});
-//  Polygon line2({l2p1, l2p2});
-//
-//  CHECK_FALSE(line1.isIn(line2));
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInPointIsInTriangle)
+//--------------------------------------------------------------------------------------------
+//TEST(Polygon, isInPointInTriangle)
 //{
 //  Vector2D p1(0, 0);
-//  Vector2D p2(10, 10);
-//  Vector2D p3(20, 0);
-//  Vector2D point(10, 1);
+//  Vector2D p2(3, 5);
+//  Vector2D p3(0, 5);
+//  Vector2D point(3, 2);
 //  Polygon triangle({p1, p2, p3});
 //
 //  CHECK(triangle.isIn(point));
 //}
 //
 ////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInPointIsNotInTriangle)
+//TEST(Polygon, isInPointNotInTriangle)
 //{
 //  Vector2D p1(0, 0);
 //  Vector2D p2(10, 10);
@@ -83,55 +57,60 @@ TEST_GROUP(Polygon)
 //
 //  CHECK_FALSE(triangle.isIn(point));
 //}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, mostLeftFromLine)
-//{
-//  Vector2D p1(2, 2);
-//  Vector2D p2(-4, 3);
-//  Polygon pol({p1, p2});
-//
-//  CHECK(p2 == pol.getMostLeftPoint());
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, mostLeftSingPoint)
-//{
-//  Vector2D point(2, 2);
-//  Polygon pol({point});
-//
-//  CHECK(point == pol.getMostLeftPoint());
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInpointIsOnALine)
-//{
-//  Vector2D start(0, 0);
-//  Vector2D end(3, 3);
-//  Vector2D point(2, 2);
-//  Polygon line({start, end});
-//
-//  CHECK(line.isIn(point));
-//}
-//
+
 //--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInsamePointsAreIn)
-//{
-//  Vector2D p1(1, 1);
-//  Polygon po({p1});
-//
-//  CHECK(po.isIn(p1));
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isIntwoDifferentPointsAreNotIn)
-//{
-//  Vector2D p1(1, 1);
-//  Vector2D p2(3, 3);
-//  Polygon po({p2});
-//
-//  CHECK_FALSE(po.isIn(p1));
-//}
+TEST(Polygon, getSegmentsFromTriangle)
+{
+  Vector2D p1(0, 0);
+  Vector2D p2(3, 5);
+  Vector2D p3(1, 1);
+  Polygon p({p1, p2, p3});
+  std::vector<Segment> s = p.getSegments();
+
+  CHECK_EQUAL(3, s.size());
+  CHECK(p1 == s[0].getP1());
+  CHECK(p2 == s[0].getP2());
+  CHECK(p2 == s[1].getP1());
+  CHECK(p3 == s[1].getP2());
+  CHECK(p3 == s[2].getP1());
+  CHECK(p1 == s[2].getP2());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, getSegmentsFromLine)
+{
+  Vector2D p1(4, 5);
+  Vector2D p2(6, 7);
+  Polygon p({p1, p2});
+  std::vector<Segment> s = p.getSegments();
+
+  CHECK_EQUAL(1, s.size());
+  CHECK(p1 == s[0].getP1());
+  CHECK(p2 == s[0].getP2());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, getSegmentsWithOnePoint)
+{
+  Vector2D p1(4, 5);
+  Polygon p({p1});
+  std::vector<Segment> s = p.getSegments();
+
+  CHECK_EQUAL(1, s.size());
+  CHECK(p1 == s[0].getP1());
+  CHECK(p1 == s[0].getP2());
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, getSegmentsDefaultConstructor)
+{
+  Polygon p;
+  std::vector<Segment> s = p.getSegments();
+
+  CHECK_EQUAL(1, s.size());
+  CHECK(Vector2D(0, 0) == s[0].getP1());
+  CHECK(Vector2D(0, 0) == s[0].getP2());
+}
 
 //--------------------------------------------------------------------------------------------
 TEST(Polygon, constructorWithPoints)

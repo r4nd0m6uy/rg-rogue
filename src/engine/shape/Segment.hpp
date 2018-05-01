@@ -28,6 +28,7 @@ namespace rgrogue {
 class Segment
 {
 public:
+  Segment();
   Segment(const Vector2D& p1, const Vector2D& p2);
   virtual ~Segment();
 

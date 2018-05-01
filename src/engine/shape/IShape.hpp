@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_I_POLYGON_HPP_
-#define _RG_ROGUE_I_POLYGON_HPP_
+#ifndef _RG_ROGUE_I_SHAPE_HPP_
+#define _RG_ROGUE_I_SHAPE_HPP_
 
 #include <vector>
 
@@ -25,17 +25,15 @@
 
 namespace rgrogue {
 
-class IPolygon
+class IShape
 {
 public:
-  IPolygon();
-  virtual ~IPolygon();
+  IShape();
+  virtual ~IShape();
 
-  virtual const std::vector<Vector2D>& getPoints() const = 0;
+  virtual bool isIn(const Vector2D& p) const = 0;
 //  virtual bool isIn(const Vector2D& p) const = 0;
 };
 
-std::ostream& operator<<(std::ostream& s, const IPolygon& p);
-
 }       // namespace
-#endif  // _RG_ROGUE_I_POLYGON_HPP_
+#endif  // _RG_ROGUE_I_SHAPE_HPP_
