@@ -41,8 +41,6 @@ public:
 private:
   Vector2D m_p1;
   Vector2D m_p2;
-
-  static int orientation(const Vector2D& p1, const Vector2D& p2, const Vector2D& p3);
 };
 
 std::ostream& operator<<(std::ostream& s, const Segment& seg);

@@ -83,38 +83,27 @@ int Segment::orientation(const Vector2D& p) const
 bool Segment::intesects(const Segment& segment) const
 {
   // https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-  int o1 = this->orientation(segment.getP2());
-  int o2 = this->orientation(segment.getP1());
+  int o1 = this->orientation(segment.getP1());
+  int o2 = this->orientation(segment.getP2());
+  int o3 = segment.orientation(getP1());
+  int o4 = segment.orientation(getP2());
 
-  // FIXME: Test case!?
-//  int o3 = segment.orientation(getP1());
-//  int o4 = segment.orientation(getP2());
-
-  if(o1 != o2)// && o3 != o4)
+  if(o1 != o2 && o3 != o4)
     return true;
 
   // Colinear lines
-  if(!o1 && isOn(segment.getP2()))
+  if(!o1 && isOn(segment.getP1()))
     return true;
-  if(!o2 && isOn(segment.getP1()))
+  if(!o2 && isOn(segment.getP2()))
     return true;
+
+  // FIXME Test case ?!
+//  if(!o3 && segment.isOn(this->getP1()))
+//    return true;
+//  if(!o4 && segment.isOn(this->getP2()))
+//    return true;
 
   return false;
-}
-
-//------------------------------------------------------------------------------
-int Segment::orientation(const Vector2D& p1, const Vector2D& p2,
-    const Vector2D& p3)
-{
-  int orientation =
-      (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) -
-      (p2.getX() - p1.getX()) * (p3.getY() - p2.getY());
-
-  if(!orientation)          // colinear
-    return 0;
-  else if(orientation > 0)  // clockwise
-    return 1;
-  return -1;                // counterclockwise
 }
 
 //------------------------------------------------------------------------------

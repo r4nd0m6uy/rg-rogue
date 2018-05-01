@@ -35,6 +35,15 @@ TEST_GROUP(Segment)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Segment, leftLineDoesntCrossRight)
+{
+  Segment s1(Vector2D(-5, -5), Vector2D(0, 0));
+  Segment s2(Vector2D(10, 10), Vector2D(20, 0));
+
+  CHECK_FALSE(s1.intesects(s2));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Segment, twoSegementsColinearHIntersect2)
 {
   Segment s1(Vector2D(3, 3), Vector2D(10, 3));
