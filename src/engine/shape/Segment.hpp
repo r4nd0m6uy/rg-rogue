@@ -16,30 +16,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_POLYGON_HPP_
-#define _RG_ROGUE_POLYGON_HPP_
+#ifndef _RG_ROGUE_SEGMENT_HPP_
+#define _RG_ROGUE_SEGMENT_HPP_
 
-#include "IPolygon.hpp"
+#include "Vector2D.hpp"
 
 namespace rgrogue {
 
-class Polygon:
-    public IPolygon // FIXME: Required?
+class Segment
 {
 public:
-  Polygon();
-  Polygon(const std::vector<Vector2D>& points);
-  virtual ~Polygon();
+  Segment(const Vector2D& p1, const Vector2D& p2);
+  virtual ~Segment();
 
-  const std::vector<Vector2D>& getPoints() const override;
-//  bool isIn(const Vector2D& p) const override;
-//  Vector2D getMostLeftPoint() const;
+  const Vector2D& getP1() const;
+  const Vector2D& getP2() const;
+  bool isOn(const Vector2D& p) const;
 
 private:
-  std::vector<Vector2D> m_points;
+  Vector2D m_p1;
+  Vector2D m_p2;
 };
-
-std::ostream& operator<<(std::ostream& s, const Polygon& p);
 
 }       // namespace
 #endif  // _RG_ROGUE_POLYGON_HPP_

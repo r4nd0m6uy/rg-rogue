@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_VECTOR_2D_HPP_
 #define _RG_ROGUE_VECTOR_2D_HPP_
 
+#include <ostream>
+
 namespace rgrogue {
 
 class Vector2D
@@ -36,13 +38,15 @@ public:
   Vector2D& operator+=(const Vector2D& rhs);
   Vector2D& operator*(float rhs);
   Vector2D& operator*=(float rhs);
-  bool operator==(const Vector2D& rhs);
-  bool operator!=(const Vector2D& rhs);
+  bool operator==(const Vector2D& rhs) const;
+  bool operator!=(const Vector2D& rhs) const;
 
 private:
   float m_x;
   float m_y;
 };
+
+std::ostream& operator<<(std::ostream& s, const Vector2D& v);
 
 }       // namespace
 #endif  // _RG_ROGUE_VECTOR_2D_HPP_

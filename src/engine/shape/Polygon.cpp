@@ -18,11 +18,6 @@
  */
 #include "Polygon.hpp"
 
-
-#include <iostream>
-
-
-
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
@@ -49,56 +44,133 @@ const std::vector<Vector2D>& Polygon::getPoints() const
 }
 
 //------------------------------------------------------------------------------
-Vector2D Polygon::getMostLeftPoint() const
-{
-  Vector2D leftMost = m_points[0];
-
-  for(const auto& p: m_points)
-    if(leftMost.getX() > p.getX())
-      leftMost = p;
-
-  return leftMost;
-}
+//Vector2D Polygon::getMostLeftPoint() const
+//{
+//  Vector2D leftMost = m_points[0];
+//
+//  for(const auto& p: m_points)
+//    if(leftMost.getX() > p.getX())
+//      leftMost = p;
+//
+//  return leftMost;
+//}
 
 //------------------------------------------------------------------------------
-bool Polygon::isIn(const Vector2D& p) const
+//bool Polygon::isIn(const Vector2D& p) const
+//{
+////    for(auto& polPoint: m_points)
+////    {
+////      std::cout << "Check same point " << polPoint << " == " << p << std::endl;
+////      // Two points are touching
+////      if(polPoint == p)
+////        return true;
+////
+////      crtSegment = Polygon({crtSegment.getPoints()[1], polPoint});
+////
+////      if(currentPoint >= 1)
+////      {
+////        // Point is on the current segment
+////        float d1 = crtSegment.getPoints()[0].distance(p);
+////        float d2 = crtSegment.getPoints()[1].distance(p);
+////        float d3 = crtSegment.getPoints()[0].distance(crtSegment.getPoints()[1]);
+////
+////        std::cout << "Check " << p << " is on " << crtSegment << std::endl;
+////
+////        if((d1 + d2) - d3 == 0)
+////        {
+////          std::cout << "Zero distance!" << std::endl;
+////          return true;
+////        }
+////
+////        // FIXME: Check polygon in polygon
+////        if(rayCastLine.isIn(crtSegment.getPoints()[0]) ||
+////            rayCastLine.isIn(crtSegment.getPoints()[1]))
+////          crossingSegements++;
+////      }
+////      currentPoint++;
+////    }
+//
+////  int crossingSegements = 0;
+////  int currentPoint = 0;
+////  Polygon rayCastLine({getMostLeftPoint(), p});
+////  Polygon crtSegment({Vector2D(0, 0), Vector2D(0, 0)});
+////
+////  std::cout << *this << " contains " << p << std::endl;
+////
+////  for(auto& polPoint: m_points)
+////  {
+////    std::cout << "Check same point " << polPoint << " == " << p << std::endl;
+////    // Two points are touching
+////    if(polPoint == p)
+////      return true;
+////
+////    crtSegment = Polygon({crtSegment.getPoints()[1], polPoint});
+////
+////    if(currentPoint >= 1)
+////    {
+////      // Point is on the current segment
+////      float d1 = crtSegment.getPoints()[0].distance(p);
+////      float d2 = crtSegment.getPoints()[1].distance(p);
+////      float d3 = crtSegment.getPoints()[0].distance(crtSegment.getPoints()[1]);
+////
+////      std::cout << "Check " << p << " is on " << crtSegment << std::endl;
+////
+////      if((d1 + d2) - d3 == 0)
+////      {
+////        std::cout << "Zero distance!" << std::endl;
+////        return true;
+////      }
+////
+////      // FIXME: Check polygon in polygon
+////      if(rayCastLine.isIn(crtSegment.getPoints()[0]) ||
+////          rayCastLine.isIn(crtSegment.getPoints()[1]))
+////        crossingSegements++;
+////    }
+////    currentPoint++;
+////  }
+////
+////  // Two points are not on each other
+////  if(currentPoint == 1)
+////    return false;
+////
+////  // Impair amount of crossed segements (ray casting)
+////  return (crossingSegements % 2) == 0;
+//  return false;
+//}
+
+//------------------------------------------------------------------------------
+//bool Polygon::isIn(const Polygon& p) const
+//{
+////  std::cout << *this << " contains " << p << std::endl;
+////
+////  for(const auto& point: p.getPoints())
+////  {
+////    std::cout << "CHECK if in " << *this << " contains " << point << std::endl;
+////    if(this->isIn(point))
+////      return true;
+////  }
+////
+////  return false;
+//  return false;
+//}
+
+//------------------------------------------------------------------------------
+std::ostream& operator<<(std::ostream& s, const Polygon& p)
 {
-  int crossingSegements = 0;
-  int currentPoint = 0;
-  Polygon crtSegment({Vector2D(0, 0), Vector2D(0, 0)});
+  int crtPoint = 1;
+  int pCount = p.getPoints().size();
 
-  for(auto& polPoint: m_points)
+  s << "[";
+  for(const auto& point : p.getPoints())
   {
-    // Two points are touching
-    if(polPoint.getX() == p.getX() &&
-        polPoint.getY() == p.getX())
-      return true;
-
-    crtSegment = Polygon({crtSegment.getPoints()[1], polPoint});
-
-    if(currentPoint >= 1)
-    {
-      // Point is on the current segment
-      float d1 = crtSegment.getPoints()[0].distance(p);
-      float d2 = crtSegment.getPoints()[1].distance(p);
-      float d3 = crtSegment.getPoints()[0].distance(crtSegment.getPoints()[1]);
-
-      if((d1 + d2) - d3 == 0)
-        return true;
-
-      // TODO: casting, get the amount of crossing segments for a polygon
-      // If cross this segments
-      //   crossingsgemetns++
-    }
-    currentPoint++;
+    s << point;
+    if(crtPoint < pCount)
+      s << ", ";
+    ++crtPoint;
   }
+  s << "]";
 
-  // Two points are not on each other
-  if(currentPoint == 1)
-    return false;
-
-  // Impair amount of crossed segements (ray casting)
-  return (crossingSegements % 2) == 0;
+  return s;
 }
 
 //------------------------------------------------------------------------------

@@ -94,16 +94,24 @@ Vector2D& Vector2D::operator*=(float rhs)
 }
 
 //------------------------------------------------------------------------------
-bool Vector2D::operator==(const Vector2D& rhs)
+bool Vector2D::operator==(const Vector2D& rhs) const
 {
   return m_x == rhs.m_x &&
       m_y == rhs.m_y;
 }
 
 //------------------------------------------------------------------------------
-bool Vector2D::operator!=(const Vector2D& rhs)
+bool Vector2D::operator!=(const Vector2D& rhs) const
 {
   return !(*this == rhs);
+}
+
+//------------------------------------------------------------------------------
+std::ostream& operator<<(std::ostream& s, const Vector2D& v)
+{
+  s << v.getX() << ";" << v.getY();
+
+  return s;
 }
 
 }       // namespace
