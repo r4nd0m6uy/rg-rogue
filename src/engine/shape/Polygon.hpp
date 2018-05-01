@@ -41,8 +41,7 @@ public:
 private:
   std::vector<Vector2D> m_points;
 
-  Vector2D getMostLeftPoint() const;
-
+  const Vector2D& getMostLeftPoint() const;
 };
 
 std::ostream& operator<<(std::ostream& s, const Polygon& p);

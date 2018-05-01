@@ -35,28 +35,28 @@ TEST_GROUP(Polygon)
 };
 
 //--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInPointInTriangle)
-//{
-//  Vector2D p1(0, 0);
-//  Vector2D p2(3, 5);
-//  Vector2D p3(0, 5);
-//  Vector2D point(3, 2);
-//  Polygon triangle({p1, p2, p3});
-//
-//  CHECK(triangle.isIn(point));
-//}
-//
-////--------------------------------------------------------------------------------------------
-//TEST(Polygon, isInPointNotInTriangle)
-//{
-//  Vector2D p1(0, 0);
-//  Vector2D p2(10, 10);
-//  Vector2D p3(20, 0);
-//  Vector2D point(-5, -5);
-//  Polygon triangle({p1, p2, p3});
-//
-//  CHECK_FALSE(triangle.isIn(point));
-//}
+TEST(Polygon, isInPointInTriangle)
+{
+  Vector2D p1(0, 0);
+  Vector2D p2(3, 5);
+  Vector2D p3(5, 0);
+  Vector2D point(3, 2);
+  Polygon triangle({p1, p2, p3});
+
+  CHECK(triangle.isIn(point));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, isInPointNotInTriangle)
+{
+  Vector2D p1(0, 0);
+  Vector2D p2(10, 10);
+  Vector2D p3(20, 0);
+  Vector2D point(-5, -5);
+  Polygon triangle({p1, p2, p3});
+
+  CHECK_FALSE(triangle.isIn(point));
+}
 
 //--------------------------------------------------------------------------------------------
 TEST(Polygon, getSegmentsFromTriangle)

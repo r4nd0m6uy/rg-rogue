@@ -32,7 +32,6 @@ public:
   virtual ~IShape();
 
   virtual bool isIn(const Vector2D& p) const = 0;
-//  virtual bool isIn(const Vector2D& p) const = 0;
 };
 
 }       // namespace

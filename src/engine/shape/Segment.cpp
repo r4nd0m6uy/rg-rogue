@@ -21,7 +21,6 @@
 
 namespace rgrogue {
 
-
 //------------------------------------------------------------------------------
 Segment::Segment()
 {
@@ -87,7 +86,6 @@ bool Segment::intesects(const Segment& segment) const
   int o2 = this->orientation(segment.getP2());
   int o3 = segment.orientation(getP1());
   int o4 = segment.orientation(getP2());
-
   if(o1 != o2 && o3 != o4)
     return true;
 

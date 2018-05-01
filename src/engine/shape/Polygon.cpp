@@ -70,77 +70,27 @@ std::vector<Segment> Polygon::getSegments() const
 //------------------------------------------------------------------------------
 bool Polygon::isIn(const Vector2D& p) const
 {
-  return false;
-//  int crossingSegements = 0;
-//  int currentPoint = 0;
-//  Polygon rayCastLine({getMostLeftPoint(), p});
-//  Polygon crtSegment({Vector2D(0, 0), Vector2D(0, 0)});
-////
-////  std::cout << *this << " contains " << p << std::endl;
-////
-//  for(auto& polPoint: m_points)
-//  {
-//    // Two points are touching
-////    if(polPoint == p)
-////      return true;
-//
-//    crtSegment = Polygon({crtSegment.getPoints()[1], polPoint});
-//
-//    if(currentPoint >= 1)
-//    {
-//      // Point is on the current segment
-//      float d1 = crtSegment.getPoints()[0].distance(p);
-//      float d2 = crtSegment.getPoints()[1].distance(p);
-//      float d3 = crtSegment.getPoints()[0].distance(crtSegment.getPoints()[1]);
-//
-//      if((d1 + d2) - d3 == 0)
-//      {
-//        return true;
-//      }
-//
-//      // FIXME: Check polygon in polygon
-//      if(rayCastLine.isIn(crtSegment.getPoints()[0]) ||
-//          rayCastLine.isIn(crtSegment.getPoints()[1]))
-//        crossingSegements++;
-//    }
-//    currentPoint++;
-//  }
+  unsigned int crossingSegements = 0;
+  Segment rayCast(Vector2D(-1, 0) + getMostLeftPoint(), p);
+  std::vector<Segment> segments = getSegments();
 
-//  // Two points are not on each other
-//  if(currentPoint == 1)
-//    return false;
-//
-  // Impair amount of crossed segements (ray casting)
-//  return (crossingSegements % 2) == 0;
+  for(const auto& s: segments)
+    if(rayCast.intesects(s))
+      crossingSegements++;
+
+  return crossingSegements &= 1; // %2 == 0
 }
 
 //------------------------------------------------------------------------------
-//bool Polygon::isIn(const Polygon& p) const
-//{
-////  std::cout << *this << " contains " << p << std::endl;
-////
-////  for(const auto& point: p.getPoints())
-////  {
-////    std::cout << "CHECK if in " << *this << " contains " << point << std::endl;
-////    if(this->isIn(point))
-////      return true;
-////  }
-////
-////  return false;
-//  return false;
-//}
-
-
-//------------------------------------------------------------------------------
-Vector2D Polygon::getMostLeftPoint() const
+const Vector2D& Polygon::getMostLeftPoint() const
 {
-  Vector2D leftMost = m_points[0];
+  int index = 0;
 
-  for(const auto& p: m_points)
-    if(leftMost.getX() > p.getX())
-      leftMost = p;
+  for(unsigned int i = 0 ; i < m_points.size() ; ++i)
+    if(m_points[index].getX() > m_points[i].getX())
+      index = i;
 
-  return leftMost;
+  return m_points[index];
 }
 
 //------------------------------------------------------------------------------
@@ -161,73 +111,5 @@ std::ostream& operator<<(std::ostream& s, const Polygon& p)
 
   return s;
 }
-
-//------------------------------------------------------------------------------
-//const Vector2D& Polygon::getPosition()const
-//{
-//  return m_pos;
-//}
-//
-////------------------------------------------------------------------------------
-//float Polygon::getX() const
-//{
-//  return m_pos.getX();
-//}
-//
-////------------------------------------------------------------------------------
-//float Polygon::getY() const
-//{
-//  return m_pos.getY();
-//}
-//
-////------------------------------------------------------------------------------
-//void Polygon::setPosition(float x, float y)
-//{
-//  setPosition(Vector2D(x, y));
-//}
-//
-////------------------------------------------------------------------------------
-//void Polygon::setPosition(const Vector2D& pos)
-//{
-//  m_pos = pos;
-//}
-//
-////------------------------------------------------------------------------------
-//float Polygon::getWidth() const
-//{
-//  return m_size.getX();
-//}
-//
-////------------------------------------------------------------------------------
-//float Polygon::getHeight() const
-//{
-//  return m_size.getY();
-//}
-//
-////------------------------------------------------------------------------------
-//void Polygon::setSize(float width, float height)
-//{
-//  setSize(Vector2D(width, height));
-//}
-//
-////------------------------------------------------------------------------------
-//void Polygon::setSize(const Vector2D& size)
-//{
-//  m_size = size;
-//}
-//
-////------------------------------------------------------------------------------
-//Polygon& Polygon::operator+(const Vector2D& rhs)
-//{
-//  m_pos += rhs;
-//
-//  return *this;
-//}
-//
-////------------------------------------------------------------------------------
-//Polygon& Polygon::operator+=(const Vector2D& rhs)
-//{
-//  return *this + rhs;
-//}
 
 }       // namespace
