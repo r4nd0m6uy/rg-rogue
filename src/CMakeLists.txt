@@ -28,8 +28,9 @@ set(APP_SOURCES
   engine/shape/IShape.cpp
   engine/shape/Polygon.cpp
   engine/shape/Segment.cpp
-  engine/shape/Square.cpp
   engine/shape/Rectangle.cpp
+  engine/shape/Square.cpp
+  engine/shape/Circle.cpp
   engine/commands/IControllable.cpp
   engine/commands/ICommand.cpp
   engine/commands/CommandJump.cpp
