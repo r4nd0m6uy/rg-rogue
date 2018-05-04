@@ -35,6 +35,36 @@ TEST_GROUP(Polygon)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Polygon, overlapsTwoTrianglesOverlap)
+{
+  Vector2D t1p1(0, 0);
+  Vector2D t1p2(3, 5);
+  Vector2D t1p3(5, 0);
+  Polygon t1({t1p1, t1p2, t1p3});
+  Vector2D t2p1(3, 1);
+  Vector2D t2p2(5, 6);
+  Vector2D t2p3(8, 1);
+  Polygon t2({t2p1, t2p2, t2p3});
+
+  CHECK(t1.overlaps(t2));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Polygon, overlapsTwoTrianglesAreNotIn)
+{
+  Vector2D t1p1(0, 0);
+  Vector2D t1p2(3, 5);
+  Vector2D t1p3(5, 0);
+  Polygon t1({t1p1, t1p2, t1p3});
+  Vector2D t2p1(100, 0);
+  Vector2D t2p2(110, 10);
+  Vector2D t2p3(120, 0);
+  Polygon t2({t2p1, t2p2, t2p3});
+
+  CHECK_FALSE(t1.overlaps(t2));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Polygon, isInPointInTriangle)
 {
   Vector2D p1(0, 0);

@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include "Vector2D.hpp"
+#include "Segment.hpp"
 
 namespace rgrogue {
 
@@ -31,7 +31,10 @@ public:
   IShape();
   virtual ~IShape();
 
+  virtual const std::vector<Vector2D>& getPoints() const = 0;
+  virtual std::vector<Segment> getSegments() const = 0;
   virtual bool isIn(const Vector2D& p) const = 0;
+  virtual bool overlaps(const IShape& s) const = 0;
 };
 
 }       // namespace

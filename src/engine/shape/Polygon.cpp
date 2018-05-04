@@ -71,10 +71,9 @@ std::vector<Segment> Polygon::getSegments() const
 bool Polygon::isIn(const Vector2D& p) const
 {
   unsigned int crossingSegements = 0;
-  Segment rayCast(Vector2D(-1, 0) + getMostLeftPoint(), p);
-  std::vector<Segment> segments = getSegments();
+  Segment rayCast(Vector2D(-1, 0) + getLeftMostPoint(), p);
 
-  for(const auto& s: segments)
+  for(const auto& s: getSegments())
     if(rayCast.intesects(s))
       crossingSegements++;
 
@@ -82,7 +81,18 @@ bool Polygon::isIn(const Vector2D& p) const
 }
 
 //------------------------------------------------------------------------------
-const Vector2D& Polygon::getMostLeftPoint() const
+bool Polygon::overlaps(const IShape& s) const
+{
+  for(auto& segThis: getSegments())
+    for(auto& segShape: s.getSegments())
+      if(segThis.intesects(segShape))
+        return true;
+
+  return false;
+}
+
+//------------------------------------------------------------------------------
+const Vector2D& Polygon::getLeftMostPoint() const
 {
   int index = 0;
 

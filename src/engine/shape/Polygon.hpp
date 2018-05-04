@@ -20,7 +20,6 @@
 #define _RG_ROGUE_POLYGON_HPP_
 
 #include "IShape.hpp"
-#include "Segment.hpp"
 
 namespace rgrogue {
 
@@ -32,16 +31,16 @@ public:
   Polygon(const std::vector<Vector2D>& points);
   virtual ~Polygon();
 
-  const std::vector<Vector2D>& getPoints() const;
-  std::vector<Segment> getSegments() const;
-
   // IShape
-  bool isIn(const Vector2D& p) const override;
+  virtual const std::vector<Vector2D>& getPoints() const;
+  virtual std::vector<Segment> getSegments() const;
+  virtual bool isIn(const Vector2D& p) const override;
+  virtual bool overlaps(const IShape& s) const override;
 
 private:
   std::vector<Vector2D> m_points;
 
-  const Vector2D& getMostLeftPoint() const;
+  const Vector2D& getLeftMostPoint() const;
 };
 
 std::ostream& operator<<(std::ostream& s, const Polygon& p);
