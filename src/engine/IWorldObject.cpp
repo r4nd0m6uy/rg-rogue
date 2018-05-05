@@ -16,21 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_I_WORLD_OBJECT_HPP_
-#define _RG_ROGUE_I_WORLD_OBJECT_HPP_
-
-#include "shape/IShape.hpp"
+#include "IWorldObject.hpp"
 
 namespace rgrogue {
 
-class IWorldObject
+//------------------------------------------------------------------------------
+IWorldObject::IWorldObject()
 {
-public:
-  IWorldObject();
-  virtual ~IWorldObject();
+}
 
-  virtual const IShape& getShape() = 0;
-};
+//------------------------------------------------------------------------------
+IWorldObject::~IWorldObject()
+{
+}
 
 }       // namespace
-#endif  // _RG_ROGUE_I_WORLD_OBJECT_HPP_

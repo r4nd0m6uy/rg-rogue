@@ -22,7 +22,7 @@
 
 using namespace rgrogue;
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST_GROUP(Rectangle)
 {
   TEST_SETUP()
@@ -34,7 +34,7 @@ TEST_GROUP(Rectangle)
   }
 };
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, sameOverlaps)
 {
   Rectangle r(20, -10,  5, 5);
@@ -42,7 +42,7 @@ TEST(Rectangle, sameOverlaps)
   CHECK(r.overlaps(r));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, TopDesntOverlapBottom)
 {
   Rectangle rBottom(20, -10,  5, 5);
@@ -51,7 +51,7 @@ TEST(Rectangle, TopDesntOverlapBottom)
   CHECK_FALSE(rTop.overlaps(rBottom));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, TopOverlapsBottom)
 {
   Rectangle rBottom(20, -10,  5, 5);
@@ -60,7 +60,7 @@ TEST(Rectangle, TopOverlapsBottom)
   CHECK(rTop.overlaps(rBottom));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, bottomOverlapsTop)
 {
   Rectangle rBottom(20, -10,  5, 5);
@@ -69,7 +69,7 @@ TEST(Rectangle, bottomOverlapsTop)
   CHECK(rBottom.overlaps(rTop));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, BottomDoesntOverlapsTop)
 {
   Rectangle rBottom(20, -10,  5, 5);
@@ -78,7 +78,7 @@ TEST(Rectangle, BottomDoesntOverlapsTop)
   CHECK_FALSE(rBottom.overlaps(rTop));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, TouchingRightLeftDoesntOverlap)
 {
   Rectangle rLeft(-10, 10, 5, 5);
@@ -88,7 +88,7 @@ TEST(Rectangle, TouchingRightLeftDoesntOverlap)
   CHECK_FALSE(rLeft.overlaps(rRight));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, RightDoesntOverlapLeft)
 {
   Rectangle rLeft(-10, 10, 5, 5);
@@ -97,7 +97,7 @@ TEST(Rectangle, RightDoesntOverlapLeft)
   CHECK_FALSE(rRight.overlaps(rLeft));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, leftOverlapsRight)
 {
   Rectangle rLeft(-10, 10, 5, 5);
@@ -106,7 +106,7 @@ TEST(Rectangle, leftOverlapsRight)
   CHECK(rRight.overlaps(rLeft));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, rightOverlapsLeft)
 {
   Rectangle rLeft(-10, 10, 5, 5);
@@ -115,7 +115,7 @@ TEST(Rectangle, rightOverlapsLeft)
   CHECK(rLeft.overlaps(rRight));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, leftDoesntOverlapsRight)
 {
   Rectangle rLeft(-10, 10, 5, 5);
@@ -124,7 +124,7 @@ TEST(Rectangle, leftDoesntOverlapsRight)
   CHECK_FALSE(rLeft.overlaps(rRight));
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, constructorXYWH)
 {
   float x = 3.2;
@@ -139,7 +139,7 @@ TEST(Rectangle, constructorXYWH)
   CHECK_EQUAL(h, r.getHeight());
 }
 
-//--------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 TEST(Rectangle, defaultConstructor)
 {
   Rectangle r;
