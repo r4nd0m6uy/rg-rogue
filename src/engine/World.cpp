@@ -27,12 +27,7 @@ namespace rgrogue {
 static Vector2D GRAVITY = Vector2D(0, -8.9);
 
 //------------------------------------------------------------------------------
-World::World():
-  m_floor(-500, 0, 2000, 50),
-  m_platform(150, 300, 200, 50),
-  m_origin(-10, 10, 20),
-  m_gray(0.2, 0.9, 0.9, 0),
-  m_red(1, 0, 0, 0.5)
+World::World()
 {
 }
 
@@ -42,90 +37,48 @@ World::~World()
 }
 
 //------------------------------------------------------------------------------
-int World::reset()
-{
-  m_player.setPosition(0, 400);
-  m_player.setVelocity(0, 0);
-  m_camera.setZoom(1);
-
-  return 0;
-}
+//int World::reset()
+//{
+//  return 0;
+//}
 
 //------------------------------------------------------------------------------
-Player& World::getPlayer()
-{
-  return m_player;
-}
-
-//------------------------------------------------------------------------------
-Camera& World::getCamera()
-{
-  return m_camera;
-}
-
-//------------------------------------------------------------------------------
-int World::tick()
-{
-  // FIXME: Always 60 fps, get actual tick in ms
-  float deltaMs = 1000 / 60;
-
-  // Apply gravity (each moving objects)
-  m_player.getVelocity() += GRAVITY;
-
-  m_player.move(deltaMs);
-
-  // Quick and dirty collision
-  // FIXME: Use prediction can pass through wall, any other size!
-//  if(m_player.getHitBox().overlaps(m_floor))
-//  {
-//    m_player.setPosition(
-//        m_player.getX(), m_floor.getY() + m_player.getHeight());
-//    m_player.setVelocity(m_player.getVelocity().getX(), 0);
-//  }
+//int World::tick()
+//{
+//  // FIXME: Always 60 fps, get actual tick in ms
+//  float deltaMs = 1000 / 60;
 //
-//  if(m_player.getHitBox().overlaps(m_platform))
-//  {
-//    m_player.setPosition(
-//        m_player.getX(), m_platform.getY() + m_player.getHeight());
-//    m_player.setVelocity(m_player.getVelocity().getX(), 0);
-//  }
+//  // Apply gravity (each moving objects)
+//  m_player.getVelocity() += GRAVITY;
+//
+//  m_player.move(deltaMs);
+//
+//  // Quick and dirty collision
+//  // FIXME: Use prediction can pass through wall, any other size!
+////  if(m_player.getHitBox().overlaps(m_floor))
+////  {
+////    m_player.setPosition(
+////        m_player.getX(), m_floor.getY() + m_player.getHeight());
+////    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+////  }
+////
+////  if(m_player.getHitBox().overlaps(m_platform))
+////  {
+////    m_player.setPosition(
+////        m_player.getX(), m_platform.getY() + m_player.getHeight());
+////    m_player.setVelocity(m_player.getVelocity().getX(), 0);
+////  }
+//
+//  // Center camera to player
+////  Vector2D playerCenter(
+////      m_player.getX() + (m_player.getWidth() / 2),
+////      m_player.getY() - (m_player.getHeight() / 2));
+//
+////  m_camera.setPosition(
+////      playerCenter.getX() - (m_camera.getScaledWidth() / 2),
+////      playerCenter.getY() + (m_camera.getScaledHeight() / 2));
+//
+//  return 0;
+//}
 
-  // Center camera to player
-//  Vector2D playerCenter(
-//      m_player.getX() + (m_player.getWidth() / 2),
-//      m_player.getY() - (m_player.getHeight() / 2));
-
-//  m_camera.setPosition(
-//      playerCenter.getX() - (m_camera.getScaledWidth() / 2),
-//      playerCenter.getY() + (m_camera.getScaledHeight() / 2));
-
-  return 0;
-}
-
-//------------------------------------------------------------------------------
-int World::draw()
-{
-//  glViewport(0, 0, (GLsizei)m_camera.getWidth(), (GLsizei)m_camera.getHeight());
-  glViewport(0, 0, 0, 0);
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-//  glOrtho(
-//    m_camera.getX(),
-//    m_camera.getX() + m_camera.getScaledWidth(),
-//    m_camera.getY() - m_camera.getScaledHeight(), m_camera.getY(),
-//    0.0f, 1.0f);
-
-  // FIXME: Draw what is contained in camera
-  if(m_player.draw())
-    return -1;
-  if(m_gray.draw(m_floor))
-    return -1;
-  if(m_gray.draw(m_platform))
-    return -1;
-  if(m_red.draw(m_origin))
-    return -1;
-
-  return 0;
-}
 }       // namespace

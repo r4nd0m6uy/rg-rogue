@@ -27,7 +27,7 @@ Player::Player():
   m_baseSpeed(100),
   m_strength(0.1),
   m_speed(0.1),
-  m_hitBox(0, 0, 20, 120),
+//  m_hitBox(0, 0, 20, 120),
   m_hitBoxPainter(0, 1, 0, 0)
 {
 }
@@ -76,7 +76,7 @@ float Player::getHeight()
 //------------------------------------------------------------------------------
 int Player::draw() const
 {
-  return m_hitBoxPainter.draw(m_hitBox);
+  return 0;//m_hitBoxPainter.draw(m_hitBox);
 }
 
 //------------------------------------------------------------------------------

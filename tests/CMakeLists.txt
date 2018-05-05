@@ -16,6 +16,7 @@ set(TEST_SOURCES
   Vector2DTest.cpp
   SegmentTest.cpp
   PolygonTest.cpp
+  RectangleTest.cpp
   CircleTest.cpp
   main.cpp
 )

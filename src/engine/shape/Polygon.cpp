@@ -81,10 +81,10 @@ bool Polygon::isIn(const Vector2D& p) const
 }
 
 //------------------------------------------------------------------------------
-bool Polygon::overlaps(const IShape& s) const
+bool Polygon::overlaps(const Polygon& p) const
 {
   for(auto& segThis: getSegments())
-    for(auto& segShape: s.getSegments())
+    for(auto& segShape: p.getSegments())
       if(segThis.intesects(segShape))
         return true;
 

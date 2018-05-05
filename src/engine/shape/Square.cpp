@@ -26,8 +26,8 @@ Square::Square()
 }
 
 //------------------------------------------------------------------------------
-Square::Square(float x, float y, float width):
-  Rectangle(x, y, width, width)
+Square::Square(float x, float y, float width)
+//  Rectangle(x, y, width, width)
 {
 }
 

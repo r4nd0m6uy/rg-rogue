@@ -19,6 +19,8 @@
 #ifndef _RG_ROGUE_POLYGON_HPP_
 #define _RG_ROGUE_POLYGON_HPP_
 
+#include <vector>
+
 #include "IShape.hpp"
 
 namespace rgrogue {
@@ -31,11 +33,10 @@ public:
   Polygon(const std::vector<Vector2D>& points);
   virtual ~Polygon();
 
-  // IShape
   virtual const std::vector<Vector2D>& getPoints() const;
   virtual std::vector<Segment> getSegments() const;
-  virtual bool isIn(const Vector2D& p) const override;
-  virtual bool overlaps(const IShape& s) const override;
+  virtual bool isIn(const Vector2D& p) const;
+  virtual bool overlaps(const Polygon& s) const;
 
 private:
   std::vector<Vector2D> m_points;

@@ -49,7 +49,7 @@ public:
 
 private:
   World m_world;
-  PlayerAI m_playerAi;
+//  PlayerAI m_playerAi;
   bool m_isRegistered;
 };
 

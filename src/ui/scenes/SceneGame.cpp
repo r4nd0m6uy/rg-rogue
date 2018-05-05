@@ -28,7 +28,7 @@ namespace rgrogue {
 //------------------------------------------------------------------------------
 SceneGame::SceneGame(SceneId id):
   Scene(id),
-  m_playerAi(m_world.getPlayer()),
+//  m_playerAi(m_world.getPlayer()),
   m_isRegistered(false)
 {
 }
@@ -45,17 +45,19 @@ int SceneGame::onDisplayed(IMainLoop& mainLoop)
   if(!m_isRegistered)
   {
     mainLoop.registerKeyObserver(*this);
-    mainLoop.registerKeyObserver(m_playerAi);
+//    mainLoop.registerKeyObserver(m_playerAi);
     m_isRegistered = true;
   }
 
-  return m_world.reset();
+//  return m_world.reset();
+  return 0;
 }
 
 //------------------------------------------------------------------------------
 int SceneGame::tick()
 {
-  return m_world.tick();
+//  return m_world.tick();
+  return 0;
 }
 
 //------------------------------------------------------------------------------
@@ -67,7 +69,7 @@ int SceneGame::draw(SDL_Window* window)
   SDL_GetWindowSize(window, &width, &height);
 //  m_world.getCamera().setSize(width, height);
 
-  m_world.draw();
+//  m_world.draw();
 
   return 0;
 }
@@ -83,20 +85,20 @@ int SceneGame::onHidden(IMainLoop& mainLoop)
 void SceneGame::onKeyPressed(SDL_Scancode scanCode, SDL_Keycode keyCode,
     Uint16 mode)
 {
-  switch(scanCode)
-  {
-  case SDL_SCANCODE_O:
-    m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
-    break;
-  case SDL_SCANCODE_P:
-    m_world.getCamera().decreaseZoom(m_world.getCamera().getZoom() * 0.1);
-    break;
-  case SDL_SCANCODE_I:
-    m_world.getCamera().setZoom(1);
-    break;
-  default:
-    break;
-  }
+//  switch(scanCode)
+//  {
+//  case SDL_SCANCODE_O:
+//    m_world.getCamera().increaseZoom(m_world.getCamera().getZoom() * 0.1);
+//    break;
+//  case SDL_SCANCODE_P:
+//    m_world.getCamera().decreaseZoom(m_world.getCamera().getZoom() * 0.1);
+//    break;
+//  case SDL_SCANCODE_I:
+//    m_world.getCamera().setZoom(1);
+//    break;
+//  default:
+//    break;
+//  }
 }
 
 //------------------------------------------------------------------------------

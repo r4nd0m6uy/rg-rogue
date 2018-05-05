@@ -31,20 +31,6 @@ public:
   World();
   ~World();
 
-  int reset();
-  Player& getPlayer();
-  Camera& getCamera();
-  int tick();
-  int draw();
-
-private:
-  Camera m_camera;
-  Player m_player;
-  Rectangle m_floor;
-  Rectangle m_platform;
-  Square m_origin;
-  ColoredShape m_gray;
-  ColoredShape m_red;
 };
 
 }       // namespace

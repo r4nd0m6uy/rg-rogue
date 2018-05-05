@@ -49,7 +49,8 @@ public:
 //  virtual void setSize(const Vector2D& size) override;
 
 private:
-  Rectangle m_shape;
+//  Rectangle m_shape;
+  Polygon m_shape;
   float m_zoom;
 };
 

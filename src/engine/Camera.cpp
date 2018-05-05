@@ -30,7 +30,7 @@ Camera::Camera():
 
 //------------------------------------------------------------------------------
 Camera::Camera(float x, float y, float width, float height):
-  m_shape(x, y, width, height),
+//  m_shape(x, y, width, height),
   m_zoom(1)
 {
 }

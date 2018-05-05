@@ -28,10 +28,10 @@ Rectangle::Rectangle()
 }
 
 //------------------------------------------------------------------------------
-Rectangle::Rectangle(float x, float y, float width, float height):
-  Polygon({Vector2D(0, 0)})
-{
-}
+//Rectangle::Rectangle(float x, float y, float width, float height):
+//  Polygon({Vector2D(0, 0)})
+//{
+//}
 
 //------------------------------------------------------------------------------
 Rectangle::~Rectangle()
@@ -39,8 +39,8 @@ Rectangle::~Rectangle()
 }
 
 //------------------------------------------------------------------------------
-int Rectangle::draw() const
-{
+//int Rectangle::draw() const
+//{
 //  glBegin(GL_QUADS);
 //
 //  glVertex2f(
@@ -57,8 +57,8 @@ int Rectangle::draw() const
 //      m_pos.getY() - m_size.getY());
 //
 //  glEnd();
-
-  return 0;
-}
+//
+//  return 0;
+//}
 
 }       // namespace

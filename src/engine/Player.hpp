@@ -58,7 +58,8 @@ private:
   float m_strength;
   float m_speed;
   Vector2D m_velocity;
-  Rectangle m_hitBox;
+  //  Rectangle m_hitBox;
+  Polygon m_hitBox;
   ColoredShape m_hitBoxPainter;
 };
 
