@@ -82,11 +82,9 @@ Vector2D Vector2D::projectionOn(const Vector2D& v) const
 }
 
 //--------------------------------------------------------------------------------------------
-Vector2D& Vector2D::operator+(const Vector2D& rhs)
+Vector2D Vector2D::operator+(const Vector2D& rhs) const
 {
-  *this += rhs;
-
-  return *this;
+  return Vector2D(*this) += rhs;
 }
 
 //--------------------------------------------------------------------------------------------
@@ -99,11 +97,9 @@ Vector2D& Vector2D::operator+=(const Vector2D& rhs)
 }
 
 //--------------------------------------------------------------------------------------------
-Vector2D& Vector2D::operator-(const Vector2D& rhs)
+Vector2D Vector2D::operator-(const Vector2D& rhs) const
 {
-  *this -= rhs;
-
-  return *this;
+  return Vector2D(*this) -= rhs;
 }
 
 //--------------------------------------------------------------------------------------------
@@ -116,9 +112,9 @@ Vector2D& Vector2D::operator-=(const Vector2D& rhs)
 }
 
 //--------------------------------------------------------------------------------------------
-Vector2D& Vector2D::operator*(float rhs)
+Vector2D Vector2D::operator*(float rhs) const
 {
-  return *this *= rhs;
+  return Vector2D(*this) *= rhs;
 }
 
 //--------------------------------------------------------------------------------------------

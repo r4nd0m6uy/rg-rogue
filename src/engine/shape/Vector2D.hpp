@@ -37,11 +37,11 @@ public:
   float length() const;
   Vector2D projectionOn(const Vector2D& v) const;
 
-  Vector2D& operator+(const Vector2D& rhs);
+  Vector2D operator+(const Vector2D& rhs) const;
   Vector2D& operator+=(const Vector2D& rhs);
-  Vector2D& operator-(const Vector2D& rhs);
+  Vector2D operator-(const Vector2D& rhs) const;
   Vector2D& operator-=(const Vector2D& rhs);
-  Vector2D& operator*(float rhs);
+  Vector2D operator*(float rhs) const;
   Vector2D& operator*=(float rhs);
   bool operator==(const Vector2D& rhs) const;
   bool operator!=(const Vector2D& rhs) const;
