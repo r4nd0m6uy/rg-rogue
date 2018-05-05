@@ -92,6 +92,33 @@ bool Polygon::overlaps(const Polygon& p) const
 }
 
 //------------------------------------------------------------------------------
+void Polygon::getBoundingBox(std::unique_ptr<IShape>& bb) const
+{
+  float maxX = m_points[0].getX();
+  float minX = m_points[0].getX();
+  float maxY = m_points[0].getY();
+  float minY= m_points[0].getY();
+
+  for(unsigned int i = 1 ; i < m_points.size() ; ++i)
+  {
+    if(m_points[i].getX() > maxX)
+      maxX = m_points[i].getX();
+    if(m_points[i].getX() < minX)
+      minX = m_points[i].getX();
+    if(m_points[i].getY() > maxY)
+      maxY = m_points[i].getY();
+    if(m_points[i].getY() < minY)
+      minY = m_points[i].getY();
+  }
+
+  bb.reset(new Polygon({
+      Vector2D(minX, maxY),
+      Vector2D(maxX, maxY),
+      Vector2D(maxX, minY),
+      Vector2D(minX, minY)}));
+}
+
+//------------------------------------------------------------------------------
 const Vector2D& Polygon::getLeftMostPoint() const
 {
   int index = 0;

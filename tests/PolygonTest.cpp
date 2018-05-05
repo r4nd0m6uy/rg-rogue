@@ -35,6 +35,40 @@ TEST_GROUP(Polygon)
 };
 
 //------------------------------------------------------------------------------
+TEST(Polygon, getBoundingBoxLine)
+{
+  std::unique_ptr<IShape> bb;
+  Polygon p({Vector2D(1, 2), Vector2D(3, 4)});
+
+  p.getBoundingBox(bb);
+
+  CHECK_FALSE(bb.get() == nullptr);
+  Polygon& pBb = static_cast<Polygon&>(*bb);
+  CHECK_EQUAL(4, pBb.getPoints().size());
+  CHECK(Vector2D(1, 4) == pBb.getPoints()[0]);
+  CHECK(Vector2D(3, 4) == pBb.getPoints()[1]);
+  CHECK(Vector2D(3, 2) == pBb.getPoints()[2]);
+  CHECK(Vector2D(1, 2) == pBb.getPoints()[3]);
+}
+
+//------------------------------------------------------------------------------
+TEST(Polygon, getBoundingBoxDefaultConstructor)
+{
+  std::unique_ptr<IShape> bb;
+  Polygon p;
+
+  p.getBoundingBox(bb);
+
+  CHECK_FALSE(bb.get() == nullptr);
+  Polygon& pBb = static_cast<Polygon&>(*bb);
+  CHECK_EQUAL(4, pBb.getPoints().size());
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[0]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[1]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[2]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[3]);
+}
+
+//------------------------------------------------------------------------------
 TEST(Polygon, overlapsTwoTrianglesOverlap)
 {
   Vector2D t1p1(0, 0);

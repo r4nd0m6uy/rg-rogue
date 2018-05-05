@@ -38,6 +38,9 @@ public:
   virtual bool isIn(const Vector2D& p) const;
   virtual bool overlaps(const Polygon& s) const;
 
+  // IShape
+  virtual void getBoundingBox(std::unique_ptr<IShape>& bb) const override;
+
 private:
   std::vector<Vector2D> m_points;
 
