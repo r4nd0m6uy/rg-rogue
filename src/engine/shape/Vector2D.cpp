@@ -77,8 +77,7 @@ float Vector2D::length() const
 //--------------------------------------------------------------------------------------------
 Vector2D Vector2D::projectionOn(const Vector2D& v) const
 {
-  return Vector2D(this->getX(), this->getY()) *
-      (this->crossProduct(v) / getHypothenuseArea());
+  return v * (v.crossProduct(*this) / v.getHypothenuseArea());
 }
 
 //--------------------------------------------------------------------------------------------

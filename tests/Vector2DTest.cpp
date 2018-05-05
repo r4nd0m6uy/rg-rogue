@@ -42,8 +42,8 @@ TEST(Vector2D, projection)
   Vector2D v2(2, 3);
   Vector2D proj = v1.projectionOn(v2);
 
-  DOUBLES_EQUAL(1.6, proj.getX(), 0.1);
-  DOUBLES_EQUAL(3.2, proj.getY(), 0.1);
+  DOUBLES_EQUAL(1.2307692, proj.getX(), 0.000001);
+  DOUBLES_EQUAL(1.8461538, proj.getY(), 0.000001);
 }
 
 //--------------------------------------------------------------------------------------------
