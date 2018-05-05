@@ -91,6 +91,26 @@ TEST(Vector2D, getDistanceFromOriginOnXAxis)
 }
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2D, operatorMinusEqualVector)
+{
+  Vector2D v1(3, 5);
+  Vector2D v2(5, 6);
+
+  v1 -= v2;
+
+  CHECK(Vector2D(-2, -1) == v1);
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2D, operatorMinusVector)
+{
+  Vector2D v1(3, 5);
+  Vector2D v2(5, 6);
+
+  CHECK(Vector2D(-2, -1) == v1 - v2);
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2D, operatorTimeEqalFloat)
 {
   float mul = 4.2;
