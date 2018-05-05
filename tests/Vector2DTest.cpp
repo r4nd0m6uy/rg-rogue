@@ -35,6 +35,15 @@ TEST_GROUP(Vector2D)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2D, crossProduct)
+{
+  Vector2D v1(1, 2);
+  Vector2D v2(3, 3);
+
+  CHECK_EQUAL(9, v1.crossProduct(v2));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2D, getDistanceFromOtherInQuadrant1)
 {
   Vector2D origin(2, 2);

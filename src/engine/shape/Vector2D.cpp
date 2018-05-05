@@ -20,6 +20,15 @@
 
 #include "Vector2D.hpp"
 
+
+
+#include <iostream>
+
+
+
+
+
+
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
@@ -60,6 +69,12 @@ float Vector2D::distance(const Vector2D& v) const
   float yDiff = this->getY() - v.getY();
 
   return std::sqrt((xDiff * xDiff) + (yDiff * yDiff));
+}
+
+//------------------------------------------------------------------------------
+float Vector2D::crossProduct(const Vector2D& v) const
+{
+  return (this->getX() * v.getX()) + (this->getY() * v.getY());
 }
 
 //------------------------------------------------------------------------------
