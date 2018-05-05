@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include "../src/engine/shape/Vector2D.hpp"
 
 #include <CppUTest/TestHarness.h>
@@ -33,6 +34,14 @@ TEST_GROUP(Vector2D)
   {
   }
 };
+
+//--------------------------------------------------------------------------------------------
+TEST(Vector2D, length)
+{
+  Vector2D v(3, 5);
+
+  DOUBLES_EQUAL(5.8309519, v.length(), 0.000001);
+}
 
 //--------------------------------------------------------------------------------------------
 TEST(Vector2D, crossProduct)

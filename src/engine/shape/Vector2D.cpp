@@ -78,6 +78,12 @@ float Vector2D::crossProduct(const Vector2D& v) const
 }
 
 //------------------------------------------------------------------------------
+float Vector2D::length() const
+{
+  return std::sqrt((getX() * getX()) + (getY() * getY()));
+}
+
+//------------------------------------------------------------------------------
 Vector2D& Vector2D::operator+(const Vector2D& rhs)
 {
   *this += rhs;

@@ -34,6 +34,7 @@ public:
   float getY() const;
   float distance(const Vector2D& v) const;
   float crossProduct(const Vector2D& v) const;
+  float length() const;
 
   Vector2D& operator+(const Vector2D& rhs);
   Vector2D& operator+=(const Vector2D& rhs);
