@@ -27,9 +27,8 @@ class Rectangle:
     public Polygon
 {
 public:
-  Rectangle();
+  Rectangle(float x, float y, float width, float height);
   ~Rectangle();
-
 };
 
 }       // namespace

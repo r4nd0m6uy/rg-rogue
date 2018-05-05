@@ -23,15 +23,14 @@
 namespace rgrogue {
 
 //------------------------------------------------------------------------------
-Rectangle::Rectangle()
+Rectangle::Rectangle(float x, float y, float width, float height):
+  Polygon({
+    Vector2D(x, y),
+    Vector2D(x + width, y),
+    Vector2D(x + width, y - height),
+    Vector2D(x, y - height)})
 {
 }
-
-//------------------------------------------------------------------------------
-//Rectangle::Rectangle(float x, float y, float width, float height):
-//  Polygon({Vector2D(0, 0)})
-//{
-//}
 
 //------------------------------------------------------------------------------
 Rectangle::~Rectangle()

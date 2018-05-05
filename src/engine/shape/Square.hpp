@@ -27,7 +27,6 @@ class Square:
     public Rectangle
 {
 public:
-  Square();
   Square(float x, float y, float width);
   virtual ~Square();
 
