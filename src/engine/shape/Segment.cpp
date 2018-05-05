@@ -105,6 +105,14 @@ bool Segment::intesects(const Segment& segment) const
 }
 
 //------------------------------------------------------------------------------
+Vector2D Segment::toVector() const
+{
+  Vector2D v = m_p2;
+
+  return v -= m_p1;
+}
+
+//------------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& s, const Segment& seg)
 {
   s << Polygon({seg.getP1(), seg.getP2()});

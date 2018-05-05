@@ -37,6 +37,7 @@ public:
   bool isOn(const Vector2D& p) const;
   int orientation(const Vector2D& p) const;
   bool intesects(const Segment& segment) const;
+  Vector2D toVector() const;
 
 private:
   Vector2D m_p1;

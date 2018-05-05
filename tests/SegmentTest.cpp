@@ -35,6 +35,14 @@ TEST_GROUP(Segment)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Segment, toVector)
+{
+  Segment s(Vector2D(3, 5), Vector2D(2, 3));
+
+  CHECK(Vector2D(-1, -2) == s.toVector());
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Segment, leftLineDoesntCrossRight)
 {
   Segment s1(Vector2D(-5, -5), Vector2D(0, 0));
