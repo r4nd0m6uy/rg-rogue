@@ -20,15 +20,6 @@
 
 #include "Vector2D.hpp"
 
-
-
-#include <iostream>
-
-
-
-
-
-
 namespace rgrogue {
 
 //--------------------------------------------------------------------------------------------
@@ -86,10 +77,8 @@ float Vector2D::length() const
 //--------------------------------------------------------------------------------------------
 Vector2D Vector2D::projectionOn(const Vector2D& v) const
 {
-  float crossProduct = this->crossProduct(v);
-  float factor = crossProduct / getHypothenuseArea();
-
-  return Vector2D(factor * this->getX(), factor * this->getY());
+  return Vector2D(this->getX(), this->getY()) *
+      (this->crossProduct(v) / getHypothenuseArea());
 }
 
 //--------------------------------------------------------------------------------------------
