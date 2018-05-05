@@ -35,6 +35,48 @@ TEST_GROUP(Circle)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Circle, getBoundingBox)
+{
+  std::unique_ptr<IShape> bb;
+  Circle c(Vector2D(3, 3), 1);
+
+  c.getBoundingBox(bb);
+
+  CHECK_FALSE(bb.get() == nullptr);
+  Polygon& pBb = static_cast<Polygon&>(*bb);
+  CHECK_EQUAL(4, pBb.getPoints().size());
+  CHECK(Vector2D(4, 2) == pBb.getPoints()[0]);
+  CHECK(Vector2D(4, 4) == pBb.getPoints()[1]);
+  CHECK(Vector2D(2, 4) == pBb.getPoints()[2]);
+  CHECK(Vector2D(2, 2) == pBb.getPoints()[3]);
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Circle, getBoundingBoxDefaltConstructor)
+{
+  std::unique_ptr<IShape> bb;
+  Circle c;
+
+  c.getBoundingBox(bb);
+
+  CHECK_FALSE(bb.get() == nullptr);
+  Polygon& pBb = static_cast<Polygon&>(*bb);
+  CHECK_EQUAL(4, pBb.getPoints().size());
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[0]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[1]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[2]);
+  CHECK(Vector2D(0, 0) == pBb.getPoints()[3]);
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Circle, getShapeType)
+{
+  Circle c;
+
+  CHECK(ShapeType::CIRCLE == c.getShpeType());
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Circle, overlapsLineProjectionBiggerThanSegmentNearP2InCircle)
 {
   Polygon p({Vector2D(1, 5), Vector2D(3, 5)});

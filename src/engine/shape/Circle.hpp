@@ -23,7 +23,8 @@
 
 namespace rgrogue {
 
-class Circle
+class Circle:
+    public IShape
 {
 public:
   Circle();
@@ -34,6 +35,10 @@ public:
   const Vector2D& getCenter() const;
   bool isIn(const Vector2D& p) const;
   bool overlaps(const Polygon& p) const;
+
+  // IShape
+  virtual ShapeType getShpeType() const override;
+  virtual void getBoundingBox(std::unique_ptr<IShape>& bb) const override;
 
 private:
   Vector2D m_center;

@@ -95,4 +95,21 @@ bool Circle::overlaps(const Polygon& p) const
   return false;
 }
 
+//------------------------------------------------------------------------------
+ShapeType Circle::getShpeType() const
+{
+  return ShapeType::CIRCLE;
+}
+
+//------------------------------------------------------------------------------
+void Circle::getBoundingBox(std::unique_ptr<IShape>& bb) const
+{
+  bb.reset(new Polygon({
+    getCenter() + Vector2D(m_radius, -m_radius),
+    getCenter() + Vector2D(m_radius, m_radius),
+    getCenter() + Vector2D(-m_radius, m_radius),
+    getCenter() + Vector2D(-m_radius, -m_radius)
+  }));
+}
+
 }       // namespace
