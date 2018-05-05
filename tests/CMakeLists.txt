@@ -17,11 +17,10 @@ set(TEST_SOURCES
   SegmentTest.cpp
   PolygonTest.cpp
   RectangleTest.cpp
+  SquareTest.cpp
   CircleTest.cpp
   main.cpp
 )
-#  RectangleTest.cpp
-#  SquareTest.cpp
 
 include_directories(
   ${CPPUTEST_INCLUDE_DIRS}

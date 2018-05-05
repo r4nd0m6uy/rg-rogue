@@ -34,58 +34,15 @@ TEST_GROUP(Square)
   }
 };
 
-//------------------------------------------------------------------------------
-TEST(Square, operatorPlusEqualVector)
-{
-  float speedX = 3.4;
-  float speedY = 4.3;
-  Vector2D translation(speedX, speedY);
-  float x = 3.2;
-  float y = 1.2;
-  float w = 5;
-  Square s(x, y, w);
-
-  s += translation;
-
-  CHECK_EQUAL(x + speedX, s.getPosition().getX());
-  CHECK_EQUAL(y + speedY, s.getPosition().getY());
-}
 
 //------------------------------------------------------------------------------
-TEST(Square, operatorEqualPlusVector)
+TEST(Square, constructor)
 {
-  float speedX = 3.4;
-  float speedY = 4.3;
-  Vector2D translation(speedX, speedY);
-  float x = 3.2;
-  float y = 1.2;
-  float w = 5;
-  Square s1(x, y, w);
-  Square s2 = s1 + translation;
+  Square s(8, 9, 4);
 
-  CHECK_EQUAL(x + speedX, s2.getPosition().getX());
-  CHECK_EQUAL(y + speedY, s2.getPosition().getY());
-}
-
-//------------------------------------------------------------------------------
-TEST(Square, constructorXYW)
-{
-  float x = 3.2;
-  float y = 1.2;
-  float w = 5;
-  Square s(x, y, w);
-
-  CHECK_EQUAL(x, s.getPosition().getX());
-  CHECK_EQUAL(y, s.getPosition().getY());
-  CHECK_EQUAL(w, s.getWidth());
-}
-
-//------------------------------------------------------------------------------
-TEST(Square, defaultConstructor)
-{
-  Square s;
-
-  CHECK_EQUAL(0, s.getPosition().getX());
-  CHECK_EQUAL(0, s.getPosition().getY());
-  CHECK_EQUAL(0, s.getWidth());
+  CHECK_EQUAL(4, s.getPoints().size());
+  CHECK(Vector2D(8, 9) == s.getPoints()[0]);
+  CHECK(Vector2D(12, 9) == s.getPoints()[1]);
+  CHECK(Vector2D(12, 5) == s.getPoints()[2]);
+  CHECK(Vector2D(8, 5) == s.getPoints()[3]);
 }
