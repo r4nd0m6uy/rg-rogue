@@ -92,6 +92,12 @@ bool Polygon::overlaps(const Polygon& p) const
 }
 
 //------------------------------------------------------------------------------
+ShapeType Polygon::getShpeType() const
+{
+  return ShapeType::POLYGON;
+}
+
+//------------------------------------------------------------------------------
 void Polygon::getBoundingBox(std::unique_ptr<IShape>& bb) const
 {
   float maxX = m_points[0].getX();

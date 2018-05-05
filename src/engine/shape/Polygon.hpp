@@ -39,6 +39,7 @@ public:
   virtual bool overlaps(const Polygon& s) const;
 
   // IShape
+  virtual ShapeType getShpeType() const override;
   virtual void getBoundingBox(std::unique_ptr<IShape>& bb) const override;
 
 private:

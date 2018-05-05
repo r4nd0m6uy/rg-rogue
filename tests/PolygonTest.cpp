@@ -35,6 +35,14 @@ TEST_GROUP(Polygon)
 };
 
 //------------------------------------------------------------------------------
+TEST(Polygon, getShapeType)
+{
+  Polygon p;
+
+  CHECK(ShapeType::POLYGON == p.getShpeType());
+}
+
+//------------------------------------------------------------------------------
 TEST(Polygon, getBoundingBoxLine)
 {
   std::unique_ptr<IShape> bb;

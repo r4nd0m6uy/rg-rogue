@@ -19,15 +19,25 @@
 #ifndef _RG_ROGUE_I_SHAPE_HPP_
 #define _RG_ROGUE_I_SHAPE_HPP_
 
+#include <memory>
+
 #include "Segment.hpp"
 
 namespace rgrogue {
+
+enum class ShapeType {
+  POLYGON,
+  CIRCLE
+};
 
 class IShape
 {
 public:
   IShape();
   virtual ~IShape();
+
+  virtual ShapeType getShpeType() const = 0;
+  virtual void getBoundingBox(std::unique_ptr<IShape>& bb) const = 0;
 };
 
 }       // namespace
