@@ -16,21 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _RG_ROGUE_I_WORLD_OBJECT_HPP_
-#define _RG_ROGUE_I_WORLD_OBJECT_HPP_
+#ifndef _RG_ROGUE_BVH_HPP_
+#define _RG_ROGUE_BVH_HPP_
 
-#include "shape/IShape.hpp"
+#include <list>
+#include <memory>
+#include <functional>
+
+#include "shape/Rectangle.hpp"
+#include "IWorldObject.hpp"
 
 namespace rgrogue {
 
-class IWorldObject
+class Bvh
 {
 public:
-  IWorldObject();
-  virtual ~IWorldObject();
+  Bvh();
+  ~Bvh();
 
-  virtual IShape& getShape() = 0;
+  void addObject(std::unique_ptr<IWorldObject>& object);
+  void getObjects(const Polygon& p,
+      std::list<std::reference_wrapper<IWorldObject> >& objects);
+
+private:
+  std::list<std::unique_ptr<IWorldObject> > m_objects;
 };
 
 }       // namespace
-#endif  // _RG_ROGUE_I_WORLD_OBJECT_HPP_
+#endif  // _RG_ROGUE_BVH_HPP_

@@ -36,6 +36,9 @@ set(APP_SOURCES
   engine/commands/CommandJump.cpp
   engine/commands/CommandStopJump.cpp
   engine/commands/CommandMove.cpp
+  engine/IWorldObject.cpp
+  engine/WorldObject.cpp
+  engine/Bvh.cpp
   engine/Camera.cpp
   engine/Player.cpp
   engine/PlayerAI.cpp

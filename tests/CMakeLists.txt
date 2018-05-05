@@ -19,6 +19,7 @@ set(TEST_SOURCES
   RectangleTest.cpp
   SquareTest.cpp
   CircleTest.cpp
+  BvhTest.cpp
   main.cpp
 )
 
