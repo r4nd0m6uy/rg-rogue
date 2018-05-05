@@ -59,4 +59,40 @@ bool Circle::isIn(const Vector2D& p) const
   return distance <= m_radius;
 }
 
+//------------------------------------------------------------------------------
+bool Circle::overlaps(const Polygon& p) const
+{
+  for(auto& s: p.getSegments())
+  {
+    Segment ac(s.getP1(), getCenter());
+    Vector2D vAc = ac.toVector();
+    Vector2D vAb = s.toVector();
+    Vector2D projAcAb = vAc.projectionOn(vAb);
+    Segment ad(s.getP1(), s.getP1() + projAcAb);
+    float adLength = ad.toVector().length();
+
+    /*
+     * A * Segment(A,B)
+     *    \
+     *     \     * C (circle center)
+     *    D *
+     *       \
+     *        \
+     *         * B
+     */
+
+    // Projection bigger than segment
+    if(adLength >= vAb.length())
+    {
+      // FIXME: Test case!?
+      if(this->isIn(s.getP2()))// || this->isIn(s.getP1()))
+        return true;
+    }
+    else if(adLength <= getRadius())
+      return true;
+  }
+
+  return false;
+}
+
 }       // namespace

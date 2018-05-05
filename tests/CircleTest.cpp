@@ -35,6 +35,42 @@ TEST_GROUP(Circle)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Circle, overlapsLineProjectionBiggerThanSegmentNearP2InCircle)
+{
+  Polygon p({Vector2D(1, 5), Vector2D(3, 5)});
+  Circle c(Vector2D(4, 2), 4);
+
+  CHECK(c.overlaps(p));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Circle, overlapsLineCenterColinearP1InCircle)
+{
+  Polygon p({Vector2D(3, 3), Vector2D(5, 5)});
+  Circle c(Vector2D(2, 2), 4);
+
+  CHECK(c.overlaps(p));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Circle, overlapsLine)
+{;
+  Polygon p({Vector2D(3, 3), Vector2D(5, 5)});
+  Circle c(Vector2D(5, 4), 3);
+
+  CHECK(c.overlaps(p));
+}
+
+//--------------------------------------------------------------------------------------------
+TEST(Circle, overlapsLineDoesnt)
+{;
+  Polygon p({Vector2D(-5, 0), Vector2D(-2, -2)});
+  Circle c(Vector2D(5, 5), 3);
+
+  CHECK_FALSE(c.overlaps(p));
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Circle, isInIn)
 {;
   Vector2D p(1, 1);

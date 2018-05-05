@@ -19,7 +19,7 @@
 #ifndef _RG_ROGUE_CIRCLE_HPP_
 #define _RG_ROGUE_CIRCLE_HPP_
 
-#include "Vector2D.hpp"
+#include "Polygon.hpp"
 
 namespace rgrogue {
 
@@ -33,6 +33,7 @@ public:
   double getRadius() const;
   const Vector2D& getCenter() const;
   bool isIn(const Vector2D& p) const;
+  bool overlaps(const Polygon& p) const;
 
 private:
   Vector2D m_center;
