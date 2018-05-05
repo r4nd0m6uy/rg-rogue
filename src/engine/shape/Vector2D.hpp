@@ -35,6 +35,7 @@ public:
   float distance(const Vector2D& v) const;
   float crossProduct(const Vector2D& v) const;
   float length() const;
+  Vector2D projectionOn(const Vector2D& v) const;
 
   Vector2D& operator+(const Vector2D& rhs);
   Vector2D& operator+=(const Vector2D& rhs);
@@ -46,6 +47,8 @@ public:
 private:
   float m_x;
   float m_y;
+
+  float getHypothenuseArea() const;
 };
 
 std::ostream& operator<<(std::ostream& s, const Vector2D& v);

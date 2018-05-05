@@ -36,6 +36,17 @@ TEST_GROUP(Vector2D)
 };
 
 //--------------------------------------------------------------------------------------------
+TEST(Vector2D, projection)
+{
+  Vector2D v1(1, 2);
+  Vector2D v2(2, 3);
+  Vector2D proj = v1.projectionOn(v2);
+
+  DOUBLES_EQUAL(1.6, proj.getX(), 0.1);
+  DOUBLES_EQUAL(3.2, proj.getY(), 0.1);
+}
+
+//--------------------------------------------------------------------------------------------
 TEST(Vector2D, length)
 {
   Vector2D v(3, 5);
