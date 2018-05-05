@@ -39,7 +39,7 @@ TEST(Polygon, getShapeType)
 {
   Polygon p;
 
-  CHECK(ShapeType::POLYGON == p.getShpeType());
+  CHECK(ShapeType::POLYGON == p.getShapeType());
 }
 
 //------------------------------------------------------------------------------

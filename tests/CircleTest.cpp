@@ -73,7 +73,7 @@ TEST(Circle, getShapeType)
 {
   Circle c;
 
-  CHECK(ShapeType::CIRCLE == c.getShpeType());
+  CHECK(ShapeType::CIRCLE == c.getShapeType());
 }
 
 //--------------------------------------------------------------------------------------------

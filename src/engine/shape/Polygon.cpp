@@ -92,7 +92,7 @@ bool Polygon::overlaps(const Polygon& p) const
 }
 
 //------------------------------------------------------------------------------
-ShapeType Polygon::getShpeType() const
+ShapeType Polygon::getShapeType() const
 {
   return ShapeType::POLYGON;
 }

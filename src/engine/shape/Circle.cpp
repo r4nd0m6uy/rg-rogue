@@ -96,7 +96,7 @@ bool Circle::overlaps(const Polygon& p) const
 }
 
 //------------------------------------------------------------------------------
-ShapeType Circle::getShpeType() const
+ShapeType Circle::getShapeType() const
 {
   return ShapeType::CIRCLE;
 }

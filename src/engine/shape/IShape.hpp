@@ -36,7 +36,7 @@ public:
   IShape();
   virtual ~IShape();
 
-  virtual ShapeType getShpeType() const = 0;
+  virtual ShapeType getShapeType() const = 0;
   virtual void getBoundingBox(std::unique_ptr<IShape>& bb) const = 0;
 };
 
